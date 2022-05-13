@@ -10,7 +10,6 @@ import TokenDetail from "./components/TokenDetail";
 function App() {
 
     return (
-        //<Home/>
         <div className="App">
           <Routes>
             <Route path="/" element={<Home />} />
