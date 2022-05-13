@@ -1,20 +1,20 @@
 //import "bulma/css/bulma.min.css";
 import "terminal.css";
 import "./App.css";
-import Layout from "./components/Layout";
-import Test from "./components/Test";
+import { Routes, Route} from 'react-router-dom';
+
+import Home from "./components/Home";
 
 function App() {
+
     return (
-        <Layout>
-            <div classname="main">
-                {["hello", "world", "huhu"].map((x) => (
-                    <Test val={x} />
-                ))}
-                <div>Hello, World</div>
-            </div>
-        </Layout>
-    );
+        //<Home/>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </div>
+      );
 }
 
 export default App;

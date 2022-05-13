@@ -1,9 +1,9 @@
 function SyncButton() {
     return (
         <div style={{
-            'margin-left': '5vw'
+            marginLeft: '5vw'
         }}>
-            <button class="btn btn-default">Sync</button>
+            <button className="btn btn-default">Sync</button>
         </div>
     );
 }

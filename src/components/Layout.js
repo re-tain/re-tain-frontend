@@ -3,32 +3,32 @@ import SyncButton from './SyncButton'
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
         <div style={{
-            'padding-right': '10vw',
-            'padding-left': '10vw'
+            paddingLeft: '10vw',
+            paddingRight: '10vw'
             }}>
             <header>
-                <div class="terminal-nav">
-                    <div class="terminal-logo">
-                        <div class="logo terminal-prompt">
-                            <a href="#" class="no-style">
+                <div className="terminal-nav">
+                    <div className="terminal-logo">
+                        <div className="logo terminal-prompt">
+                            <a href="#" className="no-style">
                                 EditArt
                             </a>
                         </div>
                     </div>
-                    <nav class="terminal-menu">
+                    <nav className="terminal-menu">
                         <ul>
-                            <li>
-                                <a class="menu-item" href="#">
+                            <li key="Mint">
+                                <a className="menu-item" href="#">
                                     Mint
                                 </a>
                             </li>
-                            <li>
-                                <a class="menu-item" href="#">
+                            <li key="Marketplace">
+                                <a className="menu-item" href="#">
                                     Marketplace
                                 </a>
                             </li>
-                            <li>
-                                <a class="menu-item" href="#">
+                            <li key="MyCollection">
+                                <a className="menu-item" href="#">
                                     My collection
                                 </a>
                             </li>
