@@ -1,4 +1,5 @@
 import SyncButton from "./SyncButton";
+import { Link } from 'react-router-dom';
 
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
@@ -12,27 +13,19 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 <div className="terminal-nav">
                     <div className="terminal-logo">
                         <div className="logo terminal-prompt">
-                            <a href="#" className="no-style">
-                                EditArt
-                            </a>
+                        <span className="no-style"><Link to="/">EditArt</Link></span>
                         </div>
                     </div>
                     <nav className="terminal-menu">
                         <ul>
                             <li key="Mint">
-                                <a className="menu-item" href="#">
-                                    Mint
-                                </a>
+                            <span className="menu-item"><Link to="/mint">Mint</Link></span>
                             </li>
                             <li key="Marketplace">
-                                <a className="menu-item" href="#">
-                                    Marketplace
-                                </a>
+                            <span className="menu-item"><Link to="/mint">Marketplace</Link></span>
                             </li>
                             <li key="MyCollection">
-                                <a className="menu-item" href="#">
-                                    My collection
-                                </a>
+                            <span className="menu-item"><Link to="/mint">My collection</Link></span>
                             </li>
                         </ul>
                     </nav>
