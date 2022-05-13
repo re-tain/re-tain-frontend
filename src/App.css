@@ -1,7 +1,0 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-body, html, button {
-  margin: 0;
-  font-family: 'VT323', monospace;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
