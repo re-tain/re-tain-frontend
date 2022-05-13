@@ -1,5 +1,5 @@
 function Test({val}) {
-    return <button class="button is-danger">{val}</button>
+    return <button class="btn btn-default">{val}</button>
 }
 
 export default Test;
