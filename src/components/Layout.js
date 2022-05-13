@@ -1,11 +1,13 @@
-import SyncButton from './SyncButton'
+import SyncButton from "./SyncButton";
 
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
-        <div style={{
-            paddingLeft: '10vw',
-            paddingRight: '10vw'
-            }}>
+        <div
+            style={{
+                paddingLeft: "10vw",
+                paddingRight: "10vw",
+            }}
+        >
             <header>
                 <div className="terminal-nav">
                     <div className="terminal-logo">
@@ -34,13 +36,19 @@ function Layout({ children, favicon = "/favicon.png" }) {
                             </li>
                         </ul>
                     </nav>
-                    <SyncButton/>
+                    <SyncButton />
                 </div>
             </header>
-            <div className="content">{children}</div>
+            <div
+                className="content"
+                style={{
+                    marginTop: "5vh",
+                }}
+            >
+                {children}
+            </div>
         </div>
     );
 }
-
 
 export default Layout;

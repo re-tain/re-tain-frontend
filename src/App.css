@@ -1,0 +1,27 @@
+.mint-slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 1px; /* Specified height */
+    background: black; /* Grey background */
+    outline: None; /* Remove outline */
+    margin: 20px;
+}
+
+.mint-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: black;
+    cursor: pointer;
+  }
+  
+  .mint-slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: black;
+    cursor: pointer;
+  }
