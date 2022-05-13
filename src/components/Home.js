@@ -1,14 +1,13 @@
 import Layout from "./Layout";
-import Test from "./Test";
+import TokenBox from "./TokenBox";
 
 function Home() {
     return (
         <Layout>
             <div className="main">
-                {["hello", "world", "huhu"].map((x) => (
-                    <Test val={x} key={x}/>
+                {["hello", "world", "huhu", "eis", "a", "s", "h", "e", "ui", "oii"].map((x) => (
+                    <TokenBox title={x} key={x}/>
                 ))}
-                <div>Hello, World</div>
             </div>
         </Layout>
     );
