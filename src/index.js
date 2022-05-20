@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { WalletProvider } from '@tezos-contrib/react-wallet-provider';
+import { TEZOS_NETWORK } from "./consts";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
+        <WalletProvider name="teztok-8bidou-demo" clientType="beacon" network={TEZOS_NETWORK}>
             <App />
+            </WalletProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

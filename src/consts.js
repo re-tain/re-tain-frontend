@@ -1,0 +1,1 @@
+export const TEZOS_NETWORK = process.env.TEZOS_NETWORK || 'ITHACANET';
