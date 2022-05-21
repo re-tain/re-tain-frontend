@@ -3,20 +3,13 @@ import TokenBox from "./TokenBox";
 import { TZKT_API } from "../consts";
 import { useState, useEffect } from "react";
 
-function TokenOverview() {
+function TokenOverview({ query }) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetch(
-            TZKT_API +
-                "v1/tokens/" +
-                "?" +
-                new URLSearchParams({
-                    contract: "KT1UxwEogk6NcfxruTicjkAGb3Mf6gxNsVNk",
-                })
-        )
+        fetch(TZKT_API + query)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -30,17 +23,19 @@ function TokenOverview() {
             );
     }, []);
 
-    if (items) {
+    if (items && items.length > 0) {
+        let tokens = items
+        if("token" in items[0]) tokens = items.map(item => item.token)
         return (
             <div>
                 <h1>Token Overview</h1>
                 <div
                     style={{
-                        display: "flex",
+                        display: "flex",    
                         flexWrap: "wrap",
                     }}
                 >
-                    {items.map((token) => (
+                    {tokens.map((token) => (
                         <TokenBox
                             title={token.metadata.name}
                             url={token.metadata.artifactUri}

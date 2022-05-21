@@ -13,7 +13,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 <div className="terminal-nav">
                     <div className="terminal-logo">
                         <div className="logo terminal-prompt">
-                        <span className="no-style"><Link to="/">EditArt</Link></span>
+                        <span className="no-style"><Link to="/">EditART</Link></span>
                         </div>
                     </div>
                     <nav className="terminal-menu">
@@ -25,7 +25,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                             <span className="menu-item"><Link to="/mint">Marketplace</Link></span>
                             </li>
                             <li key="MyCollection">
-                            <span className="menu-item"><Link to="/mint">My collection</Link></span>
+                            <span className="menu-item"><Link to="/my-collection">My collection</Link></span>
                             </li>
                         </ul>
                     </nav>

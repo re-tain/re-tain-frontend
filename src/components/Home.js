@@ -2,10 +2,17 @@ import Layout from "./Layout";
 import TokenOverview from "./TokenOverview";
 
 function Home() {
+    let query =
+        "v1/tokens/" +
+        "?" +
+        new URLSearchParams({
+            contract: "KT1UxwEogk6NcfxruTicjkAGb3Mf6gxNsVNk",
+        });
+
     return (
         <Layout>
             <div className="main">
-                <h1>EditArt...</h1>
+                <h1>EditART...</h1>
 
                 <ul>
                     <li>
@@ -30,7 +37,7 @@ function Home() {
                 </div>
 
                 <div>❤️ , pifragile</div>
-                <TokenOverview></TokenOverview>
+                <TokenOverview query={query}></TokenOverview>
             </div>
         </Layout>
     );
