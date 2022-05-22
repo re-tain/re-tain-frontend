@@ -1,5 +1,4 @@
 
-import { Link } from 'react-router-dom';
 import {getActiveAccount, connectWallet, disconnectWallet} from '../lib/wallet'
 import { useState, useEffect } from "react";
 

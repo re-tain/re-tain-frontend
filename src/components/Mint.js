@@ -25,6 +25,7 @@ function Mint() {
                 }}
             >
                 <iframe
+                    title="token"
                     style={{
                         border: "None",
                         height: "400px",

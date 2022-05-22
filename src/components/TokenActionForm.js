@@ -9,7 +9,6 @@ function TokenActionForm() {
                             <button
                                 className="btn btn-default"
                                 type="submit"
-                                role="button"
                                 name="submit"
                                 id="submit"
                             >
@@ -33,7 +32,6 @@ function TokenActionForm() {
                         <button
                             className="btn btn-default"
                             type="submit"
-                            role="button"
                             name="submit"
                             id="submit"
                         >
@@ -50,7 +48,6 @@ function TokenActionForm() {
                         <button
                             className="btn btn-default"
                             type="submit"
-                            role="button"
                             name="submit"
                             id="submit"
                         >
@@ -74,7 +71,6 @@ function TokenActionForm() {
                         <button
                             className="btn btn-default"
                             type="submit"
-                            role="button"
                             name="submit"
                             id="submit"
                         >

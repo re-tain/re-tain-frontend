@@ -76,9 +76,8 @@ function MintForm({ onSubmitForm, onMint }) {
                     </div>
                     <div className="form-group">
                         <button
-                            class="btn btn-default"
+                            className="btn btn-default"
                             type="submit"
-                            role="button"
                             name="submit"
                             id="submit"
                         >
@@ -86,7 +85,6 @@ function MintForm({ onSubmitForm, onMint }) {
                         </button>
                         <button
                             className="btn btn-default"
-                            role="button"
                             name="mint"
                             id="mint"
                             onClick={handleMint}

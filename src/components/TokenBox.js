@@ -11,6 +11,7 @@ function TokenBox({ title, url }) {
             }}
         >
             <iframe
+                title="token"
                 style={{
                     border: "None",
                     height: "100%",
