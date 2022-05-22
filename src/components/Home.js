@@ -1,12 +1,14 @@
 import Layout from "./Layout";
 import TokenOverview from "./TokenOverview";
 
+import { CONTRACT_ADDRESS } from "../consts";
+
 function Home() {
     let query =
         "v1/tokens/" +
         "?" +
         new URLSearchParams({
-            contract: "KT1UxwEogk6NcfxruTicjkAGb3Mf6gxNsVNk",
+            contract: CONTRACT_ADDRESS,
         });
 
     return (

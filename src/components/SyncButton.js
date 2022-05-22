@@ -1,15 +1,37 @@
-import { useWallet } from '@tezos-contrib/react-wallet-provider';
+
 import { Link } from 'react-router-dom';
+import {getActiveAccount, connectWallet, disconnectWallet} from '../lib/wallet'
+import { useState, useEffect } from "react";
 
 
 function SyncButton() {
-    const { activeAccount, connect, disconnect } = useWallet();
+    const [wallet, setWallet] = useState(null);
+    useEffect(() => {
+        const func = async () => {
+          const account = await getActiveAccount();
+          if (account) {
+            setWallet(account.address);
+          }
+        };
+        func();
+      }, []);
+
+      let connect = async () => {
+        const { wallet } = await connectWallet();
+        setWallet(wallet);
+      }
+
+      let disconnect = async () => {
+        const { wallet } = await disconnectWallet();
+        setWallet(wallet);
+    }
+
     return (
         <div style={{
             marginLeft: '5vw'
         }}>
-        {!activeAccount && <button className="btn btn-default" onClick={connect}>Sync</button>}
-        {activeAccount && <button className="btn btn-default" onClick={disconnect}>Unsync</button>}
+        {!wallet && <button className="btn btn-default" onClick={connect}>Sync</button>}
+        {wallet && <button className="btn btn-default" onClick={disconnect}>Unsync</button>}
 
             
         </div>
