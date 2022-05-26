@@ -31,8 +31,8 @@ function MarketPlace({ query }) {
                     token["price"] = parseInt(item.value);
                     tokens.push(token);
                 }
-                setTokens(tokens);
             }
+            setTokens(tokens);
         };
         getData().catch(console.error);
     }, [page, pageLength, query]);
