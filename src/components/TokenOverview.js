@@ -9,11 +9,9 @@ function TokenOverview({ query }) {
     useEffect(() => {
         fetch(TZKT_API + query)
             .then((res) => res.json())
-            .then(
-                (result) => {
-                    setItems(result);
-                }
-            );
+            .then((result) => {
+                setItems(result);
+            });
     }, []);
     if (items && items.length > 0) {
         let tokens = items;
@@ -27,13 +25,14 @@ function TokenOverview({ query }) {
                         flexWrap: "wrap",
                     }}
                 >
-                    {tokens.map((token) => (
-                        <TokenBox
-                            title={token.metadata.name}
-                            url={token.metadata.artifactUri}
-                            key={token.metadata.name}
-                        />
-                    ))}
+                    {tokens.map((token) => {
+                            if (token.metadata) return <TokenBox
+                                title={token.metadata.name}
+                                url={token.metadata.artifactUri}
+                                key={token.metadata.name}
+                            />
+                    }
+                    )}
                 </div>
             </div>
         );
