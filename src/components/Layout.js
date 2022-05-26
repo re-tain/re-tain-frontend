@@ -1,5 +1,5 @@
 import SyncButton from "./SyncButton";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
@@ -13,19 +13,29 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 <div className="terminal-nav">
                     <div className="terminal-logo">
                         <div className="logo terminal-prompt">
-                        <span className="no-style"><Link to="/">EditART</Link></span>
+                            <span className="no-style">
+                                <Link to="/">EditART</Link>
+                            </span>
                         </div>
                     </div>
                     <nav className="terminal-menu">
                         <ul>
                             <li key="Mint">
-                            <span className="menu-item"><Link to="/mint">Mint</Link></span>
+                                <span className="menu-item">
+                                    <Link to="/mint">Mint</Link>
+                                </span>
                             </li>
                             <li key="Marketplace">
-                            <span className="menu-item"><Link to="/mint">Marketplace</Link></span>
+                                <span className="menu-item">
+                                    <Link to="/marketplace">Marketplace</Link>
+                                </span>
                             </li>
                             <li key="MyCollection">
-                            <span className="menu-item"><Link to="/my-collection">My collection</Link></span>
+                                <span className="menu-item">
+                                    <Link to="/my-collection">
+                                        My collection
+                                    </Link>
+                                </span>
                             </li>
                         </ul>
                     </nav>

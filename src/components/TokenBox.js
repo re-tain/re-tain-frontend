@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-function TokenBox({ title, url }) {
+function TokenBox({ title, url, price }) {
     return (
         <div
             style={{
                 margin: "30px",
-                width: "min(20vw, 300px)",
-                height: "min(20vw, 300px)",
+                width: "min(30vw, 300px)",
+                height: "min(30vw, 300px)",
                 padding: "10px",
                 position: "relative",
             }}
@@ -26,6 +26,16 @@ function TokenBox({ title, url }) {
             >
                 {title}
             </div>
+            {price && (
+                <div
+                    style={{
+                        marginTop: "3px",
+                    }}
+                >
+                    ꜩ {price / 1000000}
+                </div>
+            )}
+
             <Link to={`/token-detail/${title}`}>
                 <div
                     style={{

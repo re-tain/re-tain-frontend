@@ -1,9 +1,7 @@
-import TokenBox from "./TokenBox";
-
 import { TZKT_API } from "../consts";
 import { useState, useEffect } from "react";
 
-import PaginationButtons from "./PaginationButtons";
+import TokenGrid from "./TokenGrid";
 
 function TokenOverview({ query }) {
     const [tokens, setTokens] = useState(null);
@@ -21,36 +19,15 @@ function TokenOverview({ query }) {
                     result = result.map((item) => item.token);
                 setTokens(result);
             });
-    }, [page, pageLength]);
+    }, [page, pageLength, query]);
 
     if (tokens) {
         return (
-            <div>
-                {tokens.length > 0 && (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        {tokens.map((token) => {
-                            if (token.metadata)
-                                return (
-                                    <TokenBox
-                                        title={token.metadata.name}
-                                        url={token.metadata.artifactUri}
-                                        key={token.metadata.name}
-                                    />
-                                );
-                        })}
-                    </div>
-                )}
-                {tokens.length == 0 && <div style={{marginTop: '5vw'}}>No tokens found..</div>}
-                <PaginationButtons
-                    previousPage={previousPage}
-                    nextPage={nextPage}
-                />
-            </div>
+            <TokenGrid
+                tokens={tokens}
+                previousPage={previousPage}
+                nextPage={nextPage}
+            />
         );
     } else {
         return "Loading...";
