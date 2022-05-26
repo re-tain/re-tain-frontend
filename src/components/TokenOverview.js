@@ -14,7 +14,7 @@ function TokenOverview({ query }) {
                     setItems(result);
                 }
             );
-    });
+    }, []);
     if (items && items.length > 0) {
         let tokens = items;
         if ("token" in items[0]) tokens = items.map((item) => item.token);
