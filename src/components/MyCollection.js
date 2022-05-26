@@ -5,7 +5,7 @@ import { CONTRACT_ADDRESS } from "../consts";
 import {useState, useEffect} from 'react'
 
 import {getActiveAccount} from '../lib/wallet'
-function Home() {
+function MyCollection() {
 
     const [wallet, setWallet] = useState(null);
     useEffect(() => {
@@ -34,6 +34,13 @@ function Home() {
             </Layout>
         );
     }
+    else {
+        return (
+            <Layout>
+                Please sync your wallet.
+            </Layout>
+        );
+    }
 }
 
-export default Home;
+export default MyCollection;
