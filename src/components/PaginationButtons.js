@@ -1,11 +1,11 @@
 
 function PaginationButtons({ previousPage, nextPage }) {
     return (
-        <div style={{marginTop: '5vw'}}>
-            <button className="btn btn-default" onClick={previousPage}>
+        <div className="btn-group"style={{marginTop: '5vw'}}>
+            <button className="btn btn-default btn-ghost" onClick={previousPage}>
                 Previous
             </button>
-            <button className="btn btn-default" onClick={nextPage}>
+            <button className="btn btn-default btn-ghost" onClick={nextPage}>
                 Next
             </button>
         </div>
