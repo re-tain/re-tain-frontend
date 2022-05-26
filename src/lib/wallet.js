@@ -1,34 +1,14 @@
-import { TezosToolkit } from "@taquito/taquito";
+import React from "react";
 import { BeaconWallet } from "@taquito/beacon-wallet";
+import { TezosToolkit } from "@taquito/taquito";
 import { TEZOS_NETWORK, RPC_NODE } from "../consts";
 
 const options = {
     name: "EditART",
     preferredNetwork: TEZOS_NETWORK,
 };
-
-const wallet = new BeaconWallet(options);
-
-const getActiveAccount = async () => {
-    return await wallet.client.getActiveAccount();
-};
-
-const connectWallet = async () => {
-    let account = await wallet.client.getActiveAccount();
-
-    if (!account) {
-        await wallet.requestPermissions({
-            network: { type: TEZOS_NETWORK },
-        });
-        account = await wallet.client.getActiveAccount();
-    }
-    return { success: true, wallet: account.address };
-};
-
-const disconnectWallet = async () => {
-    await wallet.disconnect();
-    return { success: true, wallet: null };
-};
+export const beaconWallet = new BeaconWallet(options);
+export const WalletContext = React.createContext(undefined);
 
 const checkIfWalletConnected = async (wallet) => {
     try {
@@ -49,8 +29,7 @@ const checkIfWalletConnected = async (wallet) => {
     }
 };
 
-const mint = async (contractAddress, queryString) => {
-    const wallet = new BeaconWallet(options);
+export const mint = async (wallet, contractAddress, queryString) => {
     const response = await checkIfWalletConnected(wallet);
 
     if (response.success) {
@@ -64,12 +43,4 @@ const mint = async (contractAddress, queryString) => {
         const result = await operation.confirmation();
         console.log(result);
     }
-};
-
-export {
-    connectWallet,
-    disconnectWallet,
-    getActiveAccount,
-    checkIfWalletConnected,
-    mint,
 };

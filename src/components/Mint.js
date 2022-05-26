@@ -1,10 +1,14 @@
 import Layout from "./Layout";
 import MintForm from "./MintForm";
-import { useState } from "react";
-import { mint } from "../lib/wallet";
 import { CONTRACT_ADDRESS } from "../consts";
 
+import { useState, useContext } from "react";
+
+import { WalletContext, mint } from "../lib/wallet";
+
 function Mint() {
+    const wallet = useContext(WalletContext);
+
     const [queryString, setQueryString] = useState(
         "m0=0.5&m1=0.5&m2=0.5&m3=0.5&m4=0.5"
     );
@@ -13,7 +17,7 @@ function Mint() {
     };
 
     let handleMint = async () => {
-        await mint(CONTRACT_ADDRESS, queryString);
+        await mint(wallet, CONTRACT_ADDRESS, queryString);
     };
     return (
         <Layout>
