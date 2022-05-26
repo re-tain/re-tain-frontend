@@ -21,6 +21,8 @@ function TokenBox({ title, url, price }) {
             />
             <div
                 style={{
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
                     marginTop: "3px",
                 }}
             >
@@ -30,6 +32,8 @@ function TokenBox({ title, url, price }) {
                 <div
                     style={{
                         marginTop: "3px",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
                     }}
                 >
                     ꜩ {price / 1000000}
