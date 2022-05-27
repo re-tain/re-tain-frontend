@@ -6,6 +6,8 @@ import TokenGrid from "./TokenGrid";
 import { CONTRACT_ADDRESS } from "../consts";
 import Layout from "./Layout";
 
+import { getToken } from "../lib/api";
+
 function MarketPlace({ query }) {
     const [tokens, setTokens] = useState(null);
     const [page, setPage] = useState(0);
@@ -23,13 +25,12 @@ function MarketPlace({ query }) {
             let data = await res.json();
             let tokens = [];
             for (let item of data) {
-                let query = `v1/tokens/?contract=${CONTRACT_ADDRESS}&tokenId=${item.key}`;
-                let res = await fetch(TZKT_API + query);
-                let data = await res.json();
-                if (data.length > 0) {
-                    let token = data[0];
-                    token["price"] = parseInt(item.value);
-                    tokens.push(token);
+                if (item.active) {
+                    let token = await getToken(CONTRACT_ADDRESS, item.key);
+                    if (token) {
+                        token["price"] = parseInt(item.value);
+                        tokens.push(token);
+                    }
                 }
             }
             setTokens(tokens);

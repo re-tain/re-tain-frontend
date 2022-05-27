@@ -1,5 +1,6 @@
 import TokenBox from "./TokenBox";
 import PaginationButtons from "./PaginationButtons";
+import { CONTRACT_ADDRESS } from "../consts";
 
 function TokenGrid({ tokens, previousPage, nextPage }) {
     return (
@@ -15,6 +16,8 @@ function TokenGrid({ tokens, previousPage, nextPage }) {
                         if (token.metadata)
                             return (
                                 <TokenBox
+                                    id={token.tokenId}
+                                    contract={CONTRACT_ADDRESS}
                                     title={token.metadata.name}
                                     url={token.metadata.artifactUri}
                                     key={token.metadata.name}

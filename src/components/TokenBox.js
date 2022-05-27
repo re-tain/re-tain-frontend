@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-function TokenBox({ title, url, price }) {
+function TokenBox({ id, contract, title, url, price }) {
     return (
         <div
             style={{
@@ -40,7 +40,7 @@ function TokenBox({ title, url, price }) {
                 </div>
             )}
 
-            <Link to={`/token-detail/${title}`}>
+            <Link to={`/token-detail/${contract}/${id}`}>
                 <div
                     style={{
                         position: "absolute",

@@ -12,7 +12,7 @@ import MarketPlace from "./components/Marketplace";
 import { WalletContext, beaconWallet } from "./lib/wallet";
 
 function App() {
-    const [wallet, setWallet] = useState(beaconWallet);
+    const [wallet, _setWallet] = useState(beaconWallet);
 
     return (
         <WalletContext.Provider value={wallet}>
@@ -21,7 +21,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/mint" element={<Mint />} />
                     <Route
-                        path="/token-detail/:tokenId"
+                        path="/token-detail/:contract/:tokenId"
                         element={<TokenDetail />}
                     />
                     <Route path="/my-collection" element={<MyCollection />} />
