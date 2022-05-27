@@ -7,6 +7,10 @@ function Layout({ children, favicon = "/favicon.png" }) {
             style={{
                 paddingLeft: "10vw",
                 paddingRight: "10vw",
+                minHeight: '100vh',
+                margin: 0,
+                display: 'grid',
+                'grid-template-rows': 'auto 1fr auto'
             }}
         >
             <header>
@@ -50,6 +54,9 @@ function Layout({ children, favicon = "/favicon.png" }) {
             >
                 {children}
             </div>
+            <footer>
+                <a href="https://tzkt.io">Built with TzKT API</a>
+            </footer>
         </div>
     );
 }
