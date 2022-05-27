@@ -12,7 +12,7 @@ import MarketPlace from "./components/Marketplace";
 import { WalletContext, beaconWallet } from "./lib/wallet";
 
 function App() {
-    const [wallet, _setWallet] = useState(beaconWallet);
+    const [wallet] = useState(beaconWallet);
 
     return (
         <WalletContext.Provider value={wallet}>
