@@ -5,7 +5,7 @@ import TokenActionForm from "./TokenActionForm";
 
 import { useEffect, useState } from "react";
 
-import { TZKT_API, TZPROFILES_API } from "../consts";
+import { TZKT_API } from "../consts";
 
 import { getToken } from "../lib/api";
 import UserDetail from "./UserDetail";
@@ -15,7 +15,6 @@ function TokenDetail() {
     const [tokenPrice, setTokenPrice] = useState(null);
     const [owner, setOwner] = useState(null);
     const [token, setToken] = useState(null);
-    const [tzProfile, setTzProfile] = useState(null);
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -42,23 +41,7 @@ function TokenDetail() {
                 if (data && data.active) {
                     let owner = data.value;
                     setOwner(owner);
-                    await fetchTzProfile(
-                        "tz1gJde57Meuqb2xMYbapTPzgTZkiCmPAMZA"
-                    );
                 }
-            }
-        };
-
-        const fetchTzProfile = async (owner) => {
-            if (!owner) return;
-            let res = await fetch(TZPROFILES_API + owner);
-            if (res.status === 200) {
-                let data = await res.json();
-                let userData = JSON.parse(data[1][1])["credentialSubject"];
-                userData["twitter"] = JSON.parse(data[0][1])[
-                    "credentialSubject"
-                ]["sameAs"];
-                setTzProfile(userData);
             }
         };
 
@@ -74,7 +57,7 @@ function TokenDetail() {
                     <h1>{token.metadata.name}</h1>
                     <div>
                         <b>Owner:</b>
-                        <UserDetail address={owner} tzProfile={tzProfile} />
+                        <UserDetail address={owner} />
                     </div>
                 </div>
                 <div
