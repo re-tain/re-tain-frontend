@@ -26,12 +26,13 @@ function UserDetail({ address }) {
         <div>
             {tzProfile && (
                 <div>
+                    <img src={tzProfile.logo} style={{width: '50px'}}></img>
                     <div>{tzProfile.alias}</div>
                     <div>{tzProfile.description}</div>
 
                     <div>
                         <a href={tzProfile.twitter}>
-                            {tzProfile.twitter.split("com/")[1]}
+                            {'@' + tzProfile.twitter.split("com/")[1]}
                         </a>
                     </div>
 
