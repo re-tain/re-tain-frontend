@@ -55,6 +55,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 {children}
             </div>
             <footer>
+                <br/>
             Built with  <a href="https://tzkt.io">TzKT API</a>
             </footer>
         </div>
