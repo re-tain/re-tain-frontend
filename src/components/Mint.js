@@ -31,7 +31,11 @@ function Mint() {
         "m0=0.5&m1=0.5&m2=0.5&m3=0.5&m4=0.5"
     );
     let setSrc = (m0, m1, m2, m3, m4) => {
-        setQueryString(`m0=${m0}&m1=${m1}&m2=${m2}&m3=${m3}&m4=${m4}`);
+        let qs = `m0=${m0}&m1=${m1}&m2=${m2}&m3=${m3}&m4=${m4}`;
+        setQueryString(qs);
+        document
+            .getElementById("tokenFrame")
+            .contentWindow.postMessage({ editartQueryString: qs }, "*");
     };
 
     let handleMint = async () => {
@@ -48,6 +52,7 @@ function Mint() {
                     }}
                 >
                     <iframe
+                        id="tokenFrame"
                         title="token"
                         style={{
                             border: "None",
