@@ -1,7 +1,7 @@
 .mint-slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
-    width: 100%; /* Full-width */
+    width: 90%; /* Full-width */
     height: 1px; /* Specified height */
     background: black; /* Grey background */
     outline: None; /* Remove outline */
