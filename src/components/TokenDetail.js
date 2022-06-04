@@ -9,6 +9,7 @@ import { TZKT_API } from "../consts";
 
 import { getToken } from "../lib/api";
 import UserDetail from "./UserDetail";
+import { resolveIpfs } from "../lib/utils";
 
 function TokenDetail() {
     let { contract, tokenId } = useParams();
@@ -74,7 +75,7 @@ function TokenDetail() {
                             width: "400px",
                             margin: "10px",
                         }}
-                        src={token.metadata.artifactUri}
+                        src={resolveIpfs(token.metadata.artifactUri)}
                     ></iframe>
 
                     <div style={{ width: "400px", margin: "10px" }}>

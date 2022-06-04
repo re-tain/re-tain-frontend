@@ -1,5 +1,6 @@
 import SyncButton from "./SyncButton";
 import { Link } from "react-router-dom";
+import contracts from "../contracts"
 
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
@@ -7,10 +8,10 @@ function Layout({ children, favicon = "/favicon.png" }) {
             style={{
                 paddingLeft: "10vw",
                 paddingRight: "10vw",
-                minHeight: '100vh',
+                minHeight: "100vh",
                 margin: 0,
-                display: 'grid',
-                'grid-template-rows': 'auto 1fr auto'
+                display: "grid",
+                "gridTemplateRows": "auto 1fr auto",
             }}
         >
             <header>
@@ -24,14 +25,23 @@ function Layout({ children, favicon = "/favicon.png" }) {
                     </div>
                     <nav className="terminal-menu">
                         <ul>
-                            <li key="Mint">
+                            <li key="Series">
                                 <span className="menu-item">
-                                    <Link to="/mint">Mint</Link>
-                                </span>
-                            </li>
-                            <li key="Marketplace">
-                                <span className="menu-item">
-                                    <Link to="/marketplace">Marketplace</Link>
+                                    <div className="show"><Link to="#">Series</Link></div>
+                                    <div className="list-categories">
+                                    <ul>
+                                    {contracts.map(c => (
+                                    <li key={c.name}>
+
+
+                                    <span className="menu-item">
+                                        <Link to={`/series/${c.address}`}>{c.name}</Link>
+                                    </span>
+                                </li>
+                                    ))}
+
+                                    </ul>
+                                    </div>
                                 </span>
                             </li>
                             <li key="MyCollection">
@@ -55,8 +65,8 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 {children}
             </div>
             <footer>
-                <br/>
-            Built with  <a href="https://tzkt.io">TzKT API</a>
+                <br />
+                Built with <a href="https://tzkt.io">TzKT API</a>
             </footer>
         </div>
     );

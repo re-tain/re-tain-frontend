@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { resolveIpfs } from "../lib/utils";
 function TokenBox({ id, contract, title, url, price }) {
     return (
         <div
@@ -17,7 +18,7 @@ function TokenBox({ id, contract, title, url, price }) {
                     height: "100%",
                     width: "100%",
                 }}
-                src={url}
+                src={resolveIpfs(url)}
             />
             <div
                 style={{

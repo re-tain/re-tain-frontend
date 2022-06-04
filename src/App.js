@@ -8,6 +8,7 @@ import Mint from "./components/Mint";
 import TokenDetail from "./components/TokenDetail";
 import MyCollection from "./components/MyCollection";
 import MarketPlace from "./components/Marketplace";
+import Series from "./components/Series";
 
 import { WalletContext, beaconWallet } from "./lib/wallet";
 
@@ -19,13 +20,14 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/mint" element={<Mint />} />
+                    <Route path="/mint/:contract" element={<Mint/>} />
                     <Route
                         path="/token-detail/:contract/:tokenId"
                         element={<TokenDetail />}
                     />
                     <Route path="/my-collection" element={<MyCollection />} />
                     <Route path="/marketplace" element={<MarketPlace />} />
+                    <Route path="/series/:contract" element={<Series />} />
                 </Routes>
             </div>
         </WalletContext.Provider>

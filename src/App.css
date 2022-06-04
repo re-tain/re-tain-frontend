@@ -25,3 +25,19 @@
     background: black;
     cursor: pointer;
   }
+
+  .show {
+    background-color: aqua;
+  }
+  .show:hover + .list-categories {
+    display: block;
+  }
+
+  .list-categories:hover {
+    display: block;
+  }
+  
+  .list-categories{
+    position:absolute;
+    display: none;
+  }

@@ -2,6 +2,7 @@ import React from "react";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { TezosToolkit } from "@taquito/taquito";
 import { TEZOS_NETWORK, RPC_NODE } from "../consts";
+import { char2Bytes } from "@taquito/utils";
 
 const options = {
     name: "EditART",
@@ -32,13 +33,13 @@ const checkIfWalletConnected = async (wallet) => {
     }
 };
 
-export const mint = async (wallet, contractAddress, queryString) => {
+export const mint = async (wallet, contractAddress, queryString, price) => {
     const response = await checkIfWalletConnected(wallet);
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
-        const operation = await contract.methods.mint(queryString).send({
-            amount: 1000000,
+        const operation = await contract.methods.mint(char2Bytes(queryString)).send({
+            amount: price,
             mutez: true,
         });
         const result = await operation.confirmation();

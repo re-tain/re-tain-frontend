@@ -1,6 +1,7 @@
 import React from "react";
+import MintButton from "./MintButton";
 
-function MintForm({ onSubmitForm, onMint }) {
+function MintForm({ onSubmitForm, onMint, price }) {
     let handleChange = (e) => {
         e.preventDefault();
         onSubmitForm(
@@ -8,14 +9,13 @@ function MintForm({ onSubmitForm, onMint }) {
             e.target.form.value1.value,
             e.target.form.value2.value,
             e.target.form.value3.value,
-            e.target.form.value4.value,
-
+            e.target.form.value4.value
         );
     };
 
     let handleMint = (e) => {
         e.preventDefault();
-        onMint()
+        onMint();
     };
     return (
         <div>
@@ -83,14 +83,10 @@ function MintForm({ onSubmitForm, onMint }) {
                         >
                             Preview
                         </button>
-                        <button
-                            className="btn btn-default"
-                            name="mint"
-                            id="mint"
+                        <MintButton
+                            price={price}
                             onClick={handleMint}
-                        >
-                            Mint
-                        </button>
+                        />
                     </div>
                 </fieldset>
             </form>
