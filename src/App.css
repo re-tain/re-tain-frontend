@@ -26,9 +26,6 @@
     cursor: pointer;
   }
 
-  .show {
-    background-color: aqua;
-  }
   .show:hover + .list-categories {
     display: block;
   }
