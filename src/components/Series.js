@@ -46,7 +46,7 @@ function Series() {
                     <div>{metadata.description}</div>
                     <div>{paused ? 'paused': 'not paused'}</div>
                     <div>
-                        <b>Creator:</b>
+                        <b>Artist:</b>
                         <UserDetail address={artist} />
                     </div>
                 </div>
