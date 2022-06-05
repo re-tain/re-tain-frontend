@@ -23,9 +23,9 @@ function UserDetail({ address }) {
     }, [address]);
 
     return (
-        <div>
+        <div style= {{width: '30vw', padding: '1vh 3vw 0 0'}}>
             {tzProfile && (
-                <div>
+                <div style={{marginBottom: '2vw'}}>
                     <img src={tzProfile.logo} style={{width: '50px'}} alt="Logo"></img>
                     <div>{tzProfile.alias}</div>
                     <div>{tzProfile.description}</div>

@@ -7,7 +7,12 @@ import { useEffect, useState } from "react";
 
 import { TZKT_API } from "../consts";
 
-import { getToken } from "../lib/api";
+import {
+    getContractBigmap,
+    getContractMetadata,
+    getContractStorage,
+    getToken,
+} from "../lib/api";
 import UserDetail from "./UserDetail";
 import { resolveIpfs } from "../lib/utils";
 
@@ -16,50 +21,32 @@ function TokenDetail() {
     const [tokenPrice, setTokenPrice] = useState(null);
     const [owner, setOwner] = useState(null);
     const [token, setToken] = useState(null);
+    const [artist, setArtist] = useState(null);
+    const [creator, setCreator] = useState(null);
+    const [metadata, setMetadata] = useState(null);
 
     useEffect(() => {
         const fetchToken = async () => {
             let token = await getToken(contract, tokenId);
             setToken(token);
-        };
-
-        const fetchPrice = async () => {
-            let query = `v1/contracts/${contract}/bigmaps/listings/keys/${tokenId}`;
-            let res = await fetch(TZKT_API + query);
-            if (res.status === 200) {
-                let data = await res.json();
-                if (data && data.active) {
-                    setTokenPrice(parseInt(data.value));
-                }
-            }
-        };
-
-        const fetchOwner = async () => {
-            let query = `v1/contracts/${contract}/bigmaps/ledger/keys/${tokenId}`;
-            let res = await fetch(TZKT_API + query);
-            if (res.status === 200) {
-                let data = await res.json();
-                if (data && data.active) {
-                    let owner = data.value;
-                    setOwner(owner);
-                }
-            }
+            setArtist(await getContractStorage(contract, "artist_address"));
+            setTokenPrice(
+                await getContractBigmap(contract, "listings", tokenId)
+            );
+            setOwner(await getContractBigmap(contract, "ledger", tokenId));
+            setCreator(await getContractBigmap(contract, "creators", tokenId));
+            setMetadata(await getContractMetadata(contract));
         };
 
         fetchToken().catch(console.error);
-        fetchPrice().catch(console.error);
-        fetchOwner().catch(console.error);
     }, [tokenId, contract]);
 
-    if (token) {
+    if (token && metadata) {
         return (
             <Layout>
-                <div>
-                    <h1>{token.metadata.name}</h1>
-                    <div>
-                        <b>Owner:</b>
-                        <UserDetail address={owner} />
-                    </div>
+                <h1>{token.metadata.name}</h1>
+                <div style={{ marginBottom: "2vh" }}>
+                    {metadata.description}
                 </div>
                 <div
                     style={{
@@ -85,6 +72,26 @@ function TokenDetail() {
                             tokenId={tokenId}
                             owner={owner}
                         />
+                    </div>
+                </div>
+
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    <div>
+                        <b>Owner:</b>
+                        <UserDetail address={owner} />
+                    </div>
+                    <div>
+                        <b>Artist:</b>
+                        <UserDetail address={artist} />
+                    </div>
+                    <div>
+                        <b>Creator:</b>
+                        <UserDetail address={creator} />
                     </div>
                 </div>
             </Layout>
