@@ -5,8 +5,6 @@ import TokenActionForm from "./TokenActionForm";
 
 import { useEffect, useState } from "react";
 
-import { TZKT_API } from "../consts";
-
 import {
     getContractBigmap,
     getContractMetadata,

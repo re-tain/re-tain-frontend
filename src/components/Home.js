@@ -1,14 +1,7 @@
 import Layout from "./Layout";
-import TokenOverview from "./TokenOverview";
-
+import SeriesBox from "./SeriesBox";
+import contracts from "../contracts";
 function Home() {
-    // let query =
-    //     "v1/tokens/" +
-    //     "?" +
-    //     new URLSearchParams({
-    //         contract: CONTRACT_ADDRESS,
-    //     });
-
     return (
         <Layout>
             <div className="main">
@@ -17,7 +10,8 @@ function Home() {
                 <ul>
                     <li>
                         is a generative art platform, where collectors can
-                        co-create a piece of art with the artist.
+                        become creators by co-creating a piece of art with the
+                        artist.
                     </li>
                     <li>
                         is currently running in Beta mode and artists wishing to
@@ -38,6 +32,10 @@ function Home() {
 
                 <div>❤️ , pifragile</div>
                 {/* <TokenOverview query={query}></TokenOverview> */}
+            </div>
+            <div style={{marginTop: '5vh'}}>
+                <h1>Featured Series</h1>
+                <SeriesBox contract={contracts[0].address} />
             </div>
         </Layout>
     );
