@@ -1,6 +1,6 @@
 import Layout from "./Layout";
 import TokenOverview from "./TokenOverview";
-import { CONTRACT_ADDRESS } from "../consts";
+import contracts from "../contracts";
 
 import { useState, useEffect, useContext } from "react";
 
@@ -24,7 +24,7 @@ function MyCollection() {
             "v1/tokens/balances" +
             "?" +
             new URLSearchParams({
-                "token.contract": CONTRACT_ADDRESS,
+                "token.contract.in": contracts.map(c => c.address).join(','),
                 account: activeAccount,
                 "balance.gt": 0,
             });

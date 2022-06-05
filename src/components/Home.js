@@ -1,15 +1,13 @@
 import Layout from "./Layout";
 import TokenOverview from "./TokenOverview";
 
-import { CONTRACT_ADDRESS } from "../consts";
-
 function Home() {
-    let query =
-        "v1/tokens/" +
-        "?" +
-        new URLSearchParams({
-            contract: CONTRACT_ADDRESS,
-        });
+    // let query =
+    //     "v1/tokens/" +
+    //     "?" +
+    //     new URLSearchParams({
+    //         contract: CONTRACT_ADDRESS,
+    //     });
 
     return (
         <Layout>
@@ -39,7 +37,7 @@ function Home() {
                 </div>
 
                 <div>❤️ , pifragile</div>
-                <TokenOverview query={query}></TokenOverview>
+                {/* <TokenOverview query={query}></TokenOverview> */}
             </div>
         </Layout>
     );

@@ -6,7 +6,7 @@ let contractList = [
     },
     {
         name: "EATEST ZWEI",
-        address: "KT1GFdmTxdPDDaePz2z9DBcHGPsf7dN62Jyy",
+        address: "KT1UHpfAcxmCNE5SusasBpBJKwmdU37EVjyP",
         author: "Some Person"
     },
 ];
