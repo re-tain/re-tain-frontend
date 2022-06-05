@@ -75,14 +75,6 @@ function MintForm({ onSubmitForm, onMint, price }) {
                         />
                     </div>
                     <div className="form-group">
-                        <button
-                            className="btn btn-default"
-                            type="submit"
-                            name="submit"
-                            id="submit"
-                        >
-                            Preview
-                        </button>
                         <MintButton
                             price={price}
                             onClick={handleMint}

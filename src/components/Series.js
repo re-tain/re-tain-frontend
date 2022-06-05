@@ -19,6 +19,7 @@ function Series() {
     const [price, setPrice] = useState(null);
     const [artist, setArtist] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
+    const [paused, setPaused] = useState(null);
 
     useEffect(() => {
         const fetchStorage = async () => {
@@ -26,6 +27,7 @@ function Series() {
             setNumTokensMinted(await getContractStorage(contract, "last_token_id"))
             setPrice(await getContractStorage(contract, "price"))
             setArtist(await getContractStorage(contract, "artist_address"))
+            setPaused(await getContractStorage(contract, "paused"))
             setMetadata(await getContractMetadata(contract));
             setPreviewUrl((await getToken(contract, 0)).metadata.artifactUri)
         };
@@ -42,6 +44,7 @@ function Series() {
                     <div>{artist}</div>
                     <div>{metadata.name}</div>
                     <div>{metadata.description}</div>
+                    <div>{paused ? 'paused': 'not paused'}</div>
                     <div>
                         <b>Creator:</b>
                         <UserDetail address={artist} />

@@ -118,3 +118,29 @@ export const transfer = async (
         console.log(result);
     }
 };
+
+export const setPrice = async (wallet, contractAddress, price) => {
+    const response = await checkIfWalletConnected(wallet);
+
+    if (response.success) {
+        const contract = await tezos.wallet.at(contractAddress);
+        const operation = await contract.methods
+            .set_price(price)
+            .send({});
+        const result = await operation.confirmation();
+        console.log(result);
+    }
+};
+
+export const togglePaused = async (wallet, contractAddress) => {
+    const response = await checkIfWalletConnected(wallet);
+
+    if (response.success) {
+        const contract = await tezos.wallet.at(contractAddress);
+        const operation = await contract.methods
+            .toggle_paused()
+            .send({});
+        const result = await operation.confirmation();
+        console.log(result);
+    }
+};

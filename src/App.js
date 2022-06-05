@@ -11,6 +11,7 @@ import MarketPlace from "./components/Marketplace";
 import Series from "./components/Series";
 
 import { WalletContext, beaconWallet } from "./lib/wallet";
+import ArtistPanel from "./components/ArtistPanel";
 
 function App() {
     const [wallet] = useState(beaconWallet);
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/my-collection" element={<MyCollection />} />
                     <Route path="/marketplace" element={<MarketPlace />} />
                     <Route path="/series/:contract" element={<Series />} />
+                    <Route path="/artist-panel/:contract" element={<ArtistPanel />} />
                 </Routes>
             </div>
         </WalletContext.Provider>

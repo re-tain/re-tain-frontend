@@ -59,7 +59,7 @@ function Mint() {
                             height: "400px",
                             width: "400px",
                         }}
-                        src={`${resolveIpfs(baseUrl)}?${queryString}`}
+                        src={`${resolveIpfs(baseUrl)}`}
                     ></iframe>
                 </div>
 

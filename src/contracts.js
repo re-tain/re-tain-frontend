@@ -1,18 +1,13 @@
 let contractList = [
     {
         name: "EATEST EIS",
-        address: "KT1XgK61FsveykKwE45Jhx2kUcCpzzuNBdM5",
+        address: "KT1TzkQSbrS8qeJ1iTbXZufizpXq57QELhgp",
         author: "pifragile"
     },
     {
         name: "EATEST ZWEI",
-        address: "KT1GG8Ky6X8qhb2FWzs2gGWsJLCPuUKGUUSM",
+        address: "KT1GFdmTxdPDDaePz2z9DBcHGPsf7dN62Jyy",
         author: "Some Person"
-    },
-    {
-        name: "EATEST NULL",
-        address: "KT1UxwEogk6NcfxruTicjkAGb3Mf6gxNsVNk",
-        author: "Some Person 2"
     },
 ];
 
