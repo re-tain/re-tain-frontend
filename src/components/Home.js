@@ -14,8 +14,10 @@ function Home() {
                         artist.
                     </li>
                     <li>
-                        is currently running in Beta mode and artists wishing to
-                        release a token can do so, but by invite only.
+                        is currently running in Beta mode!
+                    </li>
+                    <li>
+                    is happy to release projects by many artists, please reach out.
                     </li>
                     <li>
                         is a project by generative artist{" "}
