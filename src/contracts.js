@@ -5,13 +5,8 @@ if (ENV === "dev") {
     contractList = [
         {
             name: "EATEST EIS",
-            address: "KT1TzkQSbrS8qeJ1iTbXZufizpXq57QELhgp",
+            address: "KT1TJHk1fb8cduedDKokjDy6TPXoFbppwKid",
             author: "pifragile",
-        },
-        {
-            name: "EATEST ZWEI",
-            address: "KT1UHpfAcxmCNE5SusasBpBJKwmdU37EVjyP",
-            author: "Some Person",
         },
     ];
 } else if (ENV === "prod") {
