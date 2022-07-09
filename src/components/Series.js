@@ -4,12 +4,11 @@ import Layout from "./Layout";
 
 import { useEffect, useState } from "react";
 
-
 import { getContractStorage, getContractMetadata, getToken } from "../lib/api";
 import UserDetail from "./UserDetail";
-import { resolveIpfs } from "../lib/utils";
 import MarketPlace from "./Marketplace";
 import MintButton from "./MintButton";
+import TokenImage from "./TokenImage";
 
 function Series() {
     let { contract } = useParams();
@@ -18,20 +17,25 @@ function Series() {
     const [numTokensMinted, setNumTokensMinted] = useState(null);
     const [price, setPrice] = useState(null);
     const [artist, setArtist] = useState(null);
-    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewArtifactUrl, setPreviewArtifactUrl] = useState(null);
+    const [previewDisplayUrl, setPreviewDisplayUrl] = useState(null);
     const [paused, setPaused] = useState(null);
 
     useEffect(() => {
         const fetchStorage = async () => {
             setNumTokens(await getContractStorage(contract, "num_tokens"));
-            setNumTokensMinted(await getContractStorage(contract, "last_token_id"))
-            setPrice(await getContractStorage(contract, "price"))
-            setArtist(await getContractStorage(contract, "artist_address"))
-            setPaused(await getContractStorage(contract, "paused"))
+            setNumTokensMinted(
+                await getContractStorage(contract, "last_token_id")
+            );
+            setPrice(await getContractStorage(contract, "price"));
+            setArtist(await getContractStorage(contract, "artist_address"));
+            setPaused(await getContractStorage(contract, "paused"));
             setMetadata(await getContractMetadata(contract));
-            setPreviewUrl((await getToken(contract, 0)).metadata.artifactUri)
+            let token = await getToken(contract, 0);
+            setPreviewArtifactUrl(token.metadata.artifactUri);
+            setPreviewDisplayUrl(token.metadata.displayUri);
         };
-        
+
         fetchStorage().catch(console.error);
     }, [contract]);
 
@@ -39,24 +43,26 @@ function Series() {
         return (
             <Layout>
                 <div>
-                    <div>{numTokensMinted} / {numTokens}</div>
+                    <div>
+                        {numTokensMinted} / {numTokens}
+                    </div>
                     <div>{price}</div>
                     <div>{artist}</div>
                     <div>{metadata.name}</div>
                     <div>{metadata.description}</div>
-                    <div>{paused ? 'paused': 'not paused'}</div>
+                    <div>{paused ? "paused" : "not paused"}</div>
                     <div>
                         <b>Artist:</b>
                         <UserDetail address={artist} />
                     </div>
                 </div>
-                    <div
+                <div
                     style={{
                         display: "flex",
                         justifyContent: "space-evenly",
                     }}
                 >
-                    <iframe
+                    <div
                         title="token"
                         style={{
                             border: "None",
@@ -64,12 +70,15 @@ function Series() {
                             width: "400px",
                             margin: "10px",
                         }}
-                        src={resolveIpfs(previewUrl)}
-                    ></iframe>
-
+                    >
+                        <TokenImage
+                            url={previewArtifactUrl}
+                            displayUrl={previewDisplayUrl}
+                        />
+                    </div>
                 </div>
                 <Link to={`/mint/${contract}`}>
-                <MintButton price={price}/>
+                    <MintButton price={price} />
                 </Link>
                 <MarketPlace contract={contract}></MarketPlace>
             </Layout>

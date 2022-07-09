@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { resolveIpfs } from "../lib/utils";
-function TokenBox({ id, contract, title, url, price }) {
+import TokenImage from "./TokenImage";
+function TokenBox({ id, contract, title, url, displayUrl, price }) {
     return (
         <div
             style={{
@@ -11,15 +11,8 @@ function TokenBox({ id, contract, title, url, price }) {
                 position: "relative",
             }}
         >
-            <iframe
-                title="token"
-                style={{
-                    border: "None",
-                    height: "100%",
-                    width: "100%",
-                }}
-                src={resolveIpfs(url)}
-            />
+            <TokenImage url={url} displayUrl={displayUrl} />
+
             <div
                 style={{
                     overflow: "hidden",

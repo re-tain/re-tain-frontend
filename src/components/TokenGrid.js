@@ -19,6 +19,7 @@ function TokenGrid({ tokens, previousPage, nextPage }) {
                                     contract={token.contract.address}
                                     title={token.metadata.name}
                                     url={token.metadata.artifactUri}
+                                    displayUrl={token.metadata.displayUri}
                                     key={token.metadata.name}
                                     price={token.price}
                                 />

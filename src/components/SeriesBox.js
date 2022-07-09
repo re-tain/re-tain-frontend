@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
-import { resolveIpfs } from "../lib/utils";
 
 import { useEffect, useState } from "react";
 
 import { getContractMetadata, getToken } from "../lib/api";
 
+import TokenImage from "./TokenImage";
+
 function SeriesBox({ contract }) {
     const [artifactUri, setArtifactUri] = useState(null);
+    const [displayUri, setDisplayUri] = useState(null);
     const [metadata, setMetadata] = useState(null);
 
     useEffect(() => {
         const fetchToken = async () => {
-            setArtifactUri((await getToken(contract, 0)).metadata.artifactUri);
+            let token = await getToken(contract, 0)
+            setArtifactUri(token.metadata.artifactUri);
+            setDisplayUri(token.metadata.displayUri);
             setMetadata(await getContractMetadata(contract));
         };
 
@@ -22,21 +26,13 @@ function SeriesBox({ contract }) {
             <div
                 style={{
                     margin: "10px",
-                    width: "50vw",
-                    height: "50vw",
+                    width: "30vw",
+                    height: "30vw",
                     padding: "10px",
                     position: "relative",
                 }}
             >
-                <iframe
-                    title="token"
-                    style={{
-                        border: "None",
-                        height: "100%",
-                        width: "100%",
-                    }}
-                    src={resolveIpfs(artifactUri)}
-                />
+            <TokenImage url={artifactUri} displayUrl={displayUri} />
                 <div
                     style={{
                         overflow: "hidden",

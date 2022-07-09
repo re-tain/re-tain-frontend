@@ -12,7 +12,7 @@ import {
     getToken,
 } from "../lib/api";
 import UserDetail from "./UserDetail";
-import { resolveIpfs } from "../lib/utils";
+import TokenImage from "./TokenImage";
 
 function TokenDetail() {
     let { contract, tokenId } = useParams();
@@ -53,7 +53,7 @@ function TokenDetail() {
                         flexWrap: "wrap",
                     }}
                 >
-                    <iframe
+                    <div
                         title="token"
                         style={{
                             border: "None",
@@ -61,8 +61,12 @@ function TokenDetail() {
                             width: "400px",
                             margin: "10px",
                         }}
-                        src={resolveIpfs(token.metadata.artifactUri)}
-                    ></iframe>
+                    >
+                        <TokenImage
+                            url={token.metadata.artifactUri}
+                            displayUrl={token.metadata.displayUri}
+                        />
+                    </div>
 
                     <div style={{ width: "400px", margin: "10px" }}>
                         <TokenActionForm
