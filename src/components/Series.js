@@ -43,16 +43,10 @@ function Series() {
         return (
             <Layout>
                 <div>
-                    <div>
-                        {numTokensMinted} / {numTokens}
-                    </div>
-                    <div>{price}</div>
-                    <div>{artist}</div>
-                    <div>{metadata.name}</div>
+                    <div><b>{metadata.name}</b></div>
                     <div>{metadata.description}</div>
-                    <div>{paused ? "paused" : "not paused"}</div>
+                    {/* <div>{paused ? "paused" : "not paused"}</div> */}
                     <div>
-                        <b>Artist:</b>
                         <UserDetail address={artist} />
                     </div>
                 </div>
@@ -60,6 +54,7 @@ function Series() {
                     style={{
                         display: "flex",
                         justifyContent: "space-evenly",
+                        flexDirection:'column'
                     }}
                 >
                     <div
@@ -76,6 +71,9 @@ function Series() {
                             displayUrl={previewDisplayUrl}
                         />
                     </div>
+                    <div style={{"margin": "2vh 0 2vh 0"}}>
+                        {numTokensMinted} / {numTokens} minted
+                    </div>  
                 </div>
                 <Link to={`/mint/${contract}`}>
                     <MintButton price={price} />
