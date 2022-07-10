@@ -9,6 +9,7 @@ import TokenDetail from "./components/TokenDetail";
 import MyCollection from "./components/MyCollection";
 import MarketPlace from "./components/Marketplace";
 import Series from "./components/Series";
+import About from "./components/About";
 
 import { WalletContext, beaconWallet } from "./lib/wallet";
 import ArtistPanel from "./components/ArtistPanel";
@@ -21,6 +22,7 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
                     <Route path="/mint/:contract" element={<Mint/>} />
                     <Route
                         path="/token-detail/:contract/:tokenId"

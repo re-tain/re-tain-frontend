@@ -1,6 +1,6 @@
 import SyncButton from "./SyncButton";
 import { Link } from "react-router-dom";
-import contracts from "../contracts"
+import contracts from "../contracts";
 
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
@@ -11,7 +11,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 minHeight: "100vh",
                 margin: 0,
                 display: "grid",
-                "gridTemplateRows": "auto 1fr auto",
+                gridTemplateRows: "auto 1fr auto",
             }}
         >
             <header>
@@ -27,20 +27,23 @@ function Layout({ children, favicon = "/favicon.png" }) {
                         <ul>
                             <li key="Series">
                                 <span className="menu-item">
-                                    <div className="show"><Link to="#">Series</Link></div>
+                                    <div className="show">
+                                        <Link to="#">Series</Link>
+                                    </div>
                                     <div className="list-categories">
-                                    <ul>
-                                    {contracts.map(c => (
-                                    <li key={c.name}>
-
-
-                                    <span className="menu-item">
-                                        <Link to={`/series/${c.address}`}>{c.name}</Link>
-                                    </span>
-                                </li>
-                                    ))}
-
-                                    </ul>
+                                        <ul>
+                                            {contracts.map((c) => (
+                                                <li key={c.name}>
+                                                    <span className="menu-item">
+                                                        <Link
+                                                            to={`/series/${c.address}`}
+                                                        >
+                                                            {c.name}
+                                                        </Link>
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </span>
                             </li>
@@ -49,6 +52,12 @@ function Layout({ children, favicon = "/favicon.png" }) {
                                     <Link to="/my-collection">
                                         My collection
                                     </Link>
+                                </span>
+                            </li>
+
+                            <li key="About">
+                                <span className="menu-item">
+                                    <Link to="/about">About</Link>
                                 </span>
                             </li>
                         </ul>
