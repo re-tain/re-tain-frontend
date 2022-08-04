@@ -1,27 +1,16 @@
 import { ENV } from "./consts";
 
 let contractList;
-if (ENV === "dev") {
+if (["dev", "staging"].includes(ENV)) {
     contractList = [
         {
             name: "EATEST EIS",
-            address: "KT1TJHk1fb8cduedDKokjDy6TPXoFbppwKid",
+            address: "KT18rHLA8S4meAWQc5T6PoJxz7jAZhfCiNRo",
             author: "pifragile",
         },
     ];
 } else if (ENV === "prod") {
-    contractList = [
-        {
-            name: "EATEST EIS",
-            address: "KT1TzkQSbrS8qeJ1iTbXZufizpXq57QELhgp",
-            author: "pifragile",
-        },
-        {
-            name: "EATEST ZWEI",
-            address: "KT1UHpfAcxmCNE5SusasBpBJKwmdU37EVjyP",
-            author: "Some Person",
-        },
-    ];
+    contractList = [];
 }
 
 export default contractList;
