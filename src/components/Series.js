@@ -18,7 +18,7 @@ function Series() {
     const [artist, setArtist] = useState(null);
     const [previewArtifactUrl, setPreviewArtifactUrl] = useState(null);
     const [previewDisplayUrl, setPreviewDisplayUrl] = useState(null);
-    const [_paused, setPaused] = useState(null);
+    const [paused, setPaused] = useState(null);
 
     useEffect(() => {
         const fetchStorage = async () => {
