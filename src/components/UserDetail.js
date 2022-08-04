@@ -10,6 +10,7 @@ function UserDetail({ address }) {
             let res = await fetch(TZPROFILES_API + address);
             if (res.status === 200) {
                 let data = await res.json();
+                if(data.length === 0) return;
                 let userData = JSON.parse(data[1][1])["credentialSubject"];
                 userData["twitter"] = JSON.parse(data[0][1])[
                     "credentialSubject"
