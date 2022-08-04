@@ -17,7 +17,7 @@ function UserDetail({ address }) {
                 setTzProfile(userData);
             }
         };
-        fetchTzProfile("tz1gJde57Meuqb2xMYbapTPzgTZkiCmPAMZA").catch(
+        fetchTzProfile(address).catch(
             console.error
         );
     }, [address]);
