@@ -19,7 +19,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
     };
     return (
         <div>
-            <form onChange={handleChange}>
+            <form>
                 <fieldset>
                     <legend>Sliders</legend>
                     <div className="form-group">
@@ -32,6 +32,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
                             step="0.001"
                             id="value0"
                             name="value0"
+                            onMouseUp={handleChange}
                         />
                         <input
                             className="mint-slider"
@@ -42,6 +43,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
                             step="0.001"
                             id="value1"
                             name="value1"
+                            onMouseUp={handleChange}
                         />
                         <input
                             className="mint-slider"
@@ -52,6 +54,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
                             step="0.001"
                             id="value2"
                             name="value2"
+                            onMouseUp={handleChange}
                         />
                         <input
                             className="mint-slider"
@@ -62,6 +65,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
                             step="0.001"
                             id="value3"
                             name="value3"
+                            onMouseUp={handleChange}
                         />
                         <input
                             className="mint-slider"
@@ -72,6 +76,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
                             step="0.001"
                             id="value4"
                             name="value4"
+                            onMouseUp={handleChange}
                         />
                     </div>
                     <div className="form-group">
