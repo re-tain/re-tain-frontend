@@ -3,7 +3,7 @@ import MintButton from "./MintButton";
 
 function MintForm({ onSubmitForm, onMint, price }) {
     let handleChange = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         onSubmitForm(
             e.target.form.value0.value,
             e.target.form.value1.value,
