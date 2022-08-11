@@ -13,6 +13,7 @@ import About from "./components/About";
 
 import { WalletContext, beaconWallet } from "./lib/wallet";
 import ArtistPanel from "./components/ArtistPanel";
+import Sandbox from "./components/Sandbox";
 
 function App() {
     const [wallet] = useState(beaconWallet);
@@ -23,7 +24,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/mint/:contract" element={<Mint/>} />
+                    <Route path="/mint/:contract" element={<Mint />} />
                     <Route
                         path="/token-detail/:contract/:tokenId"
                         element={<TokenDetail />}
@@ -31,7 +32,11 @@ function App() {
                     <Route path="/my-collection" element={<MyCollection />} />
                     <Route path="/marketplace" element={<MarketPlace />} />
                     <Route path="/series/:contract" element={<Series />} />
-                    <Route path="/artist-panel/:contract" element={<ArtistPanel />} />
+                    <Route
+                        path="/artist-panel/:contract"
+                        element={<ArtistPanel />}
+                    />
+                    <Route path="/sandbox/" element={<Sandbox />} />
                 </Routes>
             </div>
         </WalletContext.Provider>
