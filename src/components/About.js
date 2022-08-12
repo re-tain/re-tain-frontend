@@ -19,9 +19,13 @@ function About() {
                     for the piece are submitted to the smart contract and as
                     well immutably stored on chain. This process ensures full
                     decentralization, but makes it necessary that the token
-                    metadata is fully generated on chain and is the reason why
-                    the minting fees are slightly higher that for example in
-                    fx(hash).
+                    metadata is generated on chain and is the reason why the
+                    minting fees are slightly higher that for example in
+                    fx(hash). Editart has special priviliges on the contract to
+                    set a displayURI and a thumbnailURI for the user's
+                    convenience and for a smooth integration into other
+                    platforms. The artifactURI on the other hand, which
+                    represents the actual NFT, is totally immutable after mint.
                 </p>
                 <h1>Earn royalties as a collector</h1>
                 <p>
@@ -37,7 +41,8 @@ function About() {
                 <p>aaa: 0xaaaaouhfoiuoijoih</p>
                 <h1>Fees</h1>
                 <p>
-                    Minting fee: 5%, Artist Royalties: 5%, Creator Royalties: 5%, Platform Royalties: 5%
+                    Minting fee: 5%, Artist Royalties: 5%, Creator Royalties:
+                    5%, Platform Royalties: 5%
                 </p>
 
                 <h1>Disclaimer</h1>
