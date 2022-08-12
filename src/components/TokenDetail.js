@@ -43,9 +43,6 @@ function TokenDetail() {
         return (
             <Layout>
                 <h1>{token.metadata.name}</h1>
-                <div style={{ marginBottom: "2vh" }}>
-                    {metadata.description}
-                </div>
                 <div
                     style={{
                         display: "flex",
@@ -57,9 +54,9 @@ function TokenDetail() {
                         title="token"
                         style={{
                             border: "None",
-                            height: "400px",
-                            width: "400px",
-                            margin: "10px",
+                            height: "min(400px, 80vw)",
+                            width: "min(400px, 80vw)",
+                            //margin: "10px",
                         }}
                     >
                         <TokenImage
@@ -68,7 +65,7 @@ function TokenDetail() {
                         />
                     </div>
 
-                    <div style={{ width: "400px", margin: "10px" }}>
+                    <div style={{ width: "min(400px, 80vw)", margin: "10px" }}>
                         <TokenActionForm
                             price={tokenPrice}
                             contract={contract}
