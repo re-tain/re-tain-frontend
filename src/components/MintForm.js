@@ -22,7 +22,14 @@ function MintForm({ onSubmitForm, onMint, price }) {
             <form>
                 <fieldset>
                     <legend>Sliders</legend>
-                    <div className="form-group">
+                    <div
+                        className="form-group"
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            justifyContent: "center",
+                        }}
+                    >
                         <input
                             className="mint-slider"
                             type="range"
@@ -85,10 +92,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
                         />
                     </div>
                     <div className="form-group">
-                        <MintButton
-                            price={price}
-                            onClick={handleMint}
-                        />
+                        <MintButton price={price} onClick={handleMint} />
                     </div>
                 </fieldset>
             </form>

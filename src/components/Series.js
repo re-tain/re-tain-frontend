@@ -62,8 +62,8 @@ function Series() {
                         title="token"
                         style={{
                             border: "None",
-                            height: "400px",
-                            width: "400px",
+                            width: "min(400px, 75vw)",
+                            height: "min(400px, 75vw)",
                             margin: "10px",
                         }}
                     >

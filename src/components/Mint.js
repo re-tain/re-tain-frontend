@@ -49,6 +49,7 @@ function Mint() {
                     style={{
                         display: "flex",
                         justifyContent: "center",
+                        maxWidth:"100vw",
                     }}
                 >
                     <iframe
@@ -56,8 +57,8 @@ function Mint() {
                         title="token"
                         style={{
                             border: "None",
-                            height: "400px",
-                            width: "400px",
+                            height: "min(400px, 75vw)",
+                            width: "min(400px, 75vw)",
                         }}
                         src={`${resolveIpfs(baseUrl)}`}
                     ></iframe>
@@ -70,7 +71,7 @@ function Mint() {
                         marginTop: "1vh",
                     }}
                 >
-                    <div style={{ width: "400px" }}>
+                    <div style={{ width: "min(400px, 75vw)" }}>
                         <MintForm
                             onSubmitForm={setSrc}
                             onMint={handleMint}
