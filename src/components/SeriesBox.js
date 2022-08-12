@@ -26,8 +26,8 @@ function SeriesBox({ contract, author }) {
             <div
                 style={{
                     margin: "10px",
-                    width: "40vw",
-                    height: "40vw",
+                    width: "min(400px, 80vw)",
+                    height: "min(400px, 80vw)",
                     padding: "10px",
                     position: "relative",
                 }}

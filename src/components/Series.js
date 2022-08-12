@@ -64,7 +64,7 @@ function Series() {
                             border: "None",
                             width: "min(400px, 75vw)",
                             height: "min(400px, 75vw)",
-                            margin: "10px",
+                            margin: "20px 0 0 0",
                         }}
                     >
                         <TokenImage
@@ -72,11 +72,8 @@ function Series() {
                             displayUrl={previewDisplayUrl}
                         />
                     </div>
-                    <div style={{ margin: "2vh 0 2vh 0" }}>
-                        ꜩ {price / 1000000}
-                    </div>
-                    <div style={{ margin: "0 0 2vh 0" }}>
-                        {numTokensMinted} / {numTokens} minted
+                    <div style={{ margin: "1vh 0 1vh 0" }}>
+                        ꜩ {price / 1000000} &nbsp;|&nbsp;  {numTokensMinted} / {numTokens} minted
                     </div>
                 </div>
                 <Link to={`/mint/${contract}`}>
@@ -84,7 +81,9 @@ function Series() {
                         Go to mint page
                     </button>
                 </Link>
+                <div style={{ marginTop: "5vh" }}>
                 <MarketPlace contract={contract}></MarketPlace>
+                </div>
             </Layout>
         );
     } else {

@@ -4,11 +4,10 @@ function TokenBox({ id, contract, title, url, displayUrl, price }) {
     return (
         <div
             style={{
-                margin: "30px",
-                width: "min(30vw, 300px)",
-                height: "min(30vw, 300px)",
-                padding: "10px",
+                width: "min(80vw, 400px)",
+                height: "min(80vw, 400px)",
                 position: "relative",
+                margin: "10px 30px 50px 0"
             }}
         >
             <TokenImage url={url} displayUrl={displayUrl} />
@@ -43,7 +42,6 @@ function TokenBox({ id, contract, title, url, displayUrl, price }) {
                         display: "inline-block",
                         height: "100%",
                         width: "100%",
-                        padding: "20px",
                     }}
                 ></div>
             </Link>
