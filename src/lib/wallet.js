@@ -144,3 +144,16 @@ export const togglePaused = async (wallet, contractAddress) => {
         console.log(result);
     }
 };
+
+export const setNumTokens = async (wallet, contractAddress, num_tokens) => {
+    const response = await checkIfWalletConnected(wallet);
+
+    if (response.success) {
+        const contract = await tezos.wallet.at(contractAddress);
+        const operation = await contract.methods
+            .set_num_tokens(num_tokens)
+            .send({});
+        const result = await operation.confirmation();
+        console.log(result);
+    }
+};
