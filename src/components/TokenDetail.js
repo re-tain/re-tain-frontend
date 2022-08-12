@@ -43,20 +43,13 @@ function TokenDetail() {
         return (
             <Layout>
                 <h1>{token.metadata.name}</h1>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        flexWrap: "wrap",
-                    }}
-                >
+                <div>
                     <div
                         title="token"
                         style={{
                             border: "None",
                             height: "min(400px, 80vw)",
                             width: "min(400px, 80vw)",
-                            //margin: "10px",
                         }}
                     >
                         <TokenImage
@@ -65,33 +58,36 @@ function TokenDetail() {
                         />
                     </div>
 
-                    <div style={{ width: "min(400px, 80vw)", margin: "10px" }}>
+                    <div
+                        style={{
+                            border: "None",
+                            width: "min(400px, 80vw)",
+                            marginTop: "1vh",
+                        }}
+                    >
+                        <div>
+                            <b>Artist:</b>
+                            <UserDetail address={artist} isLink={true} />
+                        </div>
+                        <div>
+                            <b>Owner:</b>
+                            <UserDetail address={owner} isLink={true}/>
+                        </div>
+
+                        <div>
+                            <b>Creator:</b>
+                            <UserDetail address={creator} isLink={true}/>
+                        </div>
+                    </div>
+                    <div
+                        style={{ width: "min(400px, 80vw)", marginTop: "1vh" }}
+                    >
                         <TokenActionForm
                             price={tokenPrice}
                             contract={contract}
                             tokenId={tokenId}
                             owner={owner}
                         />
-                    </div>
-                </div>
-
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                    }}
-                >
-                    <div>
-                        <b>Owner:</b>
-                        <UserDetail address={owner} />
-                    </div>
-                    <div>
-                        <b>Artist:</b>
-                        <UserDetail address={artist} />
-                    </div>
-                    <div>
-                        <b>Creator:</b>
-                        <UserDetail address={creator} />
                     </div>
                 </div>
             </Layout>

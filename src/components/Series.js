@@ -46,9 +46,9 @@ function Series() {
                         <b>{metadata.name}</b>
                     </div>
                     <div>
-                        <UserDetail address={artist} />
+                        by <UserDetail address={artist} isLink={true}/>
                     </div>
-                    <div>{metadata.description}</div>
+                    <div style={{marginTop: "1vh"}}>{metadata.description}</div>
                     {/* <div>{paused ? "paused" : "not paused"}</div> */}
                 </div>
                 <div

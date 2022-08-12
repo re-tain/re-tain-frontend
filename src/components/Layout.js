@@ -1,7 +1,22 @@
 import SyncButton from "./SyncButton";
 import { Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { WalletContext } from "../lib/wallet";
 
 function Layout({ children, favicon = "/favicon.png" }) {
+    const client = useContext(WalletContext).client;
+    const [activeAccount, setActiveAccount] = useState(null);
+    useEffect(() => {
+        const func = async () => {
+            const account = await client.getActiveAccount();
+                if (account) {
+                    setActiveAccount(account.address);
+                }
+        };
+        func();
+    }, [client]);
+
+
     return (
         <div
             style={{
@@ -31,7 +46,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                             </li>
                             <li key="MyCollection">
                                 <span className="menu-item">
-                                    <Link to="/my-collection">
+                                    <Link to={`/user/${activeAccount}`}>
                                         My collection
                                     </Link>
                                 </span>

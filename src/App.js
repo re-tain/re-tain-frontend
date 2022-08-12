@@ -6,7 +6,7 @@ import { React, useState } from "react";
 import Home from "./components/Home";
 import Mint from "./components/Mint";
 import TokenDetail from "./components/TokenDetail";
-import MyCollection from "./components/MyCollection";
+import User from "./components/User";
 import MarketPlace from "./components/Marketplace";
 import Series from "./components/Series";
 import About from "./components/About";
@@ -30,7 +30,7 @@ function App() {
                         path="/token-detail/:contract/:tokenId"
                         element={<TokenDetail />}
                     />
-                    <Route path="/my-collection" element={<MyCollection />} />
+                    <Route path="/user/:address" element={<User />} />
                     <Route path="/marketplace" element={<MarketPlace />} />
                     <Route path="/series/:contract" element={<Series />} />
                     <Route
