@@ -1,6 +1,5 @@
 import SyncButton from "./SyncButton";
 import { Link } from "react-router-dom";
-import contracts from "../contracts";
 
 function Layout({ children, favicon = "/favicon.png" }) {
     return (
@@ -27,24 +26,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                         <ul>
                             <li key="Series">
                                 <span className="menu-item">
-                                    <div className="show">
-                                        <Link to="#">Series</Link>
-                                    </div>
-                                    <div className="list-categories">
-                                        <ul>
-                                            {contracts.map((c) => (
-                                                <li key={c.name}>
-                                                    <span className="menu-item">
-                                                        <Link
-                                                            to={`/series/${c.address}`}
-                                                        >
-                                                            {c.name}
-                                                        </Link>
-                                                    </span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                    <Link to="/series-overview">Series</Link>
                                 </span>
                             </li>
                             <li key="MyCollection">

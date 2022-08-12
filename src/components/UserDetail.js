@@ -24,7 +24,7 @@ function UserDetail({ address }) {
     }, [address]);
 
     return (
-        <div style= {{width: '30vw', padding: '1vh 3vw 0 0'}}>
+        <div style= {{width: '30vw'}}>
             {tzProfile && (
                 <div style={{marginBottom: '2vw'}}>
                     <img src={tzProfile.logo} style={{width: '50px'}} alt="Logo"></img>
@@ -42,7 +42,7 @@ function UserDetail({ address }) {
                     </div>
                 </div>
             )}
-            {!tzProfile && <div>{address}</div>}
+            {!tzProfile && <div>{`${address.slice(0,4)}...${address.slice(-4)}`}</div>}
         </div>
     );
 }

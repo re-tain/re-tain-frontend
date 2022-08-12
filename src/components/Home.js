@@ -13,11 +13,10 @@ function Home() {
                         become creators by co-creating a piece of art with the
                         artist.
                     </li>
+                    <li>is currently running in Beta mode!</li>
                     <li>
-                        is currently running in Beta mode!
-                    </li>
-                    <li>
-                    is happy to release projects by many artists, please reach out.
+                        is happy to release projects by many artists, please
+                        reach out.
                     </li>
                     <li>
                         is a project by generative artist{" "}
@@ -35,9 +34,12 @@ function Home() {
                 <div>❤️ , pifragile</div>
                 {/* <TokenOverview query={query}></TokenOverview> */}
             </div>
-            <div style={{marginTop: '5vh'}}>
+            <div style={{ marginTop: "5vh" }}>
                 <h1>Featured Series</h1>
-                <SeriesBox contract={contracts[0].address} />
+                <SeriesBox
+                    contract={contracts[0].address}
+                    author={contracts[0].author}
+                />
             </div>
         </Layout>
     );

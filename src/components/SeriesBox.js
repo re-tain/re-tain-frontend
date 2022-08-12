@@ -6,7 +6,7 @@ import { getContractMetadata, getToken } from "../lib/api";
 
 import TokenImage from "./TokenImage";
 
-function SeriesBox({ contract }) {
+function SeriesBox({ contract, author }) {
     const [artifactUri, setArtifactUri] = useState(null);
     const [displayUri, setDisplayUri] = useState(null);
     const [metadata, setMetadata] = useState(null);
@@ -26,8 +26,8 @@ function SeriesBox({ contract }) {
             <div
                 style={{
                     margin: "10px",
-                    width: "30vw",
-                    height: "30vw",
+                    width: "40vw",
+                    height: "40vw",
                     padding: "10px",
                     position: "relative",
                 }}
@@ -41,6 +41,8 @@ function SeriesBox({ contract }) {
                     }}
                 >
                     {metadata.name}
+                    <br/>
+                    by {author && author}
                 </div>
 
                 <Link to={`/series/${contract}`}>

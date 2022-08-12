@@ -45,11 +45,11 @@ function Series() {
                     <div>
                         <b>{metadata.name}</b>
                     </div>
-                    <div>{metadata.description}</div>
-                    {/* <div>{paused ? "paused" : "not paused"}</div> */}
                     <div>
                         <UserDetail address={artist} />
                     </div>
+                    <div>{metadata.description}</div>
+                    {/* <div>{paused ? "paused" : "not paused"}</div> */}
                 </div>
                 <div
                     style={{
@@ -73,18 +73,14 @@ function Series() {
                         />
                     </div>
                     <div style={{ margin: "2vh 0 2vh 0" }}>
-                         ꜩ {price / 1000000}
+                        ꜩ {price / 1000000}
                     </div>
                     <div style={{ margin: "0 0 2vh 0" }}>
                         {numTokensMinted} / {numTokens} minted
                     </div>
                 </div>
                 <Link to={`/mint/${contract}`}>
-                    <button
-                        className="btn btn-default"
-                        name="mint"
-                        id="mint"
-                    >
+                    <button className="btn btn-default" name="mint" id="mint">
                         Go to mint page
                     </button>
                 </Link>
