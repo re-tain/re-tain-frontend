@@ -38,3 +38,10 @@
     position:absolute;
     display: none;
   }
+
+  .standard-width {
+    width: min(400px, 80vw)
+  }
+  .standard-height {
+    height: min(400px, 80vw)
+  }

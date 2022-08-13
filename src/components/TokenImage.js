@@ -2,10 +2,7 @@ import { resolveIpfs } from "../lib/utils";
 function TokenImage({ displayUrl, url }) {
     return (
         <div
-            style={{
-                height: "100%",
-                width: "100%",
-            }}
+        className="standard-width standard-height"
         >
             {!displayUrl && (
                 <iframe

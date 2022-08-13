@@ -60,10 +60,9 @@ function Series() {
                 >
                     <div
                         title="token"
+                        className="standard-width standard-height"
                         style={{
                             border: "None",
-                            width: "min(400px, 75vw)",
-                            height: "min(400px, 75vw)",
                             margin: "20px 0 0 0",
                         }}
                     >

@@ -44,14 +44,7 @@ function TokenDetail() {
             <Layout>
                 <h1>{token.metadata.name}</h1>
                 <div>
-                    <div
-                        title="token"
-                        style={{
-                            border: "None",
-                            height: "min(400px, 80vw)",
-                            width: "min(400px, 80vw)",
-                        }}
-                    >
+                    <div title="token">
                         <TokenImage
                             url={token.metadata.artifactUri}
                             displayUrl={token.metadata.displayUri}
@@ -59,9 +52,9 @@ function TokenDetail() {
                     </div>
 
                     <div
+                        className="standard-width"
                         style={{
                             border: "None",
-                            width: "min(400px, 80vw)",
                             marginTop: "1vh",
                         }}
                     >
@@ -71,16 +64,17 @@ function TokenDetail() {
                         </div>
                         <div>
                             <b>Owner:</b>
-                            <UserDetail address={owner} isLink={true}/>
+                            <UserDetail address={owner} isLink={true} />
                         </div>
 
                         <div>
                             <b>Creator:</b>
-                            <UserDetail address={creator} isLink={true}/>
+                            <UserDetail address={creator} isLink={true} />
                         </div>
                     </div>
                     <div
-                        style={{ width: "min(400px, 80vw)", marginTop: "1vh" }}
+                        className="standard-width"
+                        style={{ marginTop: "1vh" }}
                     >
                         <TokenActionForm
                             price={tokenPrice}

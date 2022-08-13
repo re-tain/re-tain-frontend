@@ -37,10 +37,9 @@ function Sandbox() {
                 <iframe
                     id="tokenFrame"
                     title="token"
+                    className="standard-width standard-height"
                     style={{
                         border: "None",
-                        height: "400px",
-                        width: "400px",
                     }}
                     src={sketchSrc}
                 ></iframe>
@@ -53,7 +52,7 @@ function Sandbox() {
                     marginTop: "1vh",
                 }}
             >
-                <div style={{ width: "400px" }}>
+                <div className="standard-width">
                     <MintForm
                         onSubmitForm={setSrc}
                         onMint={setSrc}

@@ -5,9 +5,19 @@ import contracts from "../contracts";
 function SeriesOverview() {
     return (
         <Layout>
-            <div>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "left",
+                    flexWrap: "wrap",
+                }}
+            >
                 {contracts.map((c) => (
-                    <SeriesBox contract={c.address} author={c.author}/>
+                    <SeriesBox
+                        contract={c.address}
+                        author={c.author}
+                        key={c.address}
+                    />
                 ))}
             </div>
         </Layout>

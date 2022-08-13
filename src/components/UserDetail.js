@@ -33,7 +33,7 @@ function UserDetail({ address, isLink }) {
         );
     } else {
         return (
-            <div style={{ width: "min(400px, 80vw)" }}>
+            <div className="standard-width">
                 {tzProfile && (
                     <div style={{ marginBottom: "2vw" }}>
                         <img
