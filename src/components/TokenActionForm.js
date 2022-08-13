@@ -6,6 +6,7 @@ import {
     transfer,
 } from "../lib/wallet";
 import { useContext, useState, useEffect } from "react";
+import { formatMutez } from "../lib/utils";
 
 function TokenActionForm({ contract, tokenId, price, owner }) {
     const wallet = useContext(WalletContext);
@@ -54,7 +55,7 @@ function TokenActionForm({ contract, tokenId, price, owner }) {
                                 name="submit"
                                 id="submit"
                             >
-                                Buy for {price / 1000000} tez
+                                Buy for {formatMutez(price)}
                             </button>
                         </div>
                     </fieldset>

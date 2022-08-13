@@ -4,3 +4,7 @@ export function resolveIpfs(address) {
         return address.replace("ipfs://", IPFS_GATEWAY);
     }
 }
+
+export function formatMutez(mutez) {
+    return `ꜩ ${mutez / 1000000}`
+}

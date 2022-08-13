@@ -1,3 +1,5 @@
+import { formatMutez } from "../lib/utils";
+
 function MintButton({price, onClick}) {
     return (
         <button
@@ -6,7 +8,7 @@ function MintButton({price, onClick}) {
         id="mint"
         onClick={onClick}
     >
-        Mint for ꜩ {price / 1000000}
+        Mint for {formatMutez(price)}
     </button>
     );
 }

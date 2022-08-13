@@ -8,6 +8,7 @@ import { getContractStorage, getContractMetadata, getToken } from "../lib/api";
 import UserDetail from "./UserDetail";
 import MarketPlace from "./Marketplace";
 import TokenImage from "./TokenImage";
+import { formatMutez } from "../lib/utils";
 
 function Series() {
     let { contract } = useParams();
@@ -72,7 +73,7 @@ function Series() {
                         />
                     </div>
                     <div style={{ margin: "1vh 0 1vh 0" }}>
-                        ꜩ {price / 1000000} &nbsp;|&nbsp;  {numTokensMinted} / {numTokens} minted
+                        {formatMutez(price)} &nbsp;|&nbsp;  {numTokensMinted} / {numTokens} minted
                     </div>
                 </div>
                 <Link to={`/mint/${contract}`}>
