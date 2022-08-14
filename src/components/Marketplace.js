@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 import TokenGrid from "./TokenGrid";
 
-
 import { getToken } from "../lib/api";
 
 function MarketPlace({ contract }) {
@@ -21,6 +20,10 @@ function MarketPlace({ contract }) {
                 TZKT_API + query + `?offset=${page}&limit=${pageLength}`
             );
             let data = await res.json();
+            if (data.length === 0) {
+                setPage(Math.max(page - pageLength, 0));
+                return;
+            }
             let tokens = [];
             for (let item of data) {
                 if (item.active) {
@@ -48,7 +51,7 @@ function MarketPlace({ contract }) {
             </div>
         );
     } else {
-        return "Loading..."
+        return "Loading...";
     }
 }
 

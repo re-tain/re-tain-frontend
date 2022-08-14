@@ -15,9 +15,13 @@ function TokenOverview({ query }) {
         fetch(TZKT_API + query + `&limit=${pageLength}&offset=${page}`)
             .then((res) => res.json())
             .then((result) => {
-                if (result.length > 0 && "token" in result[0])
-                    result = result.map((item) => item.token);
-                setTokens(result);
+                if (result.length > 0) {
+                    if ("token" in result[0])
+                        result = result.map((item) => item.token);
+                    setTokens(result);
+                } else {
+                    setPage(Math.max(page - pageLength, 0));
+                }
             });
     }, [page, pageLength, query]);
 
