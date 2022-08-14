@@ -20,12 +20,12 @@ function Home() {
                     </li>
                     <li>
                         is a project by generative artist{" "}
-                        <a href="https://twitter.com/pifragile/"> pifragile</a>
+                        <a href="https://twitter.com/pifragile/" target="_blank"> pifragile</a>
                     </li>
                 </ul>
                 <div>
                     For infos{" "}
-                    <a href="https://twitter.com/pifragile/">
+                    <a href="https://twitter.com/pifragile/" target="_blank">
                         {" "}
                         DM me on twitter
                     </a>

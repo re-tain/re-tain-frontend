@@ -72,7 +72,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
             </div>
             <footer>
                 <br />
-                Built with <a href="https://tzkt.io">TzKT API</a>
+                Built with <a href="https://tzkt.io" target="_blank">TzKT API</a>
             </footer>
         </div>
     );
