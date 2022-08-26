@@ -10,7 +10,7 @@ if (["dev", "staging"].includes(ENV)) {
         },
         {
             name: "Genesis",
-            address: "KT1V3BPpc98BbL6wXn7m9AZJx5i5Xp8b4LTU",
+            address: "KT1FmraLFfUC5tpW5EhgqeJvCQBBt2cLm5CM",
             author: "pifragile",
         },
     ];
