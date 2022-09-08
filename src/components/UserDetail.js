@@ -12,6 +12,9 @@ function UserDetail({ address, isLink }) {
                 let data = await res.json();
                 if (data.length === 0) return;
                 let userData = JSON.parse(data[1][1])["credentialSubject"];
+                if (!("alias" in userData)) {
+                    userData = JSON.parse(data[2][1])["credentialSubject"];
+                }
                 userData["twitter"] = JSON.parse(data[0][1])[
                     "credentialSubject"
                 ]["sameAs"];
@@ -45,7 +48,7 @@ function UserDetail({ address, isLink }) {
                             <b>{tzProfile.alias}</b>
                         </div>
                         <div>{tzProfile.description}</div>
-
+                        
                         <div>
                             <a href={tzProfile.twitter}>
                                 {"@" + tzProfile.twitter.split("com/")[1]}
