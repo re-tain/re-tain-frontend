@@ -6,5 +6,5 @@ export function resolveIpfs(address) {
 }
 
 export function formatMutez(mutez) {
-    return `ꜩ ${mutez / 1000000}`
+    return `${mutez / 1000000} tez`
 }

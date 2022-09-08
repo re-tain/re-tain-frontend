@@ -38,7 +38,7 @@ function About() {
                     Each editart token has its own contract with an included
                     marketplace functionality.
                 </p>
-                <p>aaa: 0xaaaaouhfoiuoijoih</p>
+                <p>Genesis: KT1D7Ufx21sz9yDyP4Rs1WBCur9XhaZ9JwNE</p>
                 <h1>Fees</h1>
                 <p>
                     Minting fee: 5%, Artist Royalties: 5%, Creator Royalties:

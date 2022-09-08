@@ -15,7 +15,13 @@ if (["dev", "staging"].includes(ENV)) {
         },
     ];
 } else if (ENV === "prod") {
-    contractList = [];
+    contractList = [
+        {
+            name: "Genesis",
+            address: "KT1D7Ufx21sz9yDyP4Rs1WBCur9XhaZ9JwNE",
+            author: "pifragile",
+        },
+    ];
 }
 
 export default contractList;
