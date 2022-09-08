@@ -22,6 +22,10 @@ function Home() {
                         is a project by generative artist{" "}
                         <a href="https://twitter.com/pifragile/" target="_blank"> pifragile</a>
                     </li>
+                    <li>
+                        has a twitter page {" "}
+                        <a href="https://twitter.com/editart_xyz" target="_blank"> @editart_xyz</a>
+                    </li>
                 </ul>
                 <div>
                     For infos{" "}
