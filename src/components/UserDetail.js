@@ -30,7 +30,7 @@ function UserDetail({ address, isLink }) {
             if (res.status === 200) {
                 let data = await res.json();
                 let holder = data.data.holder;
-                if (holder.length > 0) {
+                if (holder.length > 0 && holder[0].alias != null) {
                     setTzProfile(holder[0]);
                 }
             }
