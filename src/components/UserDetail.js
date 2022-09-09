@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TZPROFILES_API } from "../consts";
+import { OBJKT_API } from "../consts";
 import { Link } from "react-router-dom";
 
 function UserDetail({ address, isLink }) {
@@ -7,18 +7,32 @@ function UserDetail({ address, isLink }) {
     useEffect(() => {
         const fetchTzProfile = async (address) => {
             if (!address) return;
-            let res = await fetch(TZPROFILES_API + address);
+            let query = `query MyQuery {
+                holder(where: {address: {_eq: "${address}"}}) {
+                  alias
+                  logo
+                  twitter
+                  website
+                  description
+                }
+              }`;
+
+            let res = await fetch(OBJKT_API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    query: query,
+                }),
+            });
+
             if (res.status === 200) {
                 let data = await res.json();
-                if (data.length === 0) return;
-                let userData = JSON.parse(data[1][1])["credentialSubject"];
-                if (!("alias" in userData)) {
-                    userData = JSON.parse(data[2][1])["credentialSubject"];
+                let holder = data.data.holder;
+                if (holder.length > 0) {
+                    setTzProfile(holder[0]);
                 }
-                userData["twitter"] = JSON.parse(data[0][1])[
-                    "credentialSubject"
-                ]["sameAs"];
-                setTzProfile(userData);
             }
         };
         fetchTzProfile(address).catch(console.error);
@@ -48,7 +62,7 @@ function UserDetail({ address, isLink }) {
                             <b>{tzProfile.alias}</b>
                         </div>
                         <div>{tzProfile.description}</div>
-                        
+
                         <div>
                             <a href={tzProfile.twitter}>
                                 {"@" + tzProfile.twitter.split("com/")[1]}
