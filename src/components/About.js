@@ -10,7 +10,7 @@ function About() {
                     value sliders available that can be tuned by the collector
                     when minting a piece.
                 </p>
-                <h1>Fully on-chain.</h1>
+                <h1>Fully on-chain metadata.</h1>
                 <p>
                     First an artist creates a parameterized artwork. This
                     artwork will be uploaded to IPFS and the address of it is
