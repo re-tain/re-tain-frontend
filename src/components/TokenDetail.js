@@ -13,6 +13,7 @@ import {
 } from "../lib/api";
 import UserDetail from "./UserDetail";
 import TokenImage from "./TokenImage";
+import { getTokenMetadata } from "../lib/api";
 
 function TokenDetail() {
     let { contract, tokenId } = useParams();
@@ -26,6 +27,9 @@ function TokenDetail() {
     useEffect(() => {
         const fetchToken = async () => {
             let token = await getToken(contract, tokenId);
+            if (!('metadata' in token)) {
+                token.metadata = await getTokenMetadata(token.contract.address, token.tokenId);
+            }
             setToken(token);
             setArtist(await getContractStorage(contract, "artist_address"));
             setTokenPrice(
