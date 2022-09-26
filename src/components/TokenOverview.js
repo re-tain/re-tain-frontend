@@ -2,6 +2,7 @@ import { TZKT_API } from "../consts";
 import { useState, useEffect } from "react";
 
 import TokenGrid from "./TokenGrid";
+import { getTokenMetadata } from "../lib/api";
 
 function TokenOverview({ query }) {
     const [tokens, setTokens] = useState(null);
@@ -12,17 +13,24 @@ function TokenOverview({ query }) {
     const nextPage = () => setPage(Math.max(page + pageLength, 0));
 
     useEffect(() => {
-        fetch(TZKT_API + query + `&limit=${pageLength}&offset=${page}`)
-            .then((res) => res.json())
-            .then((result) => {
-                if (result.length > 0) {
-                    if ("token" in result[0])
-                        result = result.map((item) => item.token);
-                    setTokens(result);
-                } else {
-                    setPage(Math.max(page - pageLength, 0));
+        async function fetchTokens() {
+            let res = await fetch(TZKT_API + query + `&limit=${pageLength}&offset=${page}`);
+            let result = await res.json()
+            if (result.length > 0) {
+                if ("token" in result[0])
+                    result = result.map((item) => item.token);
+                for(let token of result) {
+                    if (!('metadata' in token)) {
+                        token.metadata = await getTokenMetadata(token.contract.address, token.tokenId);
+                    }
                 }
-            });
+                setTokens(result);
+            } else {
+                setPage(Math.max(page - pageLength, 0));
+            }
+        }
+        
+        fetchTokens().catch(console.error);
     }, [page, pageLength, query]);
 
     if (tokens) {

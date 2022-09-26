@@ -42,3 +42,14 @@ export async function getContractMetadata(contract) {
     data = await fetch(resolveIpfs(url));
     return await data.json()
 }
+
+
+export async function getTokenMetadata(contract, tokenId) {
+    let raw_metadata = (await getContractBigmap(contract, 'token_metadata', tokenId)).token_info;
+    let metadata = {}
+    metadata.name = bytes2Char(raw_metadata.name)
+    metadata.artifactUri = bytes2Char(raw_metadata.artifactUri)
+    if(raw_metadata.displayUri) metadata.displayUri = bytes2Char(raw_metadata.displayUri)
+    if(raw_metadata.thumbnailUri) metadata.thumbnailUri = bytes2Char(raw_metadata.thumbnailUri)
+    return metadata
+}
