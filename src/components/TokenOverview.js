@@ -20,9 +20,7 @@ function TokenOverview({ query }) {
                 if ("token" in result[0])
                     result = result.map((item) => item.token);
                 for(let token of result) {
-                    if (!('metadata' in token)) {
-                        token.metadata = await getTokenMetadata(token.contract.address, token.tokenId);
-                    }
+                    token.metadata = await getTokenMetadata(token.contract.address, token.tokenId);
                 }
                 setTokens(result);
             } else {
