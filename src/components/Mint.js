@@ -1,4 +1,3 @@
-import Layout from "./Layout";
 import MintForm from "./MintForm";
 
 import { useState, useContext, useEffect } from "react";
@@ -6,13 +5,11 @@ import { useState, useContext, useEffect } from "react";
 import { WalletContext, mint } from "../lib/wallet";
 import { resolveIpfs } from "../lib/utils";
 
-import { useParams } from "react-router-dom";
 import { getContractStorage } from "../lib/api";
 import { bytes2Char } from "@taquito/utils";
-function Mint() {
+function Mint({ contract}) {
     const wallet = useContext(WalletContext);
 
-    let { contract } = useParams();
     const [price, setPrice] = useState(null);
     const [baseUrl, setBaseUrl] = useState(null);
 
@@ -43,34 +40,37 @@ function Mint() {
     };
     if (baseUrl && price) {
         return (
-            <Layout>
-                <h1>Mint</h1>
+            <div>
                 <div
                     style={{
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "left",
                         maxWidth: "100vw",
+                        flexWrap: "wrap",
+                        marginTop: "2vw",
+                        padding: 0,
                     }}
                 >
                     <iframe
                         id="tokenFrame"
                         title="token"
-                        className="standard-width standard-height"
                         style={{
                             border: "None",
+                            width: "35vw",
+                            height: "35vw",
+                            marginRight: "2vw",
+                            minWidth: "300px",
+                            minHeight: "300px",
                         }}
                         src={`${resolveIpfs(baseUrl)}`}
                     ></iframe>
-                </div>
 
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "1vh",
-                    }}
-                >
-                    <div className="standard-width">
+<div                         style={{
+                            marginRight: "2vw",
+                            width: "35vw",
+                            minWidth: "300px"
+                        }}>
+
                         <MintForm
                             onSubmitForm={setSrc}
                             onMint={handleMint}
@@ -78,10 +78,11 @@ function Mint() {
                         />
                     </div>
                 </div>
-            </Layout>
+
+            </div>
         );
     } else {
-        return <Layout>Loading...</Layout>;
+        return "Loading...";
     }
 }
 

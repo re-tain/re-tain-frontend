@@ -21,7 +21,7 @@ function MintForm({ onSubmitForm, onMint, price }) {
         <div>
             <form>
                 <fieldset>
-                    <legend>Sliders</legend>
+                    <legend>Mint Variables</legend>
                     <div
                         className="form-group"
                         style={{
