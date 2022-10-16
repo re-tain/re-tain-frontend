@@ -3,6 +3,40 @@ function About() {
     return (
         <Layout>
             <div className="main">
+                <h1>For artists</h1>
+                <p>
+                    EditART is open to submissions form all generative artists.
+                    If you would like to create e project on EditART you can
+                    find a template with all the instructions{" "}
+                    <a
+                        href="https://github.com/pifragile/editartTemplate"
+                        target="_blank"
+                    >
+                        {" "}
+                        here
+                    </a>
+                    . If you have any questions, reach out on twitter
+                    <a href="https://twitter.com/pifragile/" target="_blank">
+                        {" "}
+                        @pifragile
+                    </a>
+                    .
+                    <br />
+                    <br />
+                    <a
+                        href="https://github.com/pifragile/editartTemplate"
+                        target="_blank"
+                    >
+                        <button
+                            className="btn btn-default"
+                            name="template"
+                            id="template"
+                        >
+                            Download template
+                        </button>
+                    </a>
+                </p>
+
                 <h1>About EditART</h1>
                 <p>
                     With Editart, collectors can become creators by co-creating
