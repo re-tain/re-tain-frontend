@@ -1,7 +1,7 @@
 import React from "react";
 import MintButton from "./MintButton";
 
-function MintForm({ onSubmitForm, onMint, price }) {
+function MintForm({ onSubmitForm, onMint, price, showButton }) {
     let handleChange = (e) => {
         //e.preventDefault();
         onSubmitForm(
@@ -91,9 +91,11 @@ function MintForm({ onSubmitForm, onMint, price }) {
                             onTouchEnd={handleChange}
                         />
                     </div>
-                    <div className="form-group">
-                        <MintButton price={price} onClick={handleMint} />
-                    </div>
+                    {showButton && (
+                        <div className="form-group">
+                            <MintButton price={price} onClick={handleMint} />
+                        </div>
+                    )}
                 </fieldset>
             </form>
         </div>

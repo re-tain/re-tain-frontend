@@ -7,11 +7,16 @@ import { resolveIpfs } from "../lib/utils";
 
 import { getContractStorage } from "../lib/api";
 import { bytes2Char } from "@taquito/utils";
-function Mint({ contract}) {
+function Mint({ contract }) {
     const wallet = useContext(WalletContext);
 
     const [price, setPrice] = useState(null);
     const [baseUrl, setBaseUrl] = useState(null);
+    const [numTokens, setNumTokens] = useState(null);
+    const [numTokensMinted, setNumTokensMinted] = useState(null);
+    const [artist, setArtist] = useState(null);
+    const [paused, setPaused] = useState(null);
+    const [activeAccount, setActiveAccount] = useState(null);
 
     useEffect(() => {
         const fetchStorage = async () => {
@@ -19,10 +24,22 @@ function Mint({ contract}) {
                 bytes2Char(await getContractStorage(contract, "base_url"))
             );
             setPrice(await getContractStorage(contract, "price"));
+
+            setNumTokens(await getContractStorage(contract, "num_tokens"));
+            setNumTokensMinted(
+                await getContractStorage(contract, "last_token_id")
+            );
+            setArtist(await getContractStorage(contract, "artist_address"));
+            setPaused(await getContractStorage(contract, "paused"));
+
+            const account = await wallet.client.getActiveAccount();
+            if (account) {
+                setActiveAccount(account.address);
+            }
         };
 
         fetchStorage().catch(console.error);
-    }, [contract]);
+    }, [contract, wallet]);
 
     const [queryString, setQueryString] = useState(
         "m0=0.5&m1=0.5&m2=0.5&m3=0.5&m4=0.5"
@@ -38,7 +55,15 @@ function Mint({ contract}) {
     let handleMint = async () => {
         await mint(wallet, contract, queryString, price);
     };
-    if (baseUrl && price) {
+    if (
+        baseUrl &&
+        price &&
+        numTokens &&
+        numTokensMinted &&
+        artist &&
+        paused &&
+        activeAccount
+    ) {
         return (
             <div>
                 <div
@@ -65,20 +90,24 @@ function Mint({ contract}) {
                         src={`${resolveIpfs(baseUrl)}`}
                     ></iframe>
 
-<div                         style={{
+                    <div
+                        style={{
                             marginRight: "2vw",
                             width: "35vw",
-                            minWidth: "300px"
-                        }}>
-
+                            minWidth: "300px",
+                        }}
+                    >
                         <MintForm
                             onSubmitForm={setSrc}
                             onMint={handleMint}
                             price={price}
+                            showButton={
+                                numTokensMinted !== numTokens &&
+                                (activeAccount.toString() === artist || !paused)
+                            }
                         />
                     </div>
                 </div>
-
             </div>
         );
     } else {
