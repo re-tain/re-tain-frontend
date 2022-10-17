@@ -25,7 +25,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/mint/:contract" element={<Mint />} />
                     <Route
                         path="/token-detail/:contract/:tokenId"
                         element={<TokenDetail />}
