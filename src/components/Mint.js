@@ -61,7 +61,7 @@ function Mint({ contract }) {
         numTokens &&
         numTokensMinted &&
         artist &&
-        paused
+        paused !== null
     ) {
         return (
             <div>
