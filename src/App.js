@@ -4,7 +4,6 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { React, useState } from "react";
 import Home from "./components/Home";
-import Mint from "./components/Mint";
 import TokenDetail from "./components/TokenDetail";
 import User from "./components/User";
 import MarketPlace from "./components/Marketplace";
