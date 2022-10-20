@@ -1,5 +1,6 @@
 import React from "react";
 import MintButton from "./MintButton";
+import RandomizeButton from "./RandomizeButton";
 
 function MintForm({ onSubmitForm, onMint, price, showButton }) {
     let handleChange = (e) => {
@@ -16,6 +17,16 @@ function MintForm({ onSubmitForm, onMint, price, showButton }) {
     let handleMint = (e) => {
         e.preventDefault();
         onMint();
+    };
+
+    let handleRandomize = (e) => {
+        e.preventDefault();
+        e.target.form.value0.value = Math.random().toFixed(3);
+        e.target.form.value1.value = Math.random().toFixed(3);
+        e.target.form.value2.value = Math.random().toFixed(3);
+        e.target.form.value3.value = Math.random().toFixed(3);
+        e.target.form.value4.value = Math.random().toFixed(3);
+        handleChange(e);
     };
     return (
         <div>
@@ -91,11 +102,13 @@ function MintForm({ onSubmitForm, onMint, price, showButton }) {
                             onTouchEnd={handleChange}
                         />
                     </div>
-                    {showButton && (
-                        <div className="form-group">
+
+                    <div className="form-group">
+                        <RandomizeButton handleRandomize={handleRandomize} />
+                        {showButton && (
                             <MintButton price={price} onClick={handleMint} />
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </fieldset>
             </form>
         </div>
