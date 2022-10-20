@@ -20,16 +20,16 @@ function Home() {
                     </li>
                     <li>
                         is a project by generative artist{" "}
-                        <a href="https://twitter.com/pifragile/" target="_blank"> pifragile</a>
+                        <a href="https://twitter.com/pifragile/" target="_blank" rel="noreferrer"> pifragile</a>
                     </li>
                     <li>
                         has a twitter page {" "}
-                        <a href="https://twitter.com/editart_xyz" target="_blank"> @editart_xyz</a>
+                        <a href="https://twitter.com/editart_xyz" target="_blank" rel="noreferrer"> @editart_xyz</a>
                     </li>
                 </ul>
                 <div>
                     For infos{" "}
-                    <a href="https://twitter.com/pifragile/" target="_blank">
+                    <a href="https://twitter.com/pifragile/" target="_blank" rel="noreferrer">
                         {" "}
                         DM me on twitter
                     </a>

@@ -1,5 +1,4 @@
 import { IPFS_GATEWAY } from "../consts";
-import { getTokenMetadata } from "../lib/api";
 
 export function resolveIpfs(address) {
     if (address) {

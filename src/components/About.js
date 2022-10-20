@@ -10,13 +10,13 @@ function About() {
                     find a template with all the instructions{" "}
                     <a
                         href="https://github.com/pifragile/editartTemplate"
-                        target="_blank"
+                        target="_blank" rel="noreferrer"
                     >
                         {" "}
                         here
                     </a>
                     . If you have any questions, reach out on twitter
-                    <a href="https://twitter.com/pifragile/" target="_blank">
+                    <a href="https://twitter.com/pifragile/" target="_blank" rel="noreferrer">
                         {" "}
                         @pifragile
                     </a>
@@ -25,7 +25,7 @@ function About() {
                     <br />
                     <a
                         href="https://github.com/pifragile/editartTemplate"
-                        target="_blank"
+                        target="_blank" rel="noreferrer"
                     >
                         <button
                             className="btn btn-default"
