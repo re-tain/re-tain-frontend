@@ -102,7 +102,7 @@ function Mint({ contract }) {
                             price={price}
                             showButton={
                                 numTokensMinted !== numTokens &&
-                                (activeAccount.toString() === artist || !paused)
+                                (activeAccount === artist || !paused)
                             }
                         />
                     </div>
