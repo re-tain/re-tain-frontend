@@ -17,10 +17,15 @@ if (["dev", "staging"].includes(ENV)) {
 } else if (ENV === "prod") {
     contractList = [
         {
+            name: "PIXELFACE",
+            address: "KT1Mdzu48zD387G8cTunhkTwSMXrYw8AUR5U",
+            author: "Filter8",
+        },
+        {
             name: "Genesis",
             address: "KT1D7Ufx21sz9yDyP4Rs1WBCur9XhaZ9JwNE",
             author: "pifragile",
-        },
+        }
     ];
 }
 
