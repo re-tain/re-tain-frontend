@@ -2,19 +2,17 @@ import { getToken } from "../lib/api";
 import TokenOverview from "./TokenOverview";
 
 function MarketPlace({ contract }) {
-    const query = `v1/contracts/${contract}/bigmaps/listings/keys`;
+    const query = `v1/contracts/${contract}/bigmaps/listings/keys?active=true`;
     async function extractTokensForMarketplace(data) {
         let tokens = [];
         for (let item of data) {
-            if (item.active) {
-                let token = await getToken(contract, item.key);
-                if (token) {
-                    token["price"] = parseInt(item.value);
-                    tokens.push(token);
-                }
+            let token = await getToken(contract, item.key);
+            if (token) {
+                token["price"] = parseInt(item.value);
+                tokens.push(token);
             }
         }
-        return tokens
+        return tokens;
     }
 
     return (
