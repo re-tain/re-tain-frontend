@@ -1,6 +1,7 @@
 import Layout from "./Layout";
 import TokenOverview from "./TokenOverview";
 import contracts from "../contracts";
+import { extractTokensForOverview } from "../lib/utils";
 
 import { useParams } from "react-router-dom";
 
@@ -20,7 +21,7 @@ function User() {
             <Layout>
                 <UserDetail address={address} />
                 <h1>Collection</h1>
-                <TokenOverview query={query}></TokenOverview>
+                <TokenOverview query={query} pageLength={6} extractTokens={extractTokensForOverview}></TokenOverview>
             </Layout>
         );
     } else {

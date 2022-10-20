@@ -2,43 +2,51 @@ import { TZKT_API } from "../consts";
 import { useState, useEffect } from "react";
 
 import TokenGrid from "./TokenGrid";
-import { getTokenMetadata } from "../lib/api";
 
-function TokenOverview({ query }) {
+function TokenOverview({ query, pageLength, extractTokens }) {
     const [tokens, setTokens] = useState(null);
     const [page, setPage] = useState(0);
-    const pageLength = 5;
+    const [oldPage, setOldPage] = useState(0);
+    const [maybeMore, setMaybeMore] = useState(true);
 
-    const previousPage = () => setPage(Math.max(page - pageLength, 0));
-    const nextPage = () => setPage(Math.max(page + pageLength, 0));
+    const loadMore = () => {
+        setOldPage(page);
+        setPage(Math.max(page + pageLength, 0));
+    };
 
     useEffect(() => {
         async function fetchTokens() {
-            let res = await fetch(TZKT_API + query + `&limit=${pageLength}&offset=${page}`);
-            let result = await res.json()
+            if (!maybeMore) return;
+            if (tokens && oldPage === page) return;
+            let separator = query.includes("?") ? "&" : "?";
+            let res = await fetch(
+                TZKT_API +
+                    query +
+                    `${separator}limit=${pageLength}&offset=${page}`
+            );
+            let result = await res.json();
             if (result.length > 0) {
-                if ("token" in result[0])
-                    result = result.map((item) => item.token);
-                for(let token of result) {
-                    token.metadata = await getTokenMetadata(token.contract.address, token.tokenId);
+                let extractedTokens = await extractTokens(result);
+                if (tokens === null) setTokens(extractedTokens);
+                else {
+                    extractedTokens.forEach(
+                        (t) =>
+                            tokens.filter((i) => i.id === t.id).length === 0 &&
+                            tokens.push(t)
+                    );
+                    setTokens(tokens);
                 }
-                setTokens(result);
+                setMaybeMore(result.length === pageLength);
             } else {
                 setPage(Math.max(page - pageLength, 0));
             }
         }
-        
+
         fetchTokens().catch(console.error);
-    }, [page, pageLength, query]);
+    });
 
     if (tokens) {
-        return (
-            <TokenGrid
-                tokens={tokens}
-                previousPage={previousPage}
-                nextPage={nextPage}
-            />
-        );
+        return <TokenGrid tokens={tokens} loadMore={loadMore} />;
     } else {
         return "Loading...";
     }

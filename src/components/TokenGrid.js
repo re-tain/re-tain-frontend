@@ -1,7 +1,7 @@
 import TokenBox from "./TokenBox";
-import PaginationButtons from "./PaginationButtons";
+import LoadMoreButton from "./LoadMoreButton";
 
-function TokenGrid({ tokens, previousPage, nextPage }) {
+function TokenGrid({ tokens, loadMore }) {
     return (
         <div>
             {tokens.length > 0 && (
@@ -24,17 +24,14 @@ function TokenGrid({ tokens, previousPage, nextPage }) {
                                     price={token.price}
                                 />
                             );
-                            return ""
+                        return "";
                     })}
                 </div>
             )}
             {tokens.length === 0 && (
                 <div style={{ marginTop: "5vw" }}>No tokens found..</div>
             )}
-            <PaginationButtons
-                previousPage={previousPage}
-                nextPage={nextPage}
-            />
+            <LoadMoreButton loadMore={loadMore} />
         </div>
     );
 }
