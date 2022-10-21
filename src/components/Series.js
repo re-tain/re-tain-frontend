@@ -8,6 +8,9 @@ import { getContractStorage, getContractMetadata } from "../lib/api";
 import UserDetail from "./UserDetail";
 import MarketPlace from "./Marketplace";
 import Mint from "./Mint";
+import { extractTokensForOverview } from "../lib/utils";
+
+import TokenOverview from "./TokenOverview";
 
 function Series() {
     let { contract } = useParams();
@@ -59,6 +62,15 @@ function Series() {
                 <Mint contract={contract} />
                 <div style={{ marginTop: "5vh" }}>
                     <MarketPlace contract={contract}></MarketPlace>
+                </div>
+
+                <div style={{ marginTop: "5vh" }}>
+                    <h1>All tokens</h1>
+                    <TokenOverview
+                        query={`v1/tokens?contract=${contract}`}
+                        pageLength={30}
+                        extractTokens={extractTokensForOverview}
+                    ></TokenOverview>
                 </div>
             </Layout>
         );
