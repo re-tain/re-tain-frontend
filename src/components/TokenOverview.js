@@ -8,6 +8,7 @@ function TokenOverview({ query, pageLength, extractTokens }) {
     const [page, setPage] = useState(0);
     const [oldPage, setOldPage] = useState(0);
     const [maybeMore, setMaybeMore] = useState(true);
+    const [update, setUpdate] = useState(1);
 
     const loadMore = () => {
         setOldPage(page);
@@ -35,6 +36,7 @@ function TokenOverview({ query, pageLength, extractTokens }) {
                             tokens.push(t)
                     );
                     setTokens(tokens);
+                    setUpdate((u) => u + 1);
                 }
                 setMaybeMore(result.length === pageLength);
             } else {
@@ -45,7 +47,7 @@ function TokenOverview({ query, pageLength, extractTokens }) {
         fetchTokens().catch(console.error);
     });
 
-    if (tokens) {
+    if (tokens && update) {
         return <TokenGrid tokens={tokens} loadMore={loadMore} />;
     } else {
         return "Loading...";
