@@ -45,3 +45,13 @@
   .standard-height {
     height: min(400px, 80vw)
   }
+
+.token-detail-width {
+  width: 35vw;
+  min-width: 300px;
+}
+
+.token-detail-height {
+  height: 35vw;
+  min-height: 300px;
+}

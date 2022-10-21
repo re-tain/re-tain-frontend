@@ -27,7 +27,10 @@ function TokenDetail() {
     useEffect(() => {
         const fetchToken = async () => {
             let token = await getToken(contract, tokenId);
-            token.metadata = await getTokenMetadata(token.contract.address, token.tokenId);
+            token.metadata = await getTokenMetadata(
+                token.contract.address,
+                token.tokenId
+            );
             setToken(token);
             setArtist(await getContractStorage(contract, "artist_address"));
             setTokenPrice(
@@ -50,6 +53,7 @@ function TokenDetail() {
                         <TokenImage
                             url={token.metadata.artifactUri}
                             displayUrl={token.metadata.displayUri}
+                            isBig={true}
                         />
                     </div>
 
@@ -75,7 +79,7 @@ function TokenDetail() {
                         </div>
                     </div>
                     <div
-                        className="standard-width"
+                        className="token-detail-width"
                         style={{ marginTop: "1vh" }}
                     >
                         <TokenActionForm

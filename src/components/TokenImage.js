@@ -1,8 +1,12 @@
 import { resolveIpfs } from "../lib/utils";
-function TokenImage({ displayUrl, url }) {
+function TokenImage({ displayUrl, url, isBig }) {
     return (
         <div
-            className="standard-width standard-height"
+            className={
+                isBig
+                    ? "token-detail-width token-detail-height"
+                    : "standard-width standard-height"
+            }
             style={{ position: "relative" }}
         >
             {!displayUrl && (

@@ -78,13 +78,10 @@ function Mint({ contract }) {
                     <iframe
                         id="tokenFrame"
                         title="token"
+                        className="token-detail-width token-detail-height"
                         style={{
                             border: "None",
-                            width: "35vw",
-                            height: "35vw",
                             marginRight: "2vw",
-                            minWidth: "300px",
-                            minHeight: "300px",
                         }}
                         src={`${resolveIpfs(baseUrl)}`}
                     ></iframe>
@@ -92,9 +89,8 @@ function Mint({ contract }) {
                     <div
                         style={{
                             marginRight: "2vw",
-                            width: "35vw",
-                            minWidth: "300px",
                         }}
+                        className="token-detail-width"
                     >
                         <MintForm
                             onSubmitForm={setSrc}
