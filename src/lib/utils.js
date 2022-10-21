@@ -15,10 +15,12 @@ export async function extractTokensForOverview(data) {
     if ("token" in data[0]) data = data.map((item) => item.token);
     // use this when metadata is broken in api
     for (let token of data) {
-        token.metadata = await getTokenMetadata(
-            token.contract.address,
-            token.tokenId
-        );
+        if (!"metadata" in token) {
+            token.metadata = await getTokenMetadata(
+                token.contract.address,
+                token.tokenId
+            );
+        }
     }
     return data;
 }
