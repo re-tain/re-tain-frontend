@@ -2,7 +2,8 @@ import { resolveIpfs } from "../lib/utils";
 function TokenImage({ displayUrl, url }) {
     return (
         <div
-        className="standard-width standard-height"
+            className="standard-width standard-height"
+            style={{ position: "relative" }}
         >
             {!displayUrl && (
                 <iframe
@@ -14,6 +15,22 @@ function TokenImage({ displayUrl, url }) {
                     }}
                     src={resolveIpfs(url)}
                 />
+            )}
+
+            {!displayUrl && (
+                <div
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        zIndex: "-100",
+                        paddingTop: "50%",
+                    }}
+                >
+                    Preview image not yet rendered
+                    <br />
+                    Loading live view...
+                </div>
             )}
 
             {displayUrl && <img alt="token" src={resolveIpfs(displayUrl)} />}
