@@ -16,6 +16,7 @@ function User() {
                 "token.contract.in": contracts.map((c) => c.address).join(","),
                 account: address,
                 "balance.gt": 0,
+                "sort.desc": "firstTime"
             });
         return (
             <Layout>
