@@ -13,6 +13,11 @@ if (["dev", "staging"].includes(ENV)) {
             address: "KT1QcCcnTsZHR19DBQiFiddV2kv8q9fJudav",
             author: "Filter8",
         },
+        {
+            name: "Skull Wiggles",
+            address: "KT1FwvmPotvwwU38JH8i7ypRguxRW3xywRCB",
+            author: "EarthTimeline",
+        },
     ];
 } else if (ENV === "prod") {
     contractList = [
