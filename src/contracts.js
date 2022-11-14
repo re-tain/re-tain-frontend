@@ -12,15 +12,15 @@ if (["dev", "staging"].includes(ENV)) {
             name: "PIXELFACE",
             address: "KT1QcCcnTsZHR19DBQiFiddV2kv8q9fJudav",
             author: "Filter8",
-        },
-        {
-            name: "Skull Wiggles",
-            address: "KT1FwvmPotvwwU38JH8i7ypRguxRW3xywRCB",
-            author: "EarthTimeline",
-        },
+        }
     ];
 } else if (ENV === "prod") {
     contractList = [
+        {
+            name: "Skull Wiggles",
+            address: "KT1RaB59rC3MAC4UyePt2B1pK9XuUFiJ7Yvj",
+            author: "j4son3099",
+        },
         {
             name: "PIXELFACE",
             address: "KT1Mdzu48zD387G8cTunhkTwSMXrYw8AUR5U",
