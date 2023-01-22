@@ -38,11 +38,13 @@ export const mint = async (wallet, contractAddress, queryString, price) => {
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
-        const operation = await contract.methods.mint(char2Bytes(queryString)).send({
-            amount: price,
-            mutez: true,
-            gasLimit: 20000
-        });
+        const operation = await contract.methods
+            .mint(char2Bytes(queryString))
+            .send({
+                amount: price,
+                mutez: true,
+                gasLimit: 20000,
+            });
         const result = await operation.confirmation();
         console.log(result);
     }
@@ -125,9 +127,7 @@ export const setPrice = async (wallet, contractAddress, price) => {
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
-        const operation = await contract.methods
-            .set_price(price)
-            .send({});
+        const operation = await contract.methods.set_price(price).send({});
         const result = await operation.confirmation();
         console.log(result);
     }
@@ -138,9 +138,7 @@ export const togglePaused = async (wallet, contractAddress) => {
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
-        const operation = await contract.methods
-            .toggle_paused()
-            .send({});
+        const operation = await contract.methods.toggle_paused().send({});
         const result = await operation.confirmation();
         console.log(result);
     }
@@ -156,5 +154,59 @@ export const setNumTokens = async (wallet, contractAddress, num_tokens) => {
             .send({});
         const result = await operation.confirmation();
         console.log(result);
+    }
+};
+
+export const originateContract = async (
+    wallet,
+    price,
+    royalties,
+    tokenDescription,
+    collectionName,
+    numTokens,
+    metadataHash,
+    tokenHash
+) => {
+    const response = await checkIfWalletConnected(wallet);
+    if (response.success) {
+        const contractJSON = require("../contract.json");
+        const creator = (await wallet.client.getActiveAccount()).address;
+        const shares = {};
+        const distribution = {};
+        distribution[creator] = 1000;
+        shares[creator] = royalties * 10;
+        const originationOp = await tezos.wallet
+            .originate({
+                code: contractJSON,
+                storage: {
+                    price,
+                    royalties_bytes: char2Bytes(
+                        JSON.stringify({
+                            shares,
+                            decimals: 3,
+                        })
+                    ),
+                    description_bytes: char2Bytes(tokenDescription),
+                    creators_bytes: char2Bytes(JSON.stringify([creator])),
+                    hashes: [],
+                    last_token_id: 0,
+                    ledger: {},
+                    metadata_assigner: "tz1YysPgZN7fjGbCLYN5SLSZDXCi78zoeyrY",
+                    administrator: "tz1gJde57Meuqb2xMYbapTPzgTZkiCmPAMZA",
+                    collection_name: char2Bytes(collectionName),
+                    symbol: char2Bytes("MTR"),
+                    num_tokens: numTokens,
+                    operators: {},
+                    token_metadata: {},
+                    metadata: {
+                        "": char2Bytes(`ipfs://${metadataHash}`),
+                    },
+                    base_url: char2Bytes(`ipfs://${tokenHash}`),
+                    distribution,
+                    paused: true,
+                },
+            })
+            .send();
+        return (await originationOp.contract()).address;
     }
 };

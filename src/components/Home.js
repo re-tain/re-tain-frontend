@@ -1,49 +1,129 @@
 import Layout from "./Layout";
 import SeriesBox from "./SeriesBox";
 import contracts from "../contracts";
+import { originateContract, WalletContext } from "../lib/wallet";
+import { useContext, useState } from "react";
+import PinataFolderUpload from "./PinataFolderUpload";
+import { uploadFromBuffer } from "../lib/pinata";
+
 function Home() {
+    const [statusText, setStatusText] = useState("");
+    const wallet = useContext(WalletContext);
+    const handleDeploy = () => {
+        originateContract(wallet);
+    };
+
+    async function handleUpload(e) {
+        e.preventDefault();
+        setStatusText("Uploading token to IPFS...\n")
+        const formData = new FormData(e.target.form);
+        const resp = await fetch(
+            "https://seashell-app-ly3q3.ondigitalocean.app/file-upload",
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
+        const data = JSON.parse(await resp.text());
+        setStatusText("Deploying Contract...\n")
+
+        const form = e.target.form;
+        const contract = await originateContract(
+            wallet,
+            form.price.value * 1000000,
+            form.royalties.value,
+            form.tokenDescription.value,
+            form.collectionName.value,
+            form.numTokens.value,
+            data.metadata_hash,
+            data.token_hash
+        );
+        setStatusText(statusText + `Contract Deployed at ${contract}\n`)
+    }
+
     return (
         <Layout>
             <div className="main">
-                <h1>EditART...</h1>
+                <form>
+                    <label>
+                        Collection Name:
+                        <input type="text" name="collectionName" />
+                    </label>
+                    <label>
+                        Description:
+                        <input type="text" name="description" />
+                    </label>
+                    <label>
+                        Token Level Description:
+                        <input
+                            type="text"
+                            name="tokenDescription"
+                            maxLength="32"
+                        />
+                    </label>
+                    <label>
+                        Homepage:
+                        <input type="text" name="homepage" />
+                    </label>
 
-                <ul>
-                    <li>
-                        is a generative art platform, where collectors can
-                        become creators by co-creating a piece of art with the
-                        artist.
-                    </li>
-                    <li>is currently running in Beta mode!</li>
-                    <li>
-                        is happy to release projects by many artists, please
-                        reach out.
-                    </li>
-                    <li>
-                        is a project by generative artist{" "}
-                        <a href="https://twitter.com/pifragile/" target="_blank" rel="noreferrer"> pifragile</a>
-                    </li>
-                    <li>
-                        has a twitter page {" "}
-                        <a href="https://twitter.com/editart_xyz" target="_blank" rel="noreferrer"> @editart_xyz</a>
-                    </li>
-                </ul>
-                <div>
-                    For infos{" "}
-                    <a href="https://twitter.com/pifragile/" target="_blank" rel="noreferrer">
+                    <label>
+                        Royalties:
+                        <input
+                            type="number"
+                            name="royalties"
+                            min="0"
+                            max="25"
+                        />
+                    </label>
+
+                    <label>
+                        Number of tokens:
+                        <input
+                            type="number"
+                            name="numTokens"
+                            min="0"
+                            max="100000"
+                        />
+                    </label>
+
+                    <label>
+                        Price:
+                        <input
+                            type="number"
+                            name="price"
+                            min="0"
+                            step="0.001"
+                        />
+                    </label>
+
+                    <br></br>
+                    <label>
+                        Collection Title Image:
+                        <input
+                            type="file"
+                            name="file"
+                            accept="image/png, image/jpeg"
+                        ></input>
+                    </label>
+
+                    <br></br>
+                    <label>
+                        Token Code:
+                        <input type="file" name="file" accept=".zip"></input>
+                    </label>
+
+                    <br></br>
+                    <button
+                        className="btn btn-default"
+                        onClick={handleUpload}
+                        type="submit"
+                        value="Submit"
+                    >
                         {" "}
-                        DM me on twitter
-                    </a>
-                </div>
-
-                <div>❤️ , pifragile</div>
-                {/* <TokenOverview query={query}></TokenOverview> */}
-            </div>
-            <div style={{ marginTop: "5vh" }}>
-                <h1>Featured Series</h1>
-                <SeriesBox
-                    contract={contracts[0].address}
-                    author={contracts[0].author}
-                />
+                        Deploy Contract{" "}
+                    </button>
+                </form>
+                {statusText.length > 0 && <div>{statusText}</div>}
             </div>
         </Layout>
     );
