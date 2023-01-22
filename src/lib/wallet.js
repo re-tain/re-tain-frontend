@@ -165,48 +165,57 @@ export const originateContract = async (
     collectionName,
     numTokens,
     metadataHash,
-    tokenHash
+    tokenHash,
+    network
 ) => {
-    const response = await checkIfWalletConnected(wallet);
-    if (response.success) {
-        const contractJSON = require("../contract.json");
-        const creator = (await wallet.client.getActiveAccount()).address;
-        const shares = {};
-        const distribution = {};
-        distribution[creator] = 1000;
-        shares[creator] = royalties * 10;
-        const originationOp = await tezos.wallet
-            .originate({
-                code: contractJSON,
-                storage: {
-                    price,
-                    royalties_bytes: char2Bytes(
-                        JSON.stringify({
-                            shares,
-                            decimals: 3,
-                        })
-                    ),
-                    description_bytes: char2Bytes(tokenDescription),
-                    creators_bytes: char2Bytes(JSON.stringify([creator])),
-                    hashes: [],
-                    last_token_id: 0,
-                    ledger: {},
-                    metadata_assigner: "tz1YysPgZN7fjGbCLYN5SLSZDXCi78zoeyrY",
-                    administrator: "tz1gJde57Meuqb2xMYbapTPzgTZkiCmPAMZA",
-                    collection_name: char2Bytes(collectionName),
-                    symbol: char2Bytes("MTR"),
-                    num_tokens: numTokens,
-                    operators: {},
-                    token_metadata: {},
-                    metadata: {
-                        "": char2Bytes(`ipfs://${metadataHash}`),
-                    },
-                    base_url: char2Bytes(`ipfs://${tokenHash}`),
-                    distribution,
-                    paused: true,
-                },
-            })
-            .send();
-        return (await originationOp.contract()).address;
+    const activeAccount = await wallet.client.getActiveAccount();
+    if (!activeAccount) {
+        await wallet.client.requestPermissions({
+            network: {type: network},
+        });
+    } else if (activeAccount.network.type !== network) {
+        await wallet.client.requestPermissions({
+            network: {type: network},
+        });
     }
+    console.log(network)
+    const contractJSON = require("../contract.json");
+    const creator = activeAccount.address;
+    const shares = {};
+    const distribution = {};
+    distribution[creator] = 1000;
+    shares[creator] = royalties * 10;
+    const originationOp = await tezos.wallet
+        .originate({
+            code: contractJSON,
+            storage: {
+                price,
+                royalties_bytes: char2Bytes(
+                    JSON.stringify({
+                        shares,
+                        decimals: 3,
+                    })
+                ),
+                description_bytes: char2Bytes(tokenDescription),
+                creators_bytes: char2Bytes(JSON.stringify([creator])),
+                hashes: [],
+                last_token_id: 0,
+                ledger: {},
+                metadata_assigner: "tz1YysPgZN7fjGbCLYN5SLSZDXCi78zoeyrY",
+                administrator: "tz1gJde57Meuqb2xMYbapTPzgTZkiCmPAMZA",
+                collection_name: char2Bytes(collectionName),
+                symbol: char2Bytes("MTR"),
+                num_tokens: numTokens,
+                operators: {},
+                token_metadata: {},
+                metadata: {
+                    "": char2Bytes(`ipfs://${metadataHash}`),
+                },
+                base_url: char2Bytes(`ipfs://${tokenHash}`),
+                distribution,
+                paused: true,
+            },
+        })
+        .send();
+    return (await originationOp.contract()).address;
 };

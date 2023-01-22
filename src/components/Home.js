@@ -15,7 +15,7 @@ function Home() {
 
     async function handleUpload(e) {
         e.preventDefault();
-        setStatusText("Uploading token to IPFS...\n")
+        setStatusText("Uploading token to IPFS...\n");
         const formData = new FormData(e.target.form);
         const resp = await fetch(
             "https://seashell-app-ly3q3.ondigitalocean.app/file-upload",
@@ -25,7 +25,7 @@ function Home() {
             }
         );
         const data = JSON.parse(await resp.text());
-        setStatusText("Deploying Contract...\n")
+        setStatusText("Deploying Contract...\n");
 
         const form = e.target.form;
         const contract = await originateContract(
@@ -36,9 +36,10 @@ function Home() {
             form.collectionName.value,
             form.numTokens.value,
             data.metadata_hash,
-            data.token_hash
+            data.token_hash,
+            form.network.value
         );
-        setStatusText(statusText + `Contract Deployed at ${contract}\n`)
+        setStatusText(statusText + `Contract Deployed at ${contract}\n`);
     }
 
     return (
@@ -65,7 +66,6 @@ function Home() {
                         Homepage:
                         <input type="text" name="homepage" />
                     </label>
-
                     <label>
                         Royalties:
                         <input
@@ -75,7 +75,6 @@ function Home() {
                             max="25"
                         />
                     </label>
-
                     <label>
                         Number of tokens:
                         <input
@@ -85,7 +84,6 @@ function Home() {
                             max="100000"
                         />
                     </label>
-
                     <label>
                         Price:
                         <input
@@ -95,7 +93,6 @@ function Home() {
                             step="0.001"
                         />
                     </label>
-
                     <br></br>
                     <label>
                         Collection Title Image:
@@ -105,11 +102,31 @@ function Home() {
                             accept="image/png, image/jpeg"
                         ></input>
                     </label>
-
                     <br></br>
                     <label>
                         Token Code:
                         <input type="file" name="file" accept=".zip"></input>
+                    </label>
+                    <br></br>
+                    Deploy to:
+                    <br />
+                    <label>
+                        <input
+                            type="radio"
+                            id="html"
+                            name="network"
+                            value="mainnet"
+                        ></input>
+                        Mainnet
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            id="html"
+                            name="network"
+                            value="ghostnet"
+                        ></input>
+                        Ghostnet Testnet
                     </label>
 
                     <br></br>
