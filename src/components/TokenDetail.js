@@ -21,7 +21,6 @@ function TokenDetail() {
     const [owner, setOwner] = useState(null);
     const [token, setToken] = useState(null);
     const [artist, setArtist] = useState(null);
-    const [creator, setCreator] = useState(null);
     const [metadata, setMetadata] = useState(null);
 
     useEffect(() => {
@@ -32,12 +31,11 @@ function TokenDetail() {
                 token.tokenId
             );
             setToken(token);
-            setArtist(await getContractStorage(contract, "artist_address"));
+            setArtist(await getContractStorage(contract, "administrator"));
             setTokenPrice(
                 await getContractBigmap(contract, "listings", tokenId)
             );
             setOwner(await getContractBigmap(contract, "ledger", tokenId));
-            setCreator(await getContractBigmap(contract, "creators", tokenId));
             setMetadata(await getContractMetadata(contract));
         };
 
@@ -71,11 +69,6 @@ function TokenDetail() {
                         <div>
                             <b>Owner:</b>
                             <UserDetail address={owner} isLink={true} />
-                        </div>
-
-                        <div>
-                            <b>Creator:</b>
-                            <UserDetail address={creator} isLink={true} />
                         </div>
                     </div>
                     <div

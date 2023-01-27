@@ -1,17 +1,10 @@
 import Layout from "./Layout";
-import SeriesBox from "./SeriesBox";
-import contracts from "../contracts";
 import { originateContract, WalletContext } from "../lib/wallet";
 import { useContext, useState } from "react";
-import PinataFolderUpload from "./PinataFolderUpload";
-import { uploadFromBuffer } from "../lib/pinata";
 
 function Home() {
     const [statusText, setStatusText] = useState("");
     const wallet = useContext(WalletContext);
-    const handleDeploy = () => {
-        originateContract(wallet);
-    };
 
     async function handleUpload(e) {
         e.preventDefault();

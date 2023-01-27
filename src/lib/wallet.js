@@ -33,13 +33,13 @@ const checkIfWalletConnected = async (wallet) => {
     }
 };
 
-export const mint = async (wallet, contractAddress, queryString, price) => {
+export const mint = async (wallet, contractAddress, price) => {
     const response = await checkIfWalletConnected(wallet);
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
         const operation = await contract.methods
-            .mint(char2Bytes(queryString))
+            .mint()
             .send({
                 amount: price,
                 mutez: true,
