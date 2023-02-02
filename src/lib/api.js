@@ -13,14 +13,12 @@ export async function getToken(contract, tokenId) {
     }
 }
 
-
 export async function getContractStorage(contract, key) {
     let query = `v1/contracts/${contract}/storage?path=${key}`;
     let res = await fetch(TZKT_API + query);
     let data = await res.json();
-    return data
+    return data;
 }
-
 
 export async function getContractBigmap(contract, bigmap, key) {
     let query = `v1/contracts/${contract}/bigmaps/${bigmap}/keys/${key}`;
@@ -28,28 +26,41 @@ export async function getContractBigmap(contract, bigmap, key) {
     if (res.status === 200) {
         let data = await res.json();
         if (data && data.active) {
-            return data.value
+            return data.value;
         }
     }
 }
 
-
 export async function getContractMetadata(contract) {
     let query = `v1/contracts/${contract}/bigmaps/metadata/keys/`;
     let res = await fetch(TZKT_API + query);
-    let data = await res.json()
-    let url = bytes2Char(data[data.length - 1]['value']);
-    data = await fetch(resolveIpfs(url));
-    return await data.json()
+    let data = await res.json();
+    let url = bytes2Char(data[data.length - 1]["value"]);
+
+    try {
+        const res = await fetch(resolveIpfs(url));
+        if (res.ok) {
+            data = await res.json();
+        } else {
+            throw Error("Fechitng metadata failed");
+        }
+    } catch (e) {
+        console.log("error", e);
+        return {};
+    }
+    return data;
 }
 
-
 export async function getTokenMetadata(contract, tokenId) {
-    let raw_metadata = (await getContractBigmap(contract, 'token_metadata', tokenId)).token_info;
-    let metadata = {}
-    metadata.name = bytes2Char(raw_metadata.name)
-    metadata.artifactUri = bytes2Char(raw_metadata.artifactUri)
-    if(raw_metadata.displayUri) metadata.displayUri = bytes2Char(raw_metadata.displayUri)
-    if(raw_metadata.thumbnailUri) metadata.thumbnailUri = bytes2Char(raw_metadata.thumbnailUri)
-    return metadata
+    let raw_metadata = (
+        await getContractBigmap(contract, "token_metadata", tokenId)
+    ).token_info;
+    let metadata = {};
+    metadata.name = bytes2Char(raw_metadata.name);
+    metadata.artifactUri = bytes2Char(raw_metadata.artifactUri);
+    if (raw_metadata.displayUri)
+        metadata.displayUri = bytes2Char(raw_metadata.displayUri);
+    if (raw_metadata.thumbnailUri)
+        metadata.thumbnailUri = bytes2Char(raw_metadata.thumbnailUri);
+    return metadata;
 }

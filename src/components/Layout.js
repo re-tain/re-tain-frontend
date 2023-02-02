@@ -33,12 +33,18 @@ function Layout({ children, favicon = "/favicon.png" }) {
                     <div className="terminal-logo">
                         <div className="logo terminal-prompt">
                             <span className="no-style">
-                                <Link to="/">EditART</Link>
+                                <Link to="/">Retain.xyz</Link>
                             </span>
                         </div>
                     </div>
                     <nav className="terminal-menu">
                         <ul>
+                        <li key="Deploy">
+                                <span className="menu-item">
+                                    <Link to="/deploy">Deploy</Link>
+                                </span>
+                            </li>
+
                             <li key="Series">
                                 <span className="menu-item">
                                     <Link to="/series-overview">Series</Link>

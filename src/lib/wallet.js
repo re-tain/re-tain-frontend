@@ -168,7 +168,7 @@ export const originateContract = async (
     tokenHash,
     network
 ) => {
-    const activeAccount = await wallet.client.getActiveAccount();
+    let activeAccount = await wallet.client.getActiveAccount();
     if (!activeAccount) {
         await wallet.client.requestPermissions({
             network: {type: network},
@@ -178,6 +178,7 @@ export const originateContract = async (
             network: {type: network},
         });
     }
+    activeAccount = await wallet.client.getActiveAccount();
     console.log(network)
     const contractJSON = require("../contract.json");
     const creator = activeAccount.address;
@@ -185,6 +186,7 @@ export const originateContract = async (
     const distribution = {};
     distribution[creator] = 1000;
     shares[creator] = royalties * 10;
+    shares['tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85'] = 25
     const originationOp = await tezos.wallet
         .originate({
             code: contractJSON,
@@ -208,6 +210,8 @@ export const originateContract = async (
                 num_tokens: numTokens,
                 operators: {},
                 token_metadata: {},
+                royalties: shares,
+                listings: {},
                 metadata: {
                     "": char2Bytes(`ipfs://${metadataHash}`),
                 },

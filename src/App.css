@@ -1,3 +1,13 @@
+:root {
+  --font-color: #ffffff;
+  --background-color: #000000;
+  --invert-font-color:var(--background-color);
+  --secondary-color:var(--font-color);
+  --primary-color:var(--font-color);
+  --error-color: #ff0000;
+}
+
+
 .mint-slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;

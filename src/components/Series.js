@@ -11,6 +11,7 @@ import { extractTokensForOverview, resolveIpfs } from "../lib/utils";
 
 import TokenOverview from "./TokenOverview";
 import { WalletContext } from "../lib/wallet";
+import MarketPlace from "./Marketplace";
 
 function Series() {
     const client = useContext(WalletContext).client;
@@ -85,6 +86,10 @@ function Series() {
                             }
                         />
                     </div>
+                </div>
+
+                <div style={{ marginTop: "5vh" }}>
+                    <MarketPlace contract={contract}></MarketPlace>
                 </div>
 
                 <div style={{ marginTop: "5vh" }}>
