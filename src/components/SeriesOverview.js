@@ -7,7 +7,7 @@ import Box from "./Box";
 import SeriesOverviewGrid from "./SeriesOverviewGrid";
 
 function SeriesOverview() {
-    const pageLength = 20;
+    const pageLength = 10;
     const [contracts, setContracts] = useState([]);
     const [page, setPage] = useState(0);
     const [oldPage, setOldPage] = useState(0);
@@ -33,17 +33,19 @@ function SeriesOverview() {
             let result = await res.json();
             if (result.length > 0) {
                 setContracts(
-                    await Promise.all(
-                        result.map(async (c) => {
-                            let res = await fetch(
-                                TZKT_API + `v1/contracts/${c.address}`
-                            );
-                            const contract = await res.json();
-                            const metadata = await getContractMetadata(
-                                c.address
-                            );
-                            return { contract, metadata };
-                        })
+                    contracts.concat(
+                        await Promise.all(
+                            result.map(async (c) => {
+                                let res = await fetch(
+                                    TZKT_API + `v1/contracts/${c.address}`
+                                );
+                                const contract = await res.json();
+                                const metadata = await getContractMetadata(
+                                    c.address
+                                );
+                                return { contract, metadata };
+                            })
+                        )
                     )
                 );
 
