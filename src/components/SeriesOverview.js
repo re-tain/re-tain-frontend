@@ -19,7 +19,7 @@ function SeriesOverview() {
         setPage(Math.max(page + pageLength, 0));
     };
 
-    const query = `v1/contracts/${referenceContract}/same`;
+    const query = `v1/contracts/${referenceContract}/same?sort.desc=firstActivity`;
     useEffect(() => {
         async function fetchContracts() {
             if (!maybeMore) return;
@@ -32,23 +32,20 @@ function SeriesOverview() {
             );
             let result = await res.json();
             if (result.length > 0) {
-                setContracts(
-                    contracts.concat(
-                        await Promise.all(
-                            result.map(async (c) => {
-                                let res = await fetch(
-                                    TZKT_API + `v1/contracts/${c.address}`
-                                );
-                                const contract = await res.json();
-                                const metadata = await getContractMetadata(
-                                    c.address
-                                );
-                                return { contract, metadata };
-                            })
-                        )
-                    )
+                const newContracts = await Promise.all(
+                    result.map(async (c) => {
+                        let res = await fetch(
+                            TZKT_API + `v1/contracts/${c.address}`
+                        );
+                        const contract = await res.json();
+                        const metadata = await getContractMetadata(
+                            c.address
+                        );
+                        return { contract, metadata };
+                    })
                 );
 
+                setContracts(contracts.concat(newContracts))
                 setMaybeMore(result.length === pageLength);
             } else {
                 setPage(Math.max(page - pageLength, 0));
