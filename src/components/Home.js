@@ -3,9 +3,19 @@ function Home() {
 
     return (
         <Layout>
-            Welcome, deploy your own contract on tez.
-            <br/>
             Own your art.
+            <br/>
+            <br/>
+            Onchain metadata.
+            <br/>
+            <br/>
+            Onchain randomness.
+            <br/>
+            <br/>
+            Integrated marketplace.
+            <br/>
+            <br/>
+            Deploy your own smart contract for your art project on Tezos now.
         </Layout>
     );
 }

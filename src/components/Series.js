@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Layout from "./Layout";
 
@@ -87,6 +87,16 @@ function Series() {
                         />
                     </div>
                 </div>
+
+                {activeAccount == artist && (
+                        <div>
+                            <Link to={`/artist-panel/${contract}`}>
+                            <button class="btn btn-default">
+                                Go to artist panel
+                            </button>
+                            </Link>
+                        </div>
+                    )}
 
                 <div style={{ marginTop: "5vh" }}>
                     <MarketPlace contract={contract}></MarketPlace>

@@ -8,6 +8,10 @@ function DeployForm() {
 
     async function handleUpload(e) {
         e.preventDefault();
+        if(!e.target.form.checkValidity()) {
+            setStatusText(`Error: Form data incorrect.`);
+            return;
+        }
         setStatusText("Uploading token to IPFS...\n");
         const formData = new FormData(e.target.form);
         const resp = await fetch(
@@ -17,7 +21,18 @@ function DeployForm() {
                 body: formData,
             }
         );
+
+        if (resp.status === 413) {
+            setStatusText(`Error: Files too large.`);
+            return;
+        }
+
         const data = JSON.parse(await resp.text());
+
+        if (!resp.ok) {
+            setStatusText(`Error: ${data["message"]}`);
+            return;
+        }
         setStatusText("Deploying Contract...\n");
 
         const form = e.target.form;
@@ -47,31 +62,36 @@ function DeployForm() {
                 <form>
                     <label>
                         Collection Name:
-                        <input type="text" name="collectionName" />
+                        <input type="text" name="collectionName" placeholder=" " required />
                     </label>
                     <label>
                         Description:
-                        <input type="text" name="description" />
+                        <input type="text" name="description" placeholder=" " required />
                     </label>
                     <label>
-                        Token Level Description:
+                        Token Level Description{" "}
+                        <small>(Limited to 32 chars)</small>:
                         <input
+                            required
                             type="text"
                             name="tokenDescription"
                             maxLength="32"
+                            placeholder=" "
                         />
                     </label>
                     <label>
                         Homepage:
-                        <input type="text" name="homepage" />
+                        <input type="text" name="homepage" placeholder=" " required/>
                     </label>
                     <label>
-                        Royalties:
+                        Royalties <small>(In %. 0-25)</small>:
                         <input
                             type="number"
                             name="royalties"
                             min="0"
                             max="25"
+                            placeholder=" "
+                            required
                         />
                     </label>
                     <label>
@@ -81,6 +101,8 @@ function DeployForm() {
                             name="numTokens"
                             min="0"
                             max="100000"
+                            placeholder=" "
+                            required
                         />
                     </label>
                     <label>
@@ -90,21 +112,24 @@ function DeployForm() {
                             name="price"
                             min="0"
                             step="0.001"
+                            placeholder=" "
+                            required
                         />
                     </label>
                     <br></br>
                     <label>
-                        Collection Title Image:
+                        Collection Title Image <small>(Max 5MB)</small>:
                         <input
                             type="file"
                             name="file"
                             accept="image/png, image/jpeg"
+                            required
                         ></input>
                     </label>
                     <br></br>
                     <label>
-                        Token Code:
-                        <input type="file" name="file" accept=".zip"></input>
+                        Token Code<small>(Max 30MB)</small>:
+                        <input type="file" name="file" accept=".zip" required></input>
                     </label>
                     <br></br>
                     Deploy to:
@@ -115,6 +140,7 @@ function DeployForm() {
                             id="html"
                             name="network"
                             value="mainnet"
+                            required
                         ></input>
                         Mainnet
                     </label>
