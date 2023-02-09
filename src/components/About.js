@@ -12,11 +12,11 @@ function About() {
                     to you. For testing, please deploy the contract to the
                     testnet, after that the project will be available at{" "}
                     <a
-                        href="https://staging.retain.xyz"
+                        href="https://staging.re-tain.xyz"
                         target="_blank"
                         rel="noreferrer"
                     >
-                        staging.retain.xyz
+                        staging.re-tain.xyz
                     </a>
                     {". "}
                     After deployment of the contract, the project will be
@@ -36,7 +36,7 @@ function About() {
                     <br />
                     <br />
                     <a
-                        href="https://github.com/pifragile/editartTemplate"
+                        href="https://github.com/pifragile/re-tain-template"
                         target="_blank"
                         rel="noreferrer"
                     >
@@ -70,7 +70,7 @@ function About() {
                 <h1>Disclaimer</h1>
                 <b>TL;DR USE AT YOUR OWN RISK.</b>
                 <p>
-                    Retain.xyz is an experimental platform. While every effort
+                    re-tain.xyz is an experimental platform. While every effort
                     is made by the team to provide a secure platform, Editart
                     will not accept any liability or responsibility for any kind
                     of damage created by the use of the platform.
