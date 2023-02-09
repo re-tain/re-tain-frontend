@@ -31,7 +31,7 @@ function SeriesOverview() {
                     `${separator}limit=${pageLength}&offset=${page}`
             );
             let result = await res.json();
-            result = result.filter(e => e.firstActivity >= 1959705) 
+            result = result.filter(e => e.firstActivity >= 1959879) 
             if (result.length > 0) {
                 const newContracts = await Promise.all(
                     result.map(async (c) => {

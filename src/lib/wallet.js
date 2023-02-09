@@ -38,13 +38,11 @@ export const mint = async (wallet, contractAddress, price) => {
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
-        const operation = await contract.methods
-            .mint()
-            .send({
-                amount: price,
-                mutez: true,
-                gasLimit: 20000,
-            });
+        const operation = await contract.methods.mint().send({
+            amount: price,
+            mutez: true,
+            gasLimit: 20000,
+        });
         const result = await operation.confirmation();
         console.log(result);
     }
@@ -171,22 +169,22 @@ export const originateContract = async (
     let activeAccount = await wallet.client.getActiveAccount();
     if (!activeAccount) {
         await wallet.client.requestPermissions({
-            network: {type: network},
+            network: { type: network },
         });
     } else if (activeAccount.network.type !== network) {
         await wallet.client.requestPermissions({
-            network: {type: network},
+            network: { type: network },
         });
     }
     activeAccount = await wallet.client.getActiveAccount();
-    console.log(network)
+
     const contractJSON = require("../contract.json");
     const creator = activeAccount.address;
     const shares = {};
     const distribution = {};
     distribution[creator] = 1000;
     shares[creator] = royalties * 10;
-    shares['tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85'] = 25
+    shares["tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85"] = 25;
     const originationOp = await tezos.wallet
         .originate({
             code: contractJSON,
@@ -219,6 +217,60 @@ export const originateContract = async (
                 distribution,
                 paused: true,
             },
+        })
+        .send();
+    return (await originationOp.contract()).address;
+};
+
+export const originateContractFromExisting = async (
+    wallet,
+    address,
+    network
+) => {
+    let activeAccount = await wallet.client.getActiveAccount();
+    if (!activeAccount) {
+        await wallet.client.requestPermissions({
+            network: { type: network },
+        });
+    } else if (activeAccount.network.type !== network) {
+        await wallet.client.requestPermissions({
+            network: { type: network },
+        });
+    }
+    activeAccount = await wallet.client.getActiveAccount();
+
+    const contractJSON = require("../contract.json");
+    const creator = activeAccount.address;
+
+    const storage = await (
+        await fetch(
+            `https://api.ghostnet.tzkt.io/v1/contracts/${address}/storage`
+        )
+    ).json();
+    const metadata = await (
+        await fetch(
+            `https://api.ghostnet.tzkt.io/v1/contracts/${address}/bigmaps/metadata/keys/`
+        )
+    ).json();
+
+    storage.hashes = [];
+    storage.ledger = {};
+    storage.listings = {};
+    storage.metadata = {
+        "": metadata[0].value,
+    };
+    storage.operators = {};
+    storage.paused = true;
+    storage.token_metadata = {};
+    storage.last_token_id = 0;
+
+    console.log(storage);
+
+    
+    const originationOp = await tezos.wallet
+        .originate({
+            code: contractJSON,
+            storage,
         })
         .send();
     return (await originationOp.contract()).address;

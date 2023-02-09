@@ -12,7 +12,6 @@ import About from "./components/About";
 
 import { WalletContext, beaconWallet } from "./lib/wallet";
 import ArtistPanel from "./components/ArtistPanel";
-import Sandbox from "./components/Sandbox";
 import SeriesOverview from "./components/SeriesOverview";
 import DeployForm from "./components/DeployForm";
 
