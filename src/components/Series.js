@@ -10,11 +10,13 @@ import Mint from "./Mint";
 import { extractTokensForOverview, resolveIpfs } from "../lib/utils";
 
 import TokenOverview from "./TokenOverview";
-import { WalletContext } from "../lib/wallet";
+import { originateContractFromExisting, WalletContext } from "../lib/wallet";
 import MarketPlace from "./Marketplace";
+import { ENV } from "../consts";
 
 function Series() {
-    const client = useContext(WalletContext).client;
+    const wallet = useContext(WalletContext);
+    const client = wallet.client;
     let { contract } = useParams();
     const [metadata, setMetadata] = useState(null);
     const [numTokens, setNumTokens] = useState(null);
@@ -43,6 +45,10 @@ function Series() {
         fetchStorage().catch(console.error);
     }, [contract, client]);
 
+    const handleDeployToMainnet = async () => {
+        await originateContractFromExisting(wallet, contract, "mainnet");
+    };
+
     if (numTokens && metadata) {
         return (
             <Layout>
@@ -69,8 +75,7 @@ function Series() {
                 </div>
                 <br />
 
-                <div
-                    className="token-detail-width">
+                <div className="token-detail-width">
                     <div style={{ margin: "0 0 1vh 0" }}>
                         {numTokensMinted} / {numTokens} minted
                     </div>
@@ -86,15 +91,24 @@ function Series() {
                     </div>
                 </div>
 
-                {activeAccount == artist && (
-                        <div>
-                            <Link to={`/artist-panel/${contract}`}>
+                {activeAccount === artist && (
+                    <div>
+                        <Link to={`/artist-panel/${contract}`}>
                             <button class="btn btn-default">
                                 Go to artist panel
                             </button>
-                            </Link>
-                        </div>
-                    )}
+                        </Link>
+                    </div>
+                )}
+
+                {activeAccount === artist && ENV !== "prod" && (
+                    <button
+                        class="btn btn-default"
+                        onClick={handleDeployToMainnet}
+                    >
+                        Deploy to mainnet
+                    </button>
+                )}
 
                 <div style={{ marginTop: "3vh" }}>
                     <MarketPlace contract={contract}></MarketPlace>

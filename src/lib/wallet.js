@@ -240,7 +240,6 @@ export const originateContractFromExisting = async (
     activeAccount = await wallet.client.getActiveAccount();
 
     const contractJSON = require("../contract.json");
-    const creator = activeAccount.address;
 
     const storage = await (
         await fetch(
@@ -252,6 +251,9 @@ export const originateContractFromExisting = async (
             `https://api.ghostnet.tzkt.io/v1/contracts/${address}/bigmaps/metadata/keys/`
         )
     ).json();
+
+    if (activeAccount.address !== storage.administrator)
+        throw Error("Wrong account");
 
     storage.hashes = [];
     storage.ledger = {};
@@ -266,7 +268,6 @@ export const originateContractFromExisting = async (
 
     console.log(storage);
 
-    
     const originationOp = await tezos.wallet
         .originate({
             code: contractJSON,
