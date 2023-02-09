@@ -19,6 +19,14 @@ function About() {
                         staging.re-tain.xyz
                     </a>
                     {". "}
+                    You will need some Testnet Tez, you can get it at{" "}<a
+                        href="https://faucet.ghostnet.teztnets.xyz/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {" "}
+                        this faucet
+                    </a>.
                     After deployment of the contract, the project will be
                     paused, which means that only the artist can mint. You can
                     unpause using the artist panel, available on the series page

@@ -1,6 +1,7 @@
 import Layout from "./Layout";
 import { originateContract, WalletContext } from "../lib/wallet";
 import { useContext, useState } from "react";
+import { ENV } from "../consts";
 
 function DeployForm() {
     const [statusText, setStatusText] = useState("");
@@ -8,7 +9,7 @@ function DeployForm() {
 
     async function handleUpload(e) {
         e.preventDefault();
-        if(!e.target.form.checkValidity()) {
+        if (!e.target.form.checkValidity()) {
             setStatusText(`Error: Form data incorrect.`);
             return;
         }
@@ -62,11 +63,21 @@ function DeployForm() {
                 <form>
                     <label>
                         Collection Name:
-                        <input type="text" name="collectionName" placeholder=" " required />
+                        <input
+                            type="text"
+                            name="collectionName"
+                            placeholder=" "
+                            required
+                        />
                     </label>
                     <label>
                         Description:
-                        <input type="text" name="description" placeholder=" " required />
+                        <input
+                            type="text"
+                            name="description"
+                            placeholder=" "
+                            required
+                        />
                     </label>
                     <label>
                         Token Level Description{" "}
@@ -81,7 +92,12 @@ function DeployForm() {
                     </label>
                     <label>
                         Homepage:
-                        <input type="text" name="homepage" placeholder=" " required/>
+                        <input
+                            type="text"
+                            name="homepage"
+                            placeholder=" "
+                            required
+                        />
                     </label>
                     <label>
                         Royalties <small>(In %. 0-25)</small>:
@@ -129,21 +145,28 @@ function DeployForm() {
                     <br></br>
                     <label>
                         Token Code<small>(Max 30MB)</small>:
-                        <input type="file" name="file" accept=".zip" required></input>
+                        <input
+                            type="file"
+                            name="file"
+                            accept=".zip"
+                            required
+                        ></input>
                     </label>
                     <br></br>
                     Deploy to:
                     <br />
-                    <label>
-                        <input
-                            type="radio"
-                            id="html"
-                            name="network"
-                            value="mainnet"
-                            required
-                        ></input>
-                        Mainnet
-                    </label>
+                    {ENV === "prod" && (
+                        <label>
+                            <input
+                                type="radio"
+                                id="html"
+                                name="network"
+                                value="mainnet"
+                                required
+                            ></input>
+                            Mainnet
+                        </label>
+                    )}
                     <label>
                         <input
                             type="radio"
