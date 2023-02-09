@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Layout from "./Layout";
 import TokenActionForm from "./TokenActionForm";
@@ -71,6 +71,9 @@ function TokenDetail() {
                             <UserDetail address={owner} isLink={true} />
                         </div>
                     </div>
+                    <br/>
+                    <Link to={`/series/${contract}`}><button class="btn btn-default">Go to series</button></Link>
+                    <br/>
                     <div
                         className="token-detail-width"
                         style={{ marginTop: "1vh" }}
