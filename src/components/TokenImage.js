@@ -1,5 +1,6 @@
 import { resolveIpfs } from "../lib/utils";
-function TokenImage({ displayUrl, url, isBig }) {
+function TokenImage({ displayUrl, url, isBig, isLive }) {
+    const showPreview = displayUrl && !isLive
     return (
         <div
             className={
@@ -9,7 +10,7 @@ function TokenImage({ displayUrl, url, isBig }) {
             }
             style={{ position: "relative" }}
         >
-            {!displayUrl && (
+            {!showPreview && (
                 <iframe
                     title="token"
                     style={{
@@ -21,7 +22,7 @@ function TokenImage({ displayUrl, url, isBig }) {
                 />
             )}
 
-            {!displayUrl && (
+            {!showPreview && (
                 <div
                     style={{
                         position: "absolute",
@@ -31,13 +32,11 @@ function TokenImage({ displayUrl, url, isBig }) {
                         paddingTop: "50%",
                     }}
                 >
-                    Preview image not yet rendered
-                    <br />
                     Loading live view...
                 </div>
             )}
 
-            {displayUrl && <img alt="token" src={resolveIpfs(displayUrl)} />}
+            {showPreview && <img alt="token" src={resolveIpfs(displayUrl)} />}
         </div>
     );
 }
