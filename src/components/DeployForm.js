@@ -1,7 +1,7 @@
 import Layout from "./Layout";
 import { originateContract, WalletContext } from "../lib/wallet";
 import { useContext, useState } from "react";
-import { ENV } from "../consts";
+import { ENV, UPLOAD_URL } from "../consts";
 
 function DeployForm() {
     const [statusText, setStatusText] = useState("");
@@ -16,7 +16,7 @@ function DeployForm() {
         setStatusText("Uploading token to IPFS...\n");
         const formData = new FormData(e.target.form);
         const resp = await fetch(
-            "https://seashell-app-ly3q3.ondigitalocean.app/file-upload",
+            UPLOAD_URL,
             {
                 method: "POST",
                 body: formData,
