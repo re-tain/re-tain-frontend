@@ -19,19 +19,23 @@ function About() {
                         staging.re-tain.xyz
                     </a>
                     {". "}
-                    You will need some Testnet Tez, you can get it at{" "}<a
+                    You will need some Testnet Tez, you can get it at{" "}
+                    <a
                         href="https://faucet.ghostnet.teztnets.xyz/"
                         target="_blank"
                         rel="noreferrer"
                     >
                         {" "}
                         this faucet
-                    </a>.
-                    After deployment of the contract, the project will be
+                    </a>
+                    . After deployment of the contract, the project will be
                     paused, which means that only the artist can mint. You can
                     unpause using the artist panel, available on the series page
-                    (if you are connected with the artist account.) Have fun! If
-                    you have any questions, reach out on twitter
+                    (if you are connected with the artist account.). Once you
+                    are happy with the result, you can hit the "Deploy to
+                    mainnet" button in the series page to go live to mainnet
+                    with your contract. Have fun! If you have any questions,
+                    reach out on twitter
                     <a
                         href="https://twitter.com/pifragile/"
                         target="_blank"
