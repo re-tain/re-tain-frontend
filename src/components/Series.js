@@ -70,13 +70,11 @@ function Series() {
                 <br />
 
                 <div
-                    className="token-detail-width"
-                    style={{ border: "solid 1px black", padding: "1vh" }}
-                >
+                    className="token-detail-width">
                     <div style={{ margin: "0 0 1vh 0" }}>
                         {numTokensMinted} / {numTokens} minted
                     </div>
-                    <div style={{ margin: "1vh 0 0 0" }}>
+                    <div style={{ margin: "1vh 0 0vh 0" }}>
                         <Mint
                             contract={contract}
                             price={price}
@@ -98,7 +96,7 @@ function Series() {
                         </div>
                     )}
 
-                <div style={{ marginTop: "5vh" }}>
+                <div style={{ marginTop: "3vh" }}>
                     <MarketPlace contract={contract}></MarketPlace>
                 </div>
 
