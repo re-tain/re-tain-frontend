@@ -134,7 +134,7 @@ function DeployForm() {
                     </label>
                     <br></br>
                     <label>
-                        Collection Title Image <small>(Max 5MB)</small>:
+                        Collection Title Image <small>(jpg/png, Max 5MB)</small>:
                         <input
                             type="file"
                             name="file"
@@ -144,7 +144,7 @@ function DeployForm() {
                     </label>
                     <br></br>
                     <label>
-                        Token Code<small>(Max 30MB)</small>:
+                        Token Code<small>(zip, Max 30MB)</small>:
                         <input
                             type="file"
                             name="file"
