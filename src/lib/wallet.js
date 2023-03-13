@@ -202,7 +202,7 @@ export const originateContract = async (
                 last_token_id: 0,
                 ledger: {},
                 metadata_assigner: "tz1YysPgZN7fjGbCLYN5SLSZDXCi78zoeyrY",
-                administrator: "tz1gJde57Meuqb2xMYbapTPzgTZkiCmPAMZA",
+                administrator: creator,
                 collection_name: char2Bytes(collectionName),
                 symbol: char2Bytes("MTR"),
                 num_tokens: numTokens,
