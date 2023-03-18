@@ -14,6 +14,7 @@ import { WalletContext, beaconWallet } from "./lib/wallet";
 import ArtistPanel from "./components/ArtistPanel";
 import SeriesOverview from "./components/SeriesOverview";
 import DeployForm from "./components/DeployForm";
+import MintIFrame from "./components/MintIFrame";
 
 function App() {
     const [wallet] = useState(beaconWallet);
@@ -37,6 +38,7 @@ function App() {
                         element={<ArtistPanel />}
                     />
                     <Route path="/series-overview/" element={<SeriesOverview />} />
+                    <Route path="/mint-iframe/:contract" element={<MintIFrame />} />
                 </Routes>
             </div>
         </WalletContext.Provider>
