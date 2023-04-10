@@ -9,9 +9,6 @@ function Home() {
             Onchain metadata.
             <br/>
             <br/>
-            Onchain randomness.
-            <br/>
-            <br/>
             Integrated marketplace.
             <br/>
             <br/>
