@@ -101,14 +101,14 @@ function Series() {
                     </div>
                 )}
 
-                {activeAccount === artist && ENV !== "prod" && (
+                {/* {activeAccount === artist && ENV !== "prod" && (
                     <button
                         class="btn btn-default"
                         onClick={handleDeployToMainnet}
                     >
                         Deploy to mainnet
                     </button>
-                )}
+                )} */}
 
                 <div style={{ marginTop: "3vh" }}>
                     <MarketPlace contract={contract}></MarketPlace>
