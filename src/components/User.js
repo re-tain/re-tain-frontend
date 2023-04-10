@@ -18,7 +18,9 @@ function User() {
                 TZKT_API + `v1/contracts/${referenceContract}/same`
             );
 
-            const contracts = (await res.json()).map((c) => c.address);
+            const contracts = (await res.json())
+                .filter((e) => e.firstActivity >= 2332268)
+                .map((c) => c.address);
             console.log(contracts)
             setContracts(contracts);
         }
@@ -27,17 +29,19 @@ function User() {
     }, [address]);
 
     if (address && contracts) {
-        console.log(contracts)
+        console.log(contracts);
         let query =
             "v1/tokens/balances" +
             "?" +
             new URLSearchParams({
-                "token.contract.in": contracts.join(",") + ',KT1HxKqrPb5oax9PvD1kfUTfi34cupNDjynT',
+                "token.contract.in":
+                    contracts.join(",") +
+                    ",KT1McBYvysFX7YWRnbKx6XQue1DfMxTE47U4",
                 account: address,
                 "balance.gt": 0,
                 "sort.desc": "firstTime",
             });
-            console.log(query)
+        console.log(query);
         return (
             <Layout>
                 <UserDetail address={address} />
