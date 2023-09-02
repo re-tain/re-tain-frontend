@@ -31,7 +31,7 @@ function TokenDetail() {
                 token.tokenId
             );
             setToken(token);
-            setArtist(await getContractStorage(contract, "administrator"));
+            setArtist(await getContractStorage(contract, "artist_address"));
             setTokenPrice(
                 await getContractBigmap(contract, "listings", tokenId)
             );

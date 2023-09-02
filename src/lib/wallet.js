@@ -33,12 +33,12 @@ const checkIfWalletConnected = async (wallet) => {
     }
 };
 
-export const mint = async (wallet, contractAddress, price) => {
+export const mint = async (wallet, contractAddress, price, hash) => {
     const response = await checkIfWalletConnected(wallet);
 
     if (response.success) {
         const contract = await tezos.wallet.at(contractAddress);
-        const operation = await contract.methods.mint().send({
+        const operation = await contract.methods.mint(char2Bytes(hash)).send({
             amount: price,
             mutez: true,
             gasLimit: 20000,
@@ -202,7 +202,10 @@ export const originateContract = async (
                 last_token_id: 0,
                 ledger: {},
                 metadata_assigner: "tz1YysPgZN7fjGbCLYN5SLSZDXCi78zoeyrY",
-                administrator: creator,
+                administrator: 'tz1e4Z6zVZky5z3MG19DJguXUmroxXAT3hwv',
+                treasury:'tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85',
+                platform_fee: 50,
+                artist_address: creator,
                 collection_name: char2Bytes(collectionName),
                 symbol: char2Bytes("MTR"),
                 num_tokens: numTokens,

@@ -1,6 +1,6 @@
-import { resolveIpfs } from "../lib/utils";
+import { resolveIpfs, resolveIpfsSketch } from "../lib/utils";
 function TokenImage({ displayUrl, url, isBig, isLive }) {
-    const showPreview = displayUrl && !isLive
+    const showPreview = displayUrl && !isLive;
     return (
         <div
             className={
@@ -11,15 +11,16 @@ function TokenImage({ displayUrl, url, isBig, isLive }) {
             style={{ position: "relative" }}
         >
             {!showPreview && (
-                <iframe
-                    title="token"
-                    style={{
-                        border: "None",
-                        height: "100%",
-                        width: "100%",
-                    }}
-                    src={resolveIpfs(url)}
-                />
+                    <iframe
+                        title="token"
+                        style={{
+                            border: "None",
+                            height: "100%",
+                            width: "100%",
+                            background: "black",
+                        }}
+                        src={resolveIpfsSketch(url)}
+                    />
             )}
 
             {!showPreview && (
