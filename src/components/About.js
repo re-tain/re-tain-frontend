@@ -83,7 +83,7 @@ function About() {
                 <b>TL;DR USE AT YOUR OWN RISK.</b>
                 <p>
                     re-tain.xyz is an experimental platform. While every effort
-                    is made by the team to provide a secure platform, Editart
+                    is made by the team to provide a secure platform, Re--Tain
                     will not accept any liability or responsibility for any kind
                     of damage created by the use of the platform.
                 </p>
