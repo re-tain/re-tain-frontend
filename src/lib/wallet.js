@@ -159,7 +159,6 @@ export const originateContract = async (
     wallet,
     price,
     royalties,
-    tokenDescription,
     collectionName,
     numTokens,
     metadataHash,
@@ -196,7 +195,6 @@ export const originateContract = async (
                         decimals: 3,
                     })
                 ),
-                description_bytes: char2Bytes(tokenDescription),
                 creators_bytes: char2Bytes(JSON.stringify([creator])),
                 hashes: [],
                 last_token_id: 0,

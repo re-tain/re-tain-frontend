@@ -47,7 +47,6 @@ function DeployForm() {
             wallet,
             form.price.value * 1000000,
             form.royalties.value,
-            form.tokenDescription.value,
             form.collectionName.value,
             form.numTokens.value,
             data.metadata_hash,
@@ -75,26 +74,6 @@ function DeployForm() {
                         <input
                             type="text"
                             name="description"
-                            placeholder=" "
-                            required
-                        />
-                    </label>
-                    <label>
-                        Token Level Description{" "}
-                        <small>(Limited to 32 chars)</small>:
-                        <input
-                            required
-                            type="text"
-                            name="tokenDescription"
-                            maxLength="32"
-                            placeholder=" "
-                        />
-                    </label>
-                    <label>
-                        Homepage:
-                        <input
-                            type="text"
-                            name="homepage"
                             placeholder=" "
                             required
                         />
@@ -131,16 +110,6 @@ function DeployForm() {
                             placeholder=" "
                             required
                         />
-                    </label>
-                    <br></br>
-                    <label>
-                        Collection Title Image <small>(jpg/png, Max 5MB)</small>:
-                        <input
-                            type="file"
-                            name="file"
-                            accept="image/png, image/jpeg"
-                            required
-                        ></input>
                     </label>
                     <br></br>
                     <label>

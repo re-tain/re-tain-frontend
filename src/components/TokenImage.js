@@ -1,6 +1,32 @@
-import { resolveIpfs, resolveIpfsSketch } from "../lib/utils";
-function TokenImage({ displayUrl, url, isBig, isLive }) {
-    const showPreview = displayUrl && !isLive;
+import { resolveIpfs } from "../lib/utils";
+import LiveViewIFrame from "./LiveViewIFrame";
+function TokenImage({ displayUrl, url, isBig, showArtifact, strictlyDisplay }) {
+    const displayArtifact = showArtifact || !displayUrl;
+    if (strictlyDisplay && !displayUrl) {
+        return (
+            <div
+                className={
+                    isBig
+                        ? "token-detail-width token-detail-height"
+                        : "standard-width standard-height"
+                }
+                style={{ position: "relative" }}
+            >
+                <div
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        zIndex: "-100",
+                        paddingTop: "50%",
+                    }}
+                >
+                    Preview not available yet.
+                </div>
+            </div>
+        );
+    }
+    
     return (
         <div
             className={
@@ -10,20 +36,9 @@ function TokenImage({ displayUrl, url, isBig, isLive }) {
             }
             style={{ position: "relative" }}
         >
-            {!showPreview && (
-                    <iframe
-                        title="token"
-                        style={{
-                            border: "None",
-                            height: "100%",
-                            width: "100%",
-                            background: "black",
-                        }}
-                        src={resolveIpfsSketch(url)}
-                    />
-            )}
+            {displayArtifact && <LiveViewIFrame url={url} />}
 
-            {!showPreview && (
+            {displayArtifact && (
                 <div
                     style={{
                         position: "absolute",
@@ -37,7 +52,12 @@ function TokenImage({ displayUrl, url, isBig, isLive }) {
                 </div>
             )}
 
-            {showPreview && <img alt="token" src={resolveIpfs(displayUrl)} />}
+            {!displayArtifact && (
+                <img
+                    alt="token"
+                    src={resolveIpfs(displayUrl)}
+                />
+            )}
         </div>
     );
 }

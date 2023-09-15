@@ -13,7 +13,7 @@ import TokenOverview from "./TokenOverview";
 import { originateContractFromExisting, WalletContext } from "../lib/wallet";
 import MarketPlace from "./Marketplace";
 import { ENV } from "../consts";
-import LiveViewIFrame from "./LiveViewIframe";
+import LiveViewIFrame from "./LiveViewIFrame";
 import PrevNextForm from "./PrevNextForm";
 import { bytes2Char } from "@taquito/utils";
 
@@ -96,7 +96,7 @@ function Series() {
                 {activeAccount === artist && (
                     <div className="token-detail-width">
                         <Link to={`/artist-panel/${contract}`}>
-                            <button class="btn btn-default" style={{width: '100%', marginTop: "2vh"}}>
+                            <button className="btn btn-default" style={{width: '100%', marginTop: "2vh"}}>
                                 Go to artist panel
                             </button>
                         </Link>
