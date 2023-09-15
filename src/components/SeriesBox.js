@@ -22,7 +22,7 @@ function SeriesBox({ contract }) {
 
         fetchToken().catch(console.error);
     }, [contract]);
-    if (metadata && artifactUri && artist) {
+    if (metadata && artist) {
         return (
             <Box
                 artifactUri={artifactUri}
