@@ -24,7 +24,7 @@ function Mint({ contract, price, hash, active }) {
             <div>
                 <MintForm
                     onMint={handleMint}
-                    onSurpiseMint={handleSurpriseMint}
+                    onSurpriseMint={handleSurpriseMint}
                     price={price}
                     showButton={active}
                 />
