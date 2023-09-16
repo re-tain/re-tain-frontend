@@ -1,7 +1,6 @@
 import LoadMoreButton from "./LoadMoreButton";
 
 function SeriesOverviewGrid({ children, loadMore }) {
-    console.log(children);
     return (
         <div>
             <div

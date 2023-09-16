@@ -13,11 +13,12 @@ function SeriesBox({ contract }) {
 
     useEffect(() => {
         const fetchToken = async () => {
-            let token = await getToken(contract, 0);
+            let token = await getToken(contract.address, 0);
+            console.log(token)
             setArtifactUri(token?.metadata.artifactUri);
             setDisplayUri(token?.metadata.displayUri);
-            setMetadata(await getContractMetadata(contract));
-            setArtist(await getContractStorage(contract, 'artist_address'));
+            setMetadata(await getContractMetadata(contract.address));
+            setArtist(contract.storage.artist_address);
         };
 
         fetchToken().catch(console.error);
@@ -27,7 +28,7 @@ function SeriesBox({ contract }) {
             <Box
                 artifactUri={artifactUri}
                 displayUri={displayUri}
-                link={`/series/${contract}`}
+                link={`/series/${contract.address}`}
                 line1={metadata.name}
                 line2={<span>by <UserDetail address={artist} isLink={true}/></span>}
             />

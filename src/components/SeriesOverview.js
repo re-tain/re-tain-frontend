@@ -19,7 +19,7 @@ function SeriesOverview() {
         setPage(Math.max(page + pageLength, 0));
     };
 
-    const query = `v1/contracts/${referenceContract}/same?sort.desc=firstActivity`;
+    const query = `v1/contracts/${referenceContract}/same?sort.desc=firstActivity&firstActivity.gte=23322687&includeStorage=true`;
     useEffect(() => {
         async function fetchContracts() {
             if (!maybeMore) return;
@@ -31,20 +31,9 @@ function SeriesOverview() {
                     `${separator}limit=${pageLength}&offset=${page}`
             );
             let result = await res.json();
-            result = result.filter((e) => e.firstActivity >= 2332268);
             if (result.length > 0) {
-                const newContracts = await Promise.all(
-                    result.map(async (c) => {
-                        let res = await fetch(
-                            TZKT_API + `v1/contracts/${c.address}`
-                        );
-                        const contract = await res.json();
-                        const metadata = await getContractMetadata(c.address);
-                        return { contract, metadata };
-                    })
-                );
-
-                setContracts(contracts.concat(newContracts));
+                console.log(result);
+                setContracts(contracts.concat(result));
                 setMaybeMore(result.length === pageLength);
             } else {
                 setPage(Math.max(page - pageLength, 0));
@@ -59,11 +48,13 @@ function SeriesOverview() {
             <Layout>
                 <SeriesOverviewGrid loadMore={loadMore}>
                     {contracts.map(function (c, idx) {
-                        return <SeriesBox contract={c.contract.address} key={idx}/>;
+                        return <SeriesBox contract={c} key={idx} />;
                     })}
                 </SeriesOverviewGrid>
             </Layout>
         );
+    } else {
+        return <Layout>Loading...</Layout>;
     }
 }
 

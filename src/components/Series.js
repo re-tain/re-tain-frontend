@@ -4,7 +4,7 @@ import Layout from "./Layout";
 
 import { useContext, useEffect, useState } from "react";
 
-import { getContractStorage, getContractMetadata } from "../lib/api";
+import { getContractStorage, getContractMetadata, getContractStorageFull } from "../lib/api";
 import UserDetail from "./UserDetail";
 import Mint from "./Mint";
 import { extractTokensForOverview, formatMutez, resolveIpfs } from "../lib/utils";
@@ -33,14 +33,13 @@ function Series() {
 
     useEffect(() => {
         const fetchStorage = async () => {
-            setPrice(await getContractStorage(contract, "price"));
-            setNumTokens(await getContractStorage(contract, "num_tokens"));
-            setNumTokensMinted(
-                await getContractStorage(contract, "last_token_id")
-            );
-            setPaused(await getContractStorage(contract, "paused"));
-            setArtist(await getContractStorage(contract, "artist_address"));
-            setBaseUrl(bytes2Char(await getContractStorage(contract, "base_url")));
+            const storage = await getContractStorageFull(contract);
+            setPrice(storage.price);
+            setNumTokens(storage.num_tokens);
+            setNumTokensMinted(storage.last_token_id);
+            setPaused(storage.paused);
+            setArtist(storage.artist_address);
+            setBaseUrl(bytes2Char(storage.base_url));
             setMetadata(await getContractMetadata(contract));
             const account = await client.getActiveAccount();
             if (account) {

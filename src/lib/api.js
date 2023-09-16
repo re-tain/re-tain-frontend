@@ -13,6 +13,15 @@ export async function getToken(contract, tokenId) {
     }
 }
 
+export async function getContractStorageFull(contract) {
+    let query = `v1/contracts?address=${contract}&includeStorage=true`;
+    let res = await fetch(TZKT_API + query);
+    let data = await res.json();
+    console.log(data)
+    return data[0].storage;
+}
+
+
 export async function getContractStorage(contract, key) {
     let query = `v1/contracts/${contract}/storage?path=${key}`;
     let res = await fetch(TZKT_API + query);
