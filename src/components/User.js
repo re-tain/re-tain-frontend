@@ -28,15 +28,14 @@ function User() {
         fetchContracts().catch(console.error);
     }, [address]);
 
-    if (address && contracts) {
+    if (address && contracts.length > 0) {
         console.log(contracts);
         let query =
             "v1/tokens/balances" +
             "?" +
             new URLSearchParams({
                 "token.contract.in":
-                    contracts.join(",") +
-                    ",KT1McBYvysFX7YWRnbKx6XQue1DfMxTE47U4",
+                    contracts.join(","),
                 account: address,
                 "balance.gt": 0,
                 "sort.desc": "firstTime",

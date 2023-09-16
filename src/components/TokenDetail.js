@@ -52,7 +52,7 @@ function TokenDetail() {
                             url={token.metadata.artifactUri}
                             displayUrl={token.metadata.displayUri}
                             isBig={true}
-                            isLive={true}
+                            showArtifact={true}
                         />
                     </div>
 
