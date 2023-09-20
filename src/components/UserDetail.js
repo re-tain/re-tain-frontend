@@ -54,11 +54,11 @@ function UserDetail({ address, isLink }) {
                 {tzProfile && (
                     <div style={{ marginBottom: "2vw" }}>
                         {/* FIXME uncomment when tzprofiles starts working again */}
-                        {/* <img
+                        <img
                             src={tzProfile.logo}
                             style={{ width: "50px" }}
                             alt="Logo"
-                        ></img> */}
+                        ></img>
                         <div>
                             <b>{tzProfile.alias}</b>
                         </div>
