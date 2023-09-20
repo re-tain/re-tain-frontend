@@ -58,6 +58,7 @@ function UserDetail({ address, isLink }) {
                             src={tzProfile.logo}
                             style={{ width: "50px" }}
                             alt="Logo"
+                            onerror="this.style.display='none'"
                         ></img>
                         <div>
                             <b>{tzProfile.alias}</b>
