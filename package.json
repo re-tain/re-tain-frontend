@@ -8,13 +8,11 @@
     "@taquito/beacon-wallet": "^17.3.1",
     "@taquito/utils": "^17.3.1",
     "@vitejs/plugin-react-swc": "^3.4.0",
-    "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
-    "terminal.css": "^0.7.2",
     "vite": "^4.4.9",
     "vite-plugin-svgr": "^4.1.0",
     "vite-tsconfig-paths": "^4.2.1"
