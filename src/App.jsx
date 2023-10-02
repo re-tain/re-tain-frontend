@@ -1,3 +1,5 @@
+//import "bulma/css/bulma.min.css";
+import "terminal.css";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { React, useState } from "react";
