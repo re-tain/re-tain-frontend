@@ -4,10 +4,10 @@ import Layout from "./Layout";
 
 import { useContext, useEffect, useState } from "react";
 
-import { getContractStorage, getContractMetadata, getContractStorageFull } from "../lib/api";
+import { getContractMetadata, getContractStorageFull } from "../lib/api";
 import UserDetail from "./UserDetail";
 import Mint from "./Mint";
-import { extractTokensForOverview, formatMutez, resolveIpfs } from "../lib/utils";
+import { extractTokensForOverview, formatMutez } from "../lib/utils";
 
 import TokenOverview from "./TokenOverview";
 import { originateContractFromExisting, WalletContext } from "../lib/wallet";
