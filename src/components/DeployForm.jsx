@@ -128,7 +128,7 @@ function DeployForm() {
                    
                     <br></br><br></br>
                   
-                    {ENV === "XXX" && (
+                    {/* {ENV === "XXX" && (
                         <label>
                             <input
                                 type="radio"
@@ -149,8 +149,7 @@ function DeployForm() {
                             value="ghostnet"
                         ></input>
                         Tezos Testnet (Ghostnet)
-                    </label>
-                    <br></br><br></br>
+                    </label> */}
                     <button
                         className="btn btn-default"
                         onClick={handleUpload}
