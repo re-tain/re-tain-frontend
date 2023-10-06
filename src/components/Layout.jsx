@@ -9,13 +9,12 @@ function Layout({ children, favicon = "/favicon.png" }) {
     useEffect(() => {
         const func = async () => {
             const account = await client.getActiveAccount();
-                if (account) {
-                    setActiveAccount(account.address);
-                }
+            if (account) {
+                setActiveAccount(account.address);
+            }
         };
         func();
     }, [client]);
-
 
     return (
         <div
@@ -31,14 +30,13 @@ function Layout({ children, favicon = "/favicon.png" }) {
         >
             <header>
                 <div className="terminal-nav">
-                   
-                        <Link to="/">
-<img src="../src/assets/logo.svg"></img>
-</Link>
-  
+                    <Link to="/">
+                        <img src="/logo.svg"></img>
+                    </Link>
+
                     <nav className="terminal-menu">
                         <ul>
-                        <li key="Series">
+                            <li key="Series">
                                 <span className="menu-item">
                                     <Link to="/series-overview">Explore</Link>
                                 </span>
@@ -74,8 +72,14 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 {children}
             </div>
             <footer>
-                <br /><br /><br /><br />
-                Built with <a href="https://tzkt.io" target="_blank" rel="noreferrer">TzKT API</a>
+                <br />
+                <br />
+                <br />
+                <br />
+                Built with{" "}
+                <a href="https://tzkt.io" target="_blank" rel="noreferrer">
+                    TzKT API
+                </a>
             </footer>
         </div>
     );
