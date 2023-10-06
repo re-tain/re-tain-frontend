@@ -64,12 +64,13 @@ function UserDetail({ address, isLink }) {
                             <b>{tzProfile.alias}</b>
                         </div>
                         <div>{tzProfile.description}</div>
-
-                        <div>
-                            <a href={tzProfile.twitter}>
-                                {"@" + tzProfile.twitter.split("com/")[1]}
-                            </a>
-                        </div>
+                        {tzProfile.twitter && (
+                            <div>
+                                <a href={tzProfile.twitter}>
+                                    {"@" + tzProfile.twitter.split("com/")[1]}
+                                </a>
+                            </div>
+                        )}
 
                         <div>
                             <a href={tzProfile.website}>{tzProfile.website}</a>
