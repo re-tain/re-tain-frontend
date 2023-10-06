@@ -3,7 +3,9 @@ import { BeaconWallet } from "@taquito/beacon-wallet";
 import { TezosToolkit } from "@taquito/taquito";
 import { TEZOS_NETWORK, RPC_NODE } from "../consts";
 import { char2Bytes } from "@taquito/utils";
+import contractJSON from "../contract.json"
 
+console.log(contractJSON)
 const options = {
     name: "re-tain.xyz",
     preferredNetwork: TEZOS_NETWORK,
@@ -177,7 +179,6 @@ export const originateContract = async (
     }
     activeAccount = await wallet.client.getActiveAccount();
 
-    const contractJSON = require("../contract.json");
     const creator = activeAccount.address;
     const shares = {};
     const distribution = {};
@@ -239,8 +240,6 @@ export const originateContractFromExisting = async (
         });
     }
     activeAccount = await wallet.client.getActiveAccount();
-
-    const contractJSON = require("../contract.json");
 
     const storage = await (
         await fetch(
