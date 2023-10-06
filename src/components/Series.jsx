@@ -4,10 +4,10 @@ import Layout from "./Layout";
 
 import { useContext, useEffect, useState } from "react";
 
-import { getContractMetadata, getContractStorageFull } from "../lib/api";
+import { getContractStorage, getContractMetadata, getContractStorageFull } from "../lib/api";
 import UserDetail from "./UserDetail";
 import Mint from "./Mint";
-import { extractTokensForOverview, formatMutez } from "../lib/utils";
+import { extractTokensForOverview, formatMutez, resolveIpfs } from "../lib/utils";
 
 import TokenOverview from "./TokenOverview";
 import { originateContractFromExisting, WalletContext } from "../lib/wallet";
@@ -95,7 +95,7 @@ function Series() {
                 {activeAccount === artist && (
                     <div className="token-detail-width">
                         <Link to={`/artist-panel/${contract}`}>
-                            <button className="btn btn-default" style={{width: '100%', marginTop: "2vh"}}>
+                            <button className="btn btn-default" style={{width: '50%', marginTop: "2vh"}}>
                                 Go to artist panel
                             </button>
                         </Link>
@@ -123,10 +123,13 @@ function Series() {
                         extractTokens={extractTokensForOverview}
                     ></TokenOverview>
                 </div>
+                <br/><br/><br/><br/>
             </Layout>
         );
     } else {
+          {/* add state: if nothing listed yet */}
         return <Layout>Loading...</Layout>;
+  
     }
 }
 

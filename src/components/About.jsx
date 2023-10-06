@@ -3,48 +3,9 @@ function About() {
     return (
         <Layout>
             <div className="main">
-                <h1>For artists</h1>
+                <h1>For Artists</h1>
                 <p>
-                    You can can deploy your contract using the deploy form. For
-                    the artwork, please use the provided template. It provides a
-                    random function called rand(), based on the randomness that
-                    will be generated on-chain by the contract. The rest is up
-                    to you. For testing, please deploy the contract to the
-                    testnet, after that the project will be available at{" "}
-                    <a
-                        href="https://staging.re-tain.xyz"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        staging.re-tain.xyz
-                    </a>
-                    {". "}
-                    You will need some Testnet Tez, you can get it at{" "}
-                    <a
-                        href="https://faucet.ghostnet.teztnets.xyz/"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {" "}
-                        this faucet
-                    </a>
-                    . After deployment of the contract, the project will be
-                    paused, which means that only the artist can mint. You can
-                    unpause using the artist panel, available on the series page
-                    (if you are connected with the artist account.). Once you
-                    are happy with the result, you can hit the "Deploy to
-                    mainnet" button in the series page to go live to mainnet
-                    with your contract. Have fun! If you have any questions,
-                    reach out on twitter
-                    <a
-                        href="https://twitter.com/pifragile/"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {" "}
-                        @pifragile
-                    </a>
-                    .
+                    Download our p5.js template to get started.
                     <br />
                     <br />
                     <a
@@ -57,37 +18,33 @@ function About() {
                             name="template"
                             id="template"
                         >
-                            Download template
+                            Download p5.js starter template
                         </button>
                     </a>
                 </p>
 
-                <h1>About Retain.xyz</h1>
+                <h1>About Re—tain</h1>
                 <p>
                     You own the contract.
                     <br />
                     <br />
-                    Onchain metadata.
-                    <br />
-                    <br />
-                    Onchain randomness.
+                    On-chain metadata.
                     <br />
                     <br />
                     Integrated marketplace.
                 </p>
 
-                <h1>Fees</h1>
-                <p>2.5% on mints and royalties</p>
+                <h1>Sales Fee</h1>
+                <p>5% on primary, 2.5% on secondary</p>
+                <p>We don't charge anything for contract deployment; you only need to pay Tezos gas fees</p>
 
                 <h1>Disclaimer</h1>
-                <b>TL;DR USE AT YOUR OWN RISK.</b>
+                <b>TL;DR USE AT YOUR OWN RISK & DO YOUR OWN RESEARCH.</b>
                 <p>
-                    re-tain.xyz is an experimental platform. While every effort
-                    is made by the team to provide a secure platform, Re--Tain
-                    will not accept any liability or responsibility for any kind
-                    of damage created by the use of the platform.
+                Re-tain.xyz is currently in its alpha testing phase, serving as an experimental platform. While our team strives to ensure a secure environment, please be aware that Re-tain.xyz does not assume any liability or responsibility for any damages resulting from platform usage.
                 </p>
             </div>
+            <br /><br /><br /><br /><br /><br />
         </Layout>
     );
 }

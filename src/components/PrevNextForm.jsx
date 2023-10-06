@@ -44,6 +44,9 @@ function PrevNextForm({ setHash }) {
 
     return (
         <div>
+
+            {/* 
+
             <button style={{width: '50%'}}
                 className="btn btn-default"
                 name="prev"
@@ -52,15 +55,19 @@ function PrevNextForm({ setHash }) {
             >
                 prev
             </button>
+ */}
+
+
             <button style={{width: '50%'}}
                 className="btn btn-default"
                 name="next"
                 id="next"
                 onClick={onNext}
             >
-                next
+                Randomize
             </button>
 
+   {/* 
             <button style={{width: '100%'}}
                 className="btn btn-default"
                 name="copy"
@@ -69,6 +76,7 @@ function PrevNextForm({ setHash }) {
             >
                 Save to Clipboard
             </button>
+             */}
         </div>
     );
 }

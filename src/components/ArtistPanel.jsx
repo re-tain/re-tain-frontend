@@ -36,7 +36,7 @@ function ArtistPanel() {
                                 type="number"
                                 required={true}
                                 placeholder="tez"
-                                step="0.0001"
+                                step="1"
                             />
                             <button
                                 className="btn btn-default"
@@ -52,7 +52,7 @@ function ArtistPanel() {
 
                 <form onSubmit={handleTogglePaused}>
                     <fieldset>
-                        <legend>Toggle Paused</legend>
+                        <legend>Toggle Paused Token</legend>
                         <div className="form-group">
                             <button
                                 className="btn btn-default"
@@ -68,13 +68,13 @@ function ArtistPanel() {
 
                 <form onSubmit={handleSetNumTokens}>
                     <fieldset>
-                        <legend>Set num_tokens</legend>
+                        <legend>Set Editions</legend>
                         <div className="form-group">
                             <input
                                 id="price"
                                 type="number"
                                 required={true}
-                                placeholder="num_tokens"
+                                placeholder="Enter edition size..."
                                 step="1"
                             />
                             <button
@@ -83,7 +83,7 @@ function ArtistPanel() {
                                 name="submit"
                                 id="submit"
                             >
-                                Set num_tokens
+                                Set Editions
                             </button>
                         </div>
                     </fieldset>

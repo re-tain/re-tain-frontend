@@ -73,7 +73,7 @@ function TokenDetail() {
                         </div>
                     </div>
                     <br/>
-                    <Link to={`/series/${contract}`}><button class="btn btn-default">Go to series</button></Link>
+                    <Link to={`/series/${contract}`}><button class="btn btn-default">Go to collection</button></Link>
                     <br/>
                     <div
                         className="token-detail-width"
@@ -90,7 +90,7 @@ function TokenDetail() {
             </Layout>
         );
     } else {
-        <Layout>return "Loading..";</Layout>;
+        <Layout>return "Loading...";</Layout>;
     }
 }
 

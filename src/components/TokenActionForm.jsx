@@ -48,14 +48,14 @@ function TokenActionForm({ contract, tokenId, price, owner }) {
             {price && (
                 <form onSubmit={handleBuy}>
                     <fieldset>
-                        <legend>Buy</legend>
+                        <legend>Purchase</legend>
                         <div className="form-group">
                             <button
                                 className="btn btn-default"
                                 name="submit"
                                 id="submit"
                             >
-                                Buy for {formatMutez(price)}
+                                Purchase for {formatMutez(price)}
                             </button>
                         </div>
                     </fieldset>
@@ -72,7 +72,7 @@ function TokenActionForm({ contract, tokenId, price, owner }) {
                                     type="number"
                                     required={true}
                                     placeholder="tez"
-                                    step="0.0001"
+                                    step="1"
                                 />
                                 <button
                                     className="btn btn-default"
@@ -101,6 +101,7 @@ function TokenActionForm({ contract, tokenId, price, owner }) {
                             </div>
                         </fieldset>
                     </form>
+  {/*
                     <form onSubmit={handleTransfer}>
                         <fieldset>
                             <legend>Transfer</legend>
@@ -123,6 +124,8 @@ function TokenActionForm({ contract, tokenId, price, owner }) {
                             </div>
                         </fieldset>
                     </form>
+*/}
+
                 </div>
             )}
         </div>

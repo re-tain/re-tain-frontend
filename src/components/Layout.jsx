@@ -24,43 +24,40 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 paddingRight: "10vw",
                 minHeight: "100vh",
                 margin: 0,
+                paddingTop: 15,
                 display: "grid",
                 gridTemplateRows: "auto 1fr auto",
             }}
         >
             <header>
                 <div className="terminal-nav">
-                    <div className="terminal-logo">
-                        <div className="logo terminal-prompt">
-                            <span className="no-style">
-                                <Link to="/">re-tain.xyz</Link>
-                            </span>
-                        </div>
-                    </div>
+                   
+                        <Link to="/">
+<img src="../src/assets/logo.svg"></img>
+</Link>
+  
                     <nav className="terminal-menu">
                         <ul>
-                        <li key="Deploy">
+                        <li key="Series">
                                 <span className="menu-item">
-                                    <Link to="/deploy">Deploy</Link>
-                                </span>
-                            </li>
-
-                            <li key="Series">
-                                <span className="menu-item">
-                                    <Link to="/series-overview">Series</Link>
+                                    <Link to="/series-overview">Explore</Link>
                                 </span>
                             </li>
                             <li key="MyCollection">
                                 <span className="menu-item">
                                     <Link to={`/user/${activeAccount}`}>
-                                        My collection
+                                        Your Collection
                                     </Link>
                                 </span>
                             </li>
-
                             <li key="About">
                                 <span className="menu-item">
                                     <Link to="/about">About</Link>
+                                </span>
+                            </li>
+                            <li key="Deploy">
+                                <span className="menu-item">
+                                    <Link to="/deploy">Mint</Link>
                                 </span>
                             </li>
                         </ul>
@@ -77,7 +74,7 @@ function Layout({ children, favicon = "/favicon.png" }) {
                 {children}
             </div>
             <footer>
-                <br />
+                <br /><br /><br /><br />
                 Built with <a href="https://tzkt.io" target="_blank" rel="noreferrer">TzKT API</a>
             </footer>
         </div>

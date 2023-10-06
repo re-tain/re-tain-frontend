@@ -61,59 +61,63 @@ function DeployForm() {
             <div className="main">
                 <form>
                     <label>
-                        Collection Name:
+                        Title:
                         <input
                             type="text"
                             name="collectionName"
-                            placeholder=" "
+                            placeholder=""
                             required
                         />
                     </label>
+                    <br></br><br></br>
                     <label>
                         Description:
                         <input
                             type="text"
                             name="description"
-                            placeholder=" "
+                            placeholder=""
                             required
                         />
                     </label>
+                    <br></br><br></br>
                     <label>
-                        Royalties <small>(In %. 0-25)</small>:
+                        Royalties (5-90%):
                         <input
                             type="number"
                             name="royalties"
-                            min="0"
-                            max="25"
+                            min="5"
+                            max="90"
                             placeholder=" "
                             required
                         />
                     </label>
+                    <br></br><br></br>
                     <label>
-                        Number of tokens:
+                        Editions (10+ recommended):
                         <input
                             type="number"
                             name="numTokens"
                             min="0"
                             max="100000"
-                            placeholder=" "
+                            placeholder=""
                             required
                         />
                     </label>
+                    <br></br><br></br>
                     <label>
-                        Price:
+                        Price (per edition in tez):
                         <input
                             type="number"
                             name="price"
                             min="0"
-                            step="0.001"
-                            placeholder=" "
+                            step="1"
+                            placeholder=""
                             required
                         />
                     </label>
-                    <br></br>
+                    <br></br><br></br>
                     <label>
-                        Token Code<small>(zip, Max 30MB)</small>:
+                        Artwork Code: (.zip, max. 30MB)<br></br>
                         <input
                             type="file"
                             name="file"
@@ -121,9 +125,9 @@ function DeployForm() {
                             required
                         ></input>
                     </label>
-                    <br></br>
-                    Deploy to:
-                    <br />
+                   
+                    <br></br><br></br>
+                  
                     {ENV === "XXX" && (
                         <label>
                             <input
@@ -136,6 +140,7 @@ function DeployForm() {
                             Mainnet
                         </label>
                     )}
+                     
                     <label>
                         <input
                             type="radio"
@@ -143,9 +148,9 @@ function DeployForm() {
                             name="network"
                             value="ghostnet"
                         ></input>
-                        Ghostnet Testnet
+                        Tezos Testnet (Ghostnet)
                     </label>
-                    <br></br>
+                    <br></br><br></br>
                     <button
                         className="btn btn-default"
                         onClick={handleUpload}
@@ -153,11 +158,12 @@ function DeployForm() {
                         value="Submit"
                     >
                         {" "}
-                        Deploy Contract{" "}
+                        Publish Contract to Testnet{" "}
                     </button>
                 </form>
                 {statusText.length > 0 && <div>{statusText}</div>}
             </div>
+            <br></br><br></br> <br></br><br></br>
         </Layout>
     );
 }

@@ -51,6 +51,7 @@ function SeriesOverview() {
                         return <SeriesBox contract={c} key={idx} />;
                     })}
                 </SeriesOverviewGrid>
+                <br></br><br></br> <br></br><br></br>
             </Layout>
         );
     } else {

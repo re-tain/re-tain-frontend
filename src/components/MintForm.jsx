@@ -5,14 +5,16 @@ function MintForm({ onMint, onSurpriseMint, price, showButton }) {
         <div>
             {showButton && (
                 <div>
-                    <button style={{width: '100%'}}
+                    <button style={{width: '50%'}}
                         className="btn btn-default"
                         name="mint"
                         id="mint"
                         onClick={onMint}
                     >
-                        Mint selected
+                        Mint generated
                     </button>
+
+                  {/* 
                     <button style={{width: '100%'}}
                         className="btn btn-default"
                         name="mintSurprise"
@@ -21,6 +23,7 @@ function MintForm({ onMint, onSurpriseMint, price, showButton }) {
                     >
                         Surprise me!
                     </button>
+                */}
                 </div>
             )}
         </div>
