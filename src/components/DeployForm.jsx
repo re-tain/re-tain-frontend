@@ -51,7 +51,7 @@ function DeployForm() {
             form.numTokens.value,
             data.metadata_hash,
             data.token_hash,
-            form.network.value
+            'ghostnet'
         );
         setStatusText(statusText + `Contract Deployed at ${contract}\n`);
     }
