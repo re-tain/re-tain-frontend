@@ -6,7 +6,7 @@ import referenceContract from "../contracts";
 import SeriesOverviewGrid from "./SeriesOverviewGrid";
 import SeriesBox from "./SeriesBox";
 
-function SeriesOverview() {
+function SeriesOverview({ hidden = false }) {
     const pageLength = 10;
     const [contracts, setContracts] = useState([]);
     const [page, setPage] = useState(0);
@@ -43,6 +43,10 @@ function SeriesOverview() {
         fetchContracts().catch(console.error);
     });
 
+    if (hidden) {
+        return <Layout>Series overview is disabled.</Layout>;
+    }
+    
     if (contracts.length > 0) {
         return (
             <Layout>
@@ -51,7 +55,9 @@ function SeriesOverview() {
                         return <SeriesBox contract={c} key={idx} />;
                     })}
                 </SeriesOverviewGrid>
-                <br></br><br></br> <br></br><br></br>
+                <br></br>
+                <br></br> <br></br>
+                <br></br>
             </Layout>
         );
     } else {
