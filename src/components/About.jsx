@@ -34,9 +34,9 @@ function About() {
                     Integrated marketplace.
                 </p>
 
-                <h1>Sales Fee</h1>
+                {/* <h1>Sales Fee</h1>
                 <p>5% on primary, 2.5% on secondary</p>
-                <p>We don't charge anything for contract deployment; you only need to pay Tezos gas fees</p>
+                <p>We don't charge anything for contract deployment; you only need to pay Tezos gas fees</p> */}
 
                 <h1>Disclaimer</h1>
                 <b>TL;DR USE AT YOUR OWN RISK & DO YOUR OWN RESEARCH.</b>
