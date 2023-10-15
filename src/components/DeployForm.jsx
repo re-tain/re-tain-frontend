@@ -2,9 +2,11 @@ import Layout from "./Layout";
 import { originateContract, WalletContext } from "../lib/wallet";
 import { useContext, useState } from "react";
 import { ENV, UPLOAD_URL } from "../consts";
+import { Link } from "react-router-dom";
 
 function DeployForm() {
     const [statusText, setStatusText] = useState("");
+    const [contractAddress, setContractAddress] = useState(null);
     const wallet = useContext(WalletContext);
 
     async function handleUpload(e) {
@@ -15,13 +17,10 @@ function DeployForm() {
         }
         setStatusText("Uploading token to IPFS...\n");
         const formData = new FormData(e.target.form);
-        const resp = await fetch(
-            UPLOAD_URL,
-            {
-                method: "POST",
-                body: formData,
-            }
-        );
+        const resp = await fetch(UPLOAD_URL, {
+            method: "POST",
+            body: formData,
+        });
 
         if (resp.status === 413) {
             setStatusText(`Error: Files too large.`);
@@ -51,9 +50,10 @@ function DeployForm() {
             form.numTokens.value,
             data.metadata_hash,
             data.token_hash,
-            'ghostnet'
+            "ghostnet"
         );
         setStatusText(statusText + `Contract Deployed at ${contract}\n`);
+        setContractAddress(contract);
     }
 
     return (
@@ -69,7 +69,8 @@ function DeployForm() {
                             required
                         />
                     </label>
-                    <br></br><br></br>
+                    <br></br>
+                    <br></br>
                     <label>
                         Description:
                         <input
@@ -79,7 +80,8 @@ function DeployForm() {
                             required
                         />
                     </label>
-                    <br></br><br></br>
+                    <br></br>
+                    <br></br>
                     <label>
                         Royalties (5-90%):
                         <input
@@ -91,7 +93,8 @@ function DeployForm() {
                             required
                         />
                     </label>
-                    <br></br><br></br>
+                    <br></br>
+                    <br></br>
                     <label>
                         Editions (10+ recommended):
                         <input
@@ -103,7 +106,8 @@ function DeployForm() {
                             required
                         />
                     </label>
-                    <br></br><br></br>
+                    <br></br>
+                    <br></br>
                     <label>
                         Price (per edition in tez):
                         <input
@@ -115,7 +119,8 @@ function DeployForm() {
                             required
                         />
                     </label>
-                    <br></br><br></br>
+                    <br></br>
+                    <br></br>
                     <label>
                         Artwork Code: (.zip, max. 30MB)<br></br>
                         <input
@@ -125,9 +130,10 @@ function DeployForm() {
                             required
                         ></input>
                     </label>
-                   
-                    <br></br><br></br>
-                  
+
+                    <br></br>
+                    <br></br>
+
                     {/* {ENV === "XXX" && (
                         <label>
                             <input
@@ -161,8 +167,21 @@ function DeployForm() {
                     </button>
                 </form>
                 {statusText.length > 0 && <div>{statusText}</div>}
+                {contractAddress && (
+                    <Link to={`/series/${contractAddress}`}>
+                        <button
+                            className="btn btn-default"
+                            name="series"
+                            id="series"
+                        >
+                            Go to series
+                        </button>
+                    </Link>
+                )}
             </div>
-            <br></br><br></br> <br></br><br></br>
+            <br></br>
+            <br></br> <br></br>
+            <br></br>
         </Layout>
     );
 }
