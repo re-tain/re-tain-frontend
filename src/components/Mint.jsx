@@ -9,6 +9,7 @@ function Mint({ contract, price, hash, active }) {
     const wallet = useContext(WalletContext);
 
     let handleMint = async (e) => {
+        console.log(hash)
         e.preventDefault();
         await mint(wallet, contract, price, hash);
     };

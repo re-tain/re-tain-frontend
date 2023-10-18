@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 function PrevNextForm({ setHash }) {
     const [searchParams] = useSearchParams();
     const initialHash =
-        searchParams.get("hash") || "000000000000000000000000000000";
+        searchParams.get("hash") || "00000000000000000000000000000000";
     const [history, setHistory] = useState({
         hashes: [initialHash],
         currentHash: 0,

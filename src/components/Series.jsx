@@ -37,7 +37,7 @@ function Series() {
     const [activeAccount, setActiveAccount] = useState(null);
     const [paused, setPaused] = useState(null);
     const [baseUrl, setBaseUrl] = useState(null);
-    const [hash, setHash] = useState("000000000000000000000000000000");
+    const [hash, setHash] = useState("00000000000000000000000000000000");
 
     useEffect(() => {
         const fetchStorage = async () => {
