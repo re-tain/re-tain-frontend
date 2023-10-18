@@ -220,7 +220,9 @@ export const originateContract = async (
                 paused: true,
             },
         })
-        .send();
+        .send({
+            gasLimit: 20000,
+        });
     return (await originationOp.contract()).address;
 };
 
