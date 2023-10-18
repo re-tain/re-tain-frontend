@@ -14,6 +14,7 @@ import {
 import UserDetail from "./UserDetail";
 import TokenImage from "./TokenImage";
 import { getTokenMetadata } from "../lib/api";
+import { resolveIpfs, resolveIpfsSketch } from "../lib/utils";
 
 function TokenDetail() {
     let { contract, tokenId } = useParams();
@@ -72,9 +73,20 @@ function TokenDetail() {
                             <UserDetail address={owner} isLink={true} />
                         </div>
                     </div>
-                    <br/>
-                    <Link to={`/series/${contract}`}><button class="btn btn-default">Go to collection</button></Link>
-                    <br/>
+                    <br />
+                    <Link to={`/series/${contract}`}>
+                        <button class="btn btn-default">
+                            Go to collection
+                        </button>
+                    </Link>
+                    <br />
+                    <a
+                        href={resolveIpfsSketch(token.metadata.artifactUri)}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <button class="btn btn-default">Open live view</button>
+                    </a>
                     <div
                         className="token-detail-width"
                         style={{ marginTop: "1vh" }}

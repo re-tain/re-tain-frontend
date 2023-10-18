@@ -4,10 +4,18 @@ import Layout from "./Layout";
 
 import { useContext, useEffect, useState } from "react";
 
-import { getContractStorage, getContractMetadata, getContractStorageFull } from "../lib/api";
+import {
+    getContractStorage,
+    getContractMetadata,
+    getContractStorageFull,
+} from "../lib/api";
 import UserDetail from "./UserDetail";
 import Mint from "./Mint";
-import { extractTokensForOverview, formatMutez, resolveIpfs } from "../lib/utils";
+import {
+    extractTokensForOverview,
+    formatMutez,
+    resolveIpfs,
+} from "../lib/utils";
 
 import TokenOverview from "./TokenOverview";
 import { originateContractFromExisting, WalletContext } from "../lib/wallet";
@@ -29,7 +37,7 @@ function Series() {
     const [activeAccount, setActiveAccount] = useState(null);
     const [paused, setPaused] = useState(null);
     const [baseUrl, setBaseUrl] = useState(null);
-    const [hash, setHash] = useState('000000000000000000000000000000');
+    const [hash, setHash] = useState("000000000000000000000000000000");
 
     useEffect(() => {
         const fetchStorage = async () => {
@@ -67,7 +75,7 @@ function Series() {
                 </div>
                 <br />
                 <div className="token-detail-width token-detail-height">
-                <LiveViewIFrame url={`${baseUrl}?hash=${hash}`}/>
+                    <LiveViewIFrame url={`${baseUrl}?hash=${hash}`} />
                 </div>
 
                 <div style={{ marginTop: "1vh", whiteSpace: "pre-wrap" }}>
@@ -75,11 +83,12 @@ function Series() {
                 </div>
                 <br />
 
-                <div className="token-detail-width" >
+                <div className="token-detail-width">
                     <div style={{ margin: "0 0 1vh 0" }}>
-                        {numTokensMinted} / {numTokens} minted | {formatMutez(price)}
+                        {numTokensMinted} / {numTokens} minted |{" "}
+                        {formatMutez(price)}
                     </div>
-                    <PrevNextForm setHash={setHash}/>
+                    <PrevNextForm setHash={setHash} />
                     <div style={{ margin: "0vh 0 0vh 0" }}>
                         <Mint
                             contract={contract}
@@ -92,10 +101,14 @@ function Series() {
                         />
                     </div>
                 </div>
+
                 {activeAccount === artist && (
                     <div className="token-detail-width">
                         <Link to={`/artist-panel/${contract}`}>
-                            <button className="btn btn-default" style={{width: '50%', marginTop: "2vh"}}>
+                            <button
+                                className="btn btn-default"
+                                style={{ width: "50%", marginTop: "2vh" }}
+                            >
                                 Go to artist panel
                             </button>
                         </Link>
@@ -123,13 +136,17 @@ function Series() {
                         extractTokens={extractTokensForOverview}
                     ></TokenOverview>
                 </div>
-                <br/><br/><br/><br/>
+                <br />
+                <br />
+                <br />
+                <br />
             </Layout>
         );
     } else {
-          {/* add state: if nothing listed yet */}
+        {
+            /* add state: if nothing listed yet */
+        }
         return <Layout>Loading...</Layout>;
-  
     }
 }
 
