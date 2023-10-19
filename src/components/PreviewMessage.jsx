@@ -6,7 +6,7 @@ function PreviewMessage({ isBig, message }) {
                     ? "token-detail-width token-detail-height"
                     : "standard-width standard-height"
             }
-            style={{ position: "relative" }}
+            style={{ position: "relative", border: "solid 1px white" }}
         >
             <div
                 style={{

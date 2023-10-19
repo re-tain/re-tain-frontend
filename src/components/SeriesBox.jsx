@@ -16,7 +16,7 @@ function SeriesBox({ contract }) {
             let token = await getToken(contract.address, 0);
             console.log(token)
             setArtifactUri(token?.metadata.artifactUri);
-            setDisplayUri(token?.metadata.displayUri);
+            setDisplayUri(token ? token.metadata.displayUri : '1000');
             setMetadata(await getContractMetadata(contract.address));
             setArtist(contract.storage.artist_address);
         };

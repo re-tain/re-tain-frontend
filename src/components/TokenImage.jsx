@@ -6,11 +6,11 @@ const errors = {
     0: "Preview failed: timeout",
     1: "Preview failed: no triggerPreview() call",
     2: "Preview failed: unknown error",
+    1000: "Waiting for first token..."
 };
 
 function TokenImage({ displayUrl, url, isBig, showArtifact, strictlyDisplay }) {
     let error;
-    console.log(typeof displayUrl)
     if (displayUrl && !displayUrl.startsWith("ipfs")) error = errors[parseInt(displayUrl)];
 
     const displayArtifact = showArtifact || !displayUrl;
