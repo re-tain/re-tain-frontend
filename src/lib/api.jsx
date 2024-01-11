@@ -2,6 +2,13 @@ import { TZKT_API } from "../consts";
 import { bytes2Char } from "@taquito/utils";
 import { resolveIpfs } from "./utils";
 
+export async function getContract(contract) {
+    let query = `v1/contracts/${contract}`;
+    let res = await fetch(TZKT_API + query);
+    let data = await res.json();
+    return data;
+}
+
 export async function getToken(contract, tokenId) {
     let query = `v1/tokens/?contract=${contract}&tokenId=${tokenId}`;
     let res = await fetch(TZKT_API + query);
@@ -17,10 +24,9 @@ export async function getContractStorageFull(contract) {
     let query = `v1/contracts?address=${contract}&includeStorage=true`;
     let res = await fetch(TZKT_API + query);
     let data = await res.json();
-    console.log(data)
+    console.log(data);
     return data[0].storage;
 }
-
 
 export async function getContractStorage(contract, key) {
     let query = `v1/contracts/${contract}/storage?path=${key}`;

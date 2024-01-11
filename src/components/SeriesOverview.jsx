@@ -41,7 +41,7 @@ function SeriesOverview({ hidden = false }) {
         }
 
         fetchContracts().catch(console.error);
-    });
+    }, [page, oldPage, maybeMore]);
 
     if (hidden) {
         return <Layout>Series overview is disabled.</Layout>;

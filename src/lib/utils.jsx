@@ -13,7 +13,7 @@ export function resolveIpfsSketch(address) {
 }
 
 export function formatMutez(mutez) {
-    return `${mutez / 1000000} tez`;
+    return `ꜩ ${mutez / 1000000}`;
 }
 
 export async function extractTokensForOverview(data) {
@@ -52,4 +52,8 @@ export function insertIndexHtml(url) {
     else outval = url + "/index.html";
 
     return outval;
+}
+
+export function formatDate(d) {
+    return new Date(d).toLocaleString()
 }

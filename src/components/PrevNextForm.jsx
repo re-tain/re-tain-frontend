@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getRandomHash } from "../lib/utils";
 import { useSearchParams } from "react-router-dom";
+import { ArrowPathIcon } from '@heroicons/react/20/solid'
 
 function PrevNextForm({ setHash }) {
     const [searchParams] = useSearchParams();
@@ -44,7 +45,6 @@ function PrevNextForm({ setHash }) {
 
     return (
         <div>
-
             {/* 
 
             <button style={{width: '50%'}}
@@ -57,17 +57,16 @@ function PrevNextForm({ setHash }) {
             </button>
  */}
 
-
-            <button style={{width: '50%'}}
-                className="btn btn-default"
-                name="next"
-                id="next"
+            <button
+                type="button"
+                className="flex w-full items-center justify-center rounded-md border  bg-transparent px-8 py-3 text-base font-medium text-brand hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-grey-50"
                 onClick={onNext}
             >
+                <ArrowPathIcon className="text-brand mr-3 w-6 h-6"></ArrowPathIcon>{" "}
                 Randomize
             </button>
 
-   {/* 
+            {/* 
             <button style={{width: '100%'}}
                 className="btn btn-default"
                 name="copy"

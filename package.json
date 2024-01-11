@@ -4,7 +4,12 @@
   "private": true,
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "@rollup/plugin-inject": "^5.0.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
     "@taquito/beacon-wallet": "^17.3.1",
     "@taquito/utils": "^17.3.1",
     "@vitejs/plugin-react-swc": "^3.4.0",
