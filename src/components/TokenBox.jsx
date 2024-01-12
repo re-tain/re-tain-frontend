@@ -20,10 +20,12 @@ function TokenBox({
             line2={
                 price ? (
                     `${formatMutez(price)}`
-                ) : (
+                ) : artist ? (
                     <span>
                         by <UserDetail address={artist} isLink={true} />
                     </span>
+                ) : (
+                    ""
                 )
             }
         />

@@ -5,7 +5,6 @@ import { TEZOS_NETWORK, RPC_NODE } from "../consts";
 import { char2Bytes } from "@taquito/utils";
 import contractJSON from "../contract.json"
 
-console.log(contractJSON)
 const options = {
     name: "re-tain.xyz",
     preferredNetwork: TEZOS_NETWORK,
