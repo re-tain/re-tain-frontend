@@ -3,7 +3,7 @@ import { OBJKT_API } from "../consts";
 import { Link } from "react-router-dom";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
-function UserDetail({ address, isLink }) {
+function UserDetail({ address, isLink, detail = true }) {
     const [tzProfile, setTzProfile] = useState(null);
     useEffect(() => {
         const fetchTzProfile = async (address) => {
@@ -65,29 +65,31 @@ function UserDetail({ address, isLink }) {
                                     <h3 className="truncate text-sm font-medium text-grey-400">
                                         {tzProfile.alias}
                                     </h3>
-                                    <span className="inline-flex flex-shrink-0 items-center rounded-full  px-1.5 py-0.5 text-xs font-medium ">
+                                    {/* <span className="inline-flex flex-shrink-0 items-center rounded-full  px-1.5 py-0.5 text-xs font-medium ">
                                         <CheckBadgeIcon className="w-6 h-6"></CheckBadgeIcon>
-                                    </span>
+                                    </span> */}
                                 </div>
-                                <p className="mt-1 truncate text-sm text-grey-500">
-                                    {tzProfile.twitter && (
-                                        <span>
-                                            <a href={tzProfile.twitter}>
-                                                {"@" +
-                                                    tzProfile.twitter.split(
-                                                        "com/"
-                                                    )[1]}
-                                            </a>{" "}
-                                            •{" "}
-                                        </span>
-                                    )}
+                                {detail && (
+                                    <p className="mt-1 truncate text-sm text-grey-500">
+                                        {tzProfile.twitter && (
+                                            <span>
+                                                <a href={tzProfile.twitter}>
+                                                    {"@" +
+                                                        tzProfile.twitter.split(
+                                                            "com/"
+                                                        )[1]}
+                                                </a>{" "}
+                                                •{" "}
+                                            </span>
+                                        )}
 
-                                    <span>
-                                        <a href={tzProfile.website}>
-                                            {tzProfile.website}
-                                        </a>
-                                    </span>
-                                </p>
+                                        <span>
+                                            <a href={tzProfile.website}>
+                                                {tzProfile.website}
+                                            </a>
+                                        </span>
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </ul>

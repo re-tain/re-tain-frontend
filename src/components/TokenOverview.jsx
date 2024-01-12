@@ -47,11 +47,14 @@ function TokenOverview({ query, pageLength, extractTokens, title }) {
         fetchTokens().catch(console.error);
     });
 
-    if (tokens && update) {
-        return <TokenGrid tokens={tokens} loadMore={loadMore} title={title} />;
-    } else {
-        return "Loading...";
-    }
+    return (
+        <TokenGrid
+            tokens={tokens}
+            loadMore={loadMore}
+            title={title}
+            update={update}
+        />
+    );
 }
 
 export default TokenOverview;
