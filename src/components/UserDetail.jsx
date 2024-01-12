@@ -3,7 +3,7 @@ import { OBJKT_API } from "../consts";
 import { Link } from "react-router-dom";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
-function UserDetail({ address, isLink, detail = true }) {
+function UserDetail({ address, isLink, detail = true, imgOnly = false }) {
     const [tzProfile, setTzProfile] = useState(null);
     useEffect(() => {
         const fetchTzProfile = async (address) => {
@@ -50,6 +50,15 @@ function UserDetail({ address, isLink, detail = true }) {
             </Link>
         );
     } else {
+        if (imgOnly) {
+            return (
+                <img
+                    className="h-8 w-8 mr-1 rounded-full"
+                    src={tzProfile?.logo}
+                    alt=""
+                />
+            );
+        }
         return (
             <div>
                 {tzProfile && (
