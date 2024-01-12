@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import TokenGrid from "./TokenGrid";
 
-function TokenOverview({ query, pageLength, extractTokens }) {
+function TokenOverview({ query, pageLength, extractTokens, title }) {
     const [tokens, setTokens] = useState(null);
     const [page, setPage] = useState(0);
     const [oldPage, setOldPage] = useState(0);
@@ -48,7 +48,7 @@ function TokenOverview({ query, pageLength, extractTokens }) {
     });
 
     if (tokens && update) {
-        return <TokenGrid tokens={tokens} loadMore={loadMore} />;
+        return <TokenGrid tokens={tokens} loadMore={loadMore} title={title} />;
     } else {
         return "Loading...";
     }

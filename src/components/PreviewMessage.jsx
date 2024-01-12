@@ -1,11 +1,7 @@
 function PreviewMessage({ isBig, message }) {
     return (
         <div
-            className={
-                isBig
-                    ? "token-detail-width token-detail-height"
-                    : "standard-width standard-height"
-            }
+            className="border border-grey-700  aspect-[14/13] w-full  object-cover"
             style={{ position: "relative", border: "solid 1px white" }}
         >
             <div

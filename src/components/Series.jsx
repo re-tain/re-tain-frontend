@@ -395,90 +395,12 @@ function Series() {
                     <MarketPlace contract={contract}></MarketPlace>
                 </div>
 
-                <div style={{ marginTop: "5vh" }}>
-                    <h1>All tokens</h1>
-                    <TokenOverview
-                        query={`v1/tokens?contract=${contract}`}
-                        pageLength={30}
-                        extractTokens={extractTokensForOverview}
-                    ></TokenOverview>
-                </div>
-
-                {/* <div>
-                    <div>
-                        <b>{metadata.name}</b>
-                    </div>
-                    <div>
-                        by <UserDetail address={artist} isLink={true} />
-                    </div>
-                </div>
-                <br />
-                <div className="token-detail-width token-detail-height">
-                    <LiveViewIFrame url={`${baseUrl}?hash=${hash}`} />
-                </div>
-
-                <div style={{ marginTop: "1vh", whiteSpace: "pre-wrap" }}>
-                    {metadata.description}
-                </div>
-                <br />
-
-                <div className="token-detail-width">
-                    <div style={{ margin: "0 0 1vh 0" }}>
-                        {numTokensMinted} / {numTokens} minted |{" "}
-                        {formatMutez(price)}
-                    </div>
-                    <PrevNextForm setHash={setHash} />
-                    <div style={{ margin: "0vh 0 0vh 0" }}>
-                        <Mint
-                            contract={contract}
-                            price={price}
-                            active={
-                                numTokensMinted !== numTokens &&
-                                (activeAccount === artist || !paused)
-                            }
-                            hash={hash}
-                        />
-                    </div>
-                </div>
-
-                {activeAccount === artist && (
-                    <div className="token-detail-width">
-                        <Link to={`/artist-panel/${contract}`}>
-                            <button
-                                className="btn btn-default"
-                                style={{ width: "50%", marginTop: "2vh" }}
-                            >
-                                Go to artist panel
-                            </button>
-                        </Link>
-                    </div>
-                )}
-
-                {/* {activeAccount === artist && ENV !== "prod" && (
-                    <button
-                        class="btn btn-default"
-                        onClick={handleDeployToMainnet}
-                    >
-                        Deploy to mainnet
-                    </button>
-                )} */}
-
-                {/* <div style={{ marginTop: "3vh" }}>
-                    <MarketPlace contract={contract}></MarketPlace>
-                </div>
-
-                <div style={{ marginTop: "5vh" }}>
-                    <h1>All tokens</h1>
-                    <TokenOverview
-                        query={`v1/tokens?contract=${contract}`}
-                        pageLength={30}
-                        extractTokens={extractTokensForOverview}
-                    ></TokenOverview>
-                </div>
-                <br />
-                <br />
-                <br />
-                <br /> */}
+                <TokenOverview
+                    query={`v1/tokens?contract=${contract}`}
+                    pageLength={30}
+                    extractTokens={extractTokensForOverview}
+                    title={"Iterations"}
+                ></TokenOverview>
             </Layout>
         );
     } else {

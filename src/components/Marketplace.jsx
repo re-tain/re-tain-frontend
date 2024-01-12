@@ -16,14 +16,13 @@ function MarketPlace({ contract }) {
     }
 
     return (
-        <div>
-            <h1>Marketplace</h1>
+
             <TokenOverview
                 query={query}
                 extractTokens={extractTokensForMarketplace}
                 pageLength={3}
+                title={"Marketplace"}
             />
-        </div>
     );
 }
 
