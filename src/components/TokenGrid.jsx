@@ -39,6 +39,7 @@ function TokenGrid({ tokens, loadMore, title, update }) {
                                                 }
                                                 key={token.metadata.name}
                                                 price={token.price}
+                                                artist={JSON.parse(token.metadata.creators)[0]}
                                             />
                                         );
                                     return "";

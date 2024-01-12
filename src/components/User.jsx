@@ -44,11 +44,11 @@ function User() {
         return (
             <Layout>
                 <UserDetail address={address} />
-                <h1>Collection</h1>
                 <TokenOverview
                     query={query}
                     pageLength={6}
                     extractTokens={extractTokensForOverview}
+                    title={"Collection"}
                 ></TokenOverview>
             </Layout>
         );
