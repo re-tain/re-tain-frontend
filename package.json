@@ -20,7 +20,6 @@
     "rollup-plugin-polyfill-node": "^0.12.0",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
-    "terminal.css": "^0.7.2",
     "vite": "^4.4.9",
     "vite-plugin-svgr": "^4.1.0",
     "vite-tsconfig-paths": "^4.2.1"
