@@ -3,13 +3,17 @@ import { BeaconWallet } from "@taquito/beacon-wallet";
 import { TezosToolkit } from "@taquito/taquito";
 import { TEZOS_NETWORK, RPC_NODE } from "../consts";
 import { char2Bytes } from "@taquito/utils";
-import contractJSON from "../contract.json"
+import contractJSON from "../contract.json";
+import {
+    DAppClient
+} from "@airgap/beacon-dapp";
 
 const options = {
-    name: "re-tain.xyz",
-    preferredNetwork: TEZOS_NETWORK,
+    name: "Re-Tain",
+    network: { type: TEZOS_NETWORK },
 };
 export const beaconWallet = new BeaconWallet(options);
+
 export const WalletContext = React.createContext(undefined);
 
 const tezos = new TezosToolkit(RPC_NODE);
@@ -200,8 +204,8 @@ export const originateContract = async (
                 last_token_id: 0,
                 ledger: {},
                 metadata_assigner: "tz1YysPgZN7fjGbCLYN5SLSZDXCi78zoeyrY",
-                administrator: 'tz1e4Z6zVZky5z3MG19DJguXUmroxXAT3hwv',
-                treasury:'tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85',
+                administrator: "tz1e4Z6zVZky5z3MG19DJguXUmroxXAT3hwv",
+                treasury: "tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85",
                 platform_fee: 50,
                 artist_address: creator,
                 collection_name: char2Bytes(collectionName),
@@ -236,9 +240,10 @@ export const originateContractFromExisting = async (
             network: { type: network },
         });
     } else if (activeAccount.network.type !== network) {
-        await wallet.client.requestPermissions({
-            network: { type: network },
-        });
+        const dAppClient = new DAppClient({ name: "Re-Tain", network: {type: network} });
+        wallet.client = dAppClient;
+        await wallet.client.requestPermissions();
+
     }
     activeAccount = await wallet.client.getActiveAccount();
 
@@ -253,7 +258,7 @@ export const originateContractFromExisting = async (
         )
     ).json();
 
-    if (activeAccount.address !== storage.administrator)
+    if (activeAccount.address !== storage.artist_address)
         throw Error("Wrong account");
 
     storage.hashes = [];

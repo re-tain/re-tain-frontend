@@ -41,6 +41,7 @@ function UserDetail({ address, isLink, detail = true, imgOnly = false }) {
         fetchTzProfile(address).catch(console.error);
     }, [address]);
 
+    if(!address) return ""
     if (isLink) {
         return (
             <Link to={`/user/${address}`}>

@@ -177,6 +177,15 @@ function Series() {
                                             hash={hash}
                                         />
                                     </div>
+                                    {activeAccount === artist &&
+                                        ENV !== "prod" && (
+                                            <button
+                                            className="mt-3 flex w-full items-center justify-center rounded-md border border-transparent bg-brand px-8 py-3 text-base font-medium text-black hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-grey-50"
+                                                onClick={handleDeployToMainnet}
+                                            >
+                                                Deploy to mainnet
+                                            </button>
+                                        )}
                                     <h2
                                         id="information-heading"
                                         className="sr-only"
