@@ -14,7 +14,14 @@ export async function getToken(contract, tokenId) {
     let res = await fetch(TZKT_API + query);
     let data = await res.json();
     if (data.length > 0) {
-        return data[0];
+        let token = data[0];
+        if (!("metadata" in token)) {
+            token.metadata = await getTokenMetadata(
+                token.contract.address,
+                token.tokenId
+            );
+        }
+        return token;
     } else {
         return null;
     }
@@ -72,6 +79,7 @@ export async function getTokenMetadata(contract, tokenId) {
     ).token_info;
     let metadata = {};
     metadata.name = bytes2Char(raw_metadata.name);
+    metadata.creators = bytes2Char(raw_metadata.creators);
     metadata.artifactUri = bytes2Char(raw_metadata.artifactUri);
     if (raw_metadata.displayUri)
         metadata.displayUri = bytes2Char(raw_metadata.displayUri);

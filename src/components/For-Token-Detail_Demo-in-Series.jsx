@@ -1,41 +1,82 @@
 import { Link, useParams } from "react-router-dom";
 
 import Layout from "./Layout";
-import TokenActionForm from "./TokenActionForm";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 
 import {
-    getContract,
-    getContractBigmap,
+    getContractStorage,
     getContractMetadata,
     getContractStorageFull,
-    getToken,
+    getContract,
 } from "../lib/api";
 import UserDetail from "./UserDetail";
-import { getTokenMetadata } from "../lib/api";
-import { formatDate, formatMutez } from "../lib/utils";
+import Mint from "./Mint";
+import {
+    extractTokensForOverview,
+    formatDate,
+    formatMutez,
+    resolveIpfs,
+} from "../lib/utils";
+
+import TokenOverview from "./TokenOverview";
+import { originateContractFromExisting, WalletContext } from "../lib/wallet";
+import MarketPlace from "./Marketplace";
+import { ENV } from "../consts";
 import LiveViewIFrame from "./LiveViewIFrame";
+import PrevNextForm from "./PrevNextForm";
+import { bytes2Char } from "@taquito/utils";
 import { Tab } from "@headlessui/react";
+
+// FUCHS
+import {  ShoppingCartIcon } from '@heroicons/react/20/solid'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-function TokenDetail() {
-    let { contract, tokenId } = useParams();
-    const [tokenPrice, setTokenPrice] = useState(null);
-    const [owner, setOwner] = useState(null);
-    const [token, setToken] = useState(null);
-    const [artist, setArtist] = useState(null);
+const artworkArtist = [
+    {
+        name: "Studio Yorktown",
+        title: "@studioyorktown • studioyorktown.com",
+        role: "Verified",
+        email: "janecooper@example.com",
+        telephone: "+1-202-555-0170",
+        imageUrl:
+            "https://pbs.twimg.com/profile_images/1545668047691735040/oHha-3Op_400x400.png",
+    },
+];
+
+/* const artwork = {
+    name: "Sabler",
+    version: { name: "1.0", date: "June 5, 2021", datetime: "2021-06-05" },
+    price: "Mint selected",
+    description:
+        "'Sabler', an anagram of 'Albers',  is a generative homage to the work of the Bauhaus textile artist Anni Albers.",
+    imageSrc:
+        "https://images.squarespace-cdn.com/content/v1/60d1dd51ca008f2f908cbc2f/c8c81334-cdd3-4dd9-abf9-4d3d679e9937/Sabler.png?format=750w",
+    imageAlt: "Sabler",
+}; */
+
+function Series() {
+    const wallet = useContext(WalletContext);
+    const client = wallet.client;
+    let { contract } = useParams();
     const [metadata, setMetadata] = useState(null);
-    const [deployTime, setDeployTime] = useState(null);
+    const [numTokens, setNumTokens] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [numTokensMinted, setNumTokensMinted] = useState(null);
+    const [artist, setArtist] = useState(null);
+    const [activeAccount, setActiveAccount] = useState(null);
+    const [paused, setPaused] = useState(null);
+    const [baseUrl, setBaseUrl] = useState(null);
+    const [hash, setHash] = useState("00000000000000000000000000000000");
     const [royalties, setRoyalties] = useState(null);
     const [royaltiesTotal, setRoyaltiesTotal] = useState(null);
-    const [price, setPrice] = useState(null);
+    const [deployTime, setDeployTime] = useState(null);
 
     useEffect(() => {
-        const fetchToken = async () => {
+        const fetchStorage = async () => {
             const storage = await getContractStorageFull(contract);
             setPrice(storage.price);
             setRoyalties(storage.royalties);
@@ -47,27 +88,30 @@ function TokenDetail() {
                     )
                 )
             );
-
-            let token = await getToken(contract, tokenId);
-            token.metadata = await getTokenMetadata(
-                token.contract.address,
-                token.tokenId
-            );
-            setToken(token);
+            setNumTokens(storage.num_tokens);
+            setNumTokensMinted(storage.last_token_id);
+            setPaused(storage.paused);
             setArtist(storage.artist_address);
-            setTokenPrice(
-                await getContractBigmap(contract, "listings", tokenId)
-            );
-            setOwner(await getContractBigmap(contract, "ledger", tokenId));
-            setMetadata(await getContractMetadata(contract));
+            setBaseUrl(bytes2Char(storage.base_url));
+            const metadata = await getContractMetadata(contract);
+            setMetadata(metadata);
             const contractData = await getContract(contract);
+            console.log(contractData);
             setDeployTime(formatDate(contractData.firstActivityTime));
+            const account = await client.getActiveAccount();
+            if (account) {
+                setActiveAccount(account.address);
+            }
         };
 
-        fetchToken().catch(console.error);
-    }, [tokenId, contract]);
+        fetchStorage().catch(console.error);
+    }, [contract, client]);
 
-    if (token && metadata) {
+    const handleDeployToMainnet = async () => {
+        await originateContractFromExisting(wallet, contract, "mainnet");
+    };
+
+    if (numTokens && metadata && baseUrl) {
         return (
             <Layout>
                 <div className="mx-auto px-4 py-16 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
@@ -79,7 +123,7 @@ function TokenDetail() {
                                 <div className=" aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-black">
                                     {/* DONE! TODO ANDRE: style the iframe properly  */}
                                     <LiveViewIFrame
-                                        url={token.metadata.artifactUri}
+                                        url={`${baseUrl}?hash=${hash}`}
                                     />
                                 </div>
                             </a>
@@ -87,72 +131,157 @@ function TokenDetail() {
 
                         {/* Drop details */}
                         <div className="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
-                            <ul role="list" className="grid grid-cols-1 gap-6">
-                                <div className="flex w-full items-center justify-between space-x-6 ">
-                                    <UserDetail
-                                        address={artist}
-                                        imgOnly={true}
-                                    />
-                                    <div className="flex-1 truncate">
-                                        <div className="flex items-center space-x-3">
-                                            <h3 className="truncate text-l font-medium text-grey-200">
-                                                Created by{" "}
-                                                <UserDetail
-                                                    address={artist}
-                                                    isLink={true}
-                                                />
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
+                         
 
-                                <div className="flex w-full items-center justify-between space-x-6 ">
-                                    <UserDetail
-                                        address={owner}
-                                        imgOnly={true}
+                            <ul role="list" className="grid grid-cols-1 gap-6">
+                            
+                            <div className="flex w-full items-center justify-between space-x-6 ">
+                                    <img
+                                        className="h-10 w-10 flex-shrink-0 rounded-full bg-grey-400"
+                                        src="https://andrefuchs.xyz/avatar.png"
+                                        alt=""
                                     />
                                     <div className="flex-1 truncate">
                                         <div className="flex items-center space-x-3">
                                             <h3 className="truncate text-l font-medium text-grey-200">
-                                                Owned by{" "}
-                                                <UserDetail
-                                                    address={owner}
-                                                    isLink={true}
-                                                />
+                                                Created by -Artist Name as link to profile-
                                             </h3>
                                         </div>
                                     </div>
                                 </div>
-                            </ul>
+                            
+                                <div className="flex w-full items-center justify-between space-x-6 ">
+                                    <img
+                                        className="h-10 w-10 flex-shrink-0 rounded-full bg-grey-400"
+                                        src="https://pbs.twimg.com/profile_images/1545668047691735040/oHha-3Op_400x400.png"
+                                        alt=""
+                                    />
+                                    <div className="flex-1 truncate">
+                                        <div className="flex items-center space-x-3">
+                                            <h3 className="truncate text-l font-medium text-grey-200">
+                                                Owned by -Collector Name as link to profile-
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </ul>  
 
                             <div className="flex flex-col-reverse">
                                 <div className="mt-4">
                                     <h1 className="text-2xl font-bold tracking-tight text-grey-200 sm:text-3xl">
-                                        {token.metadata.name}
+                                      
+                                        {/* TODO PIERO: Set ID: */}
+                                         {metadata.name} #tokenID
                                     </h1>
-                                    <TokenActionForm
-                                        price={tokenPrice}
-                                        contract={contract}
-                                        tokenId={tokenId}
-                                        owner={owner}
-                                    />
-                                    <Link to={`/series/${contract}`}>
-                                        <button
-                                            type="button"
-                                            className="flex w-full items-center justify-center rounded-md border border-transparent bg-brand px-8 py-3 text-base font-medium text-black hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-grey-50"
+
+
+                            {/*        <p className="mt-4">
+                                        <span className="text-lg  text-brand">
+                                            {numTokensMinted} / {numTokens}{" "}
+                                        </span>{" "}
+                                       <span className="text-lg text-grey-400">
+                                            minted
+                                        </span>{" "}
+                                        <span className="text-lg text-brand justify-end">
+                                            {formatMutez(price)}
+                                        </span>
+                                    </p> */}
+                                    
+                               {/*      <div className="mt-2" aria-hidden="true">
+                                        <div className="overflow-hidden rounded-full bg-grey-400">
+                                            <div
+                                                className="h-2 rounded-full bg-brand"
+                                                style={{ width: "85.0%" }}
+                                            />
+                                        </div>
+                                    </div> */}
+
+
+{/* FUCHS NOTE: if available for sale */}
+                                    <button
+                                        type="button"
+                                        className="mt-4 flex w-full items-center justify-center rounded-md border border-transparent bg-brand px-8 py-3 text-base font-medium text-black hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-grey-50"
                                         >
-                                            Go to Series
-                                        </button>
-                                    </Link>
+                                        < ShoppingCartIcon className="text-black mr-3 w-6 h-6"></ ShoppingCartIcon>Purchase token - ꜩ 42
+                                    </button>
+
+{/* FUCHS NOTE: if owner and NOT for sale */}
+
+<form className="mt-5 sm:flex sm:items-center">
+   
+<div className="relative mt-2 rounded-md shadow-sm">
+
+                                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                <span className="text-white sm:text-sm">
+                                                    ꜩ
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                name="price"
+                                                id="price"
+                                                className="w-200 rounded-md border-0 py-1.5 pl-7 pr-12 bg-white/5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-brand sm:text-sm sm:leading-6"
+                                                placeholder="0.00"
+                                                aria-describedby="price-currency"
+                                            />
+                                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                <span
+                                                    className="text-white sm:text-sm"
+                                                    id="price-currency"
+                                                >
+                                                    TEZ
+                                                </span>
+                                            </div>
+                                        </div>
+    
+
+      <button
+            type="submit"
+            className="mt-3 inline-flex w-full items-center justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto"
+          >
+              List Token
+          </button>
+
+            {/* TODO PIERO: 
+            FUCHS NOTE: if owner + listed:       
+          
+            <button
+            type="submit"
+            className="ml-3 inline-flex w-full rounded-md bg-brand px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+         >
+            Cancel Listing
+            </button>
+ */}
+
+
+        </form>
+
+
+
+                                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+                                        <PrevNextForm setHash={setHash} />
+
+                                        <Mint
+                                            contract={contract}
+                                            price={price}
+                                            active={
+                                                numTokensMinted !== numTokens &&
+                                                (activeAccount === artist ||
+                                                    !paused)
+                                            }
+                                            hash={hash}
+                                        />
+                                    </div>
                                     <h2
                                         id="information-heading"
                                         className="sr-only"
                                     >
                                         Artwork information
                                     </h2>
-                                    {/* <h3 className="mt-4 text-base font-medium text-grey-400">
+                                    <h3 className="mt-4 text-base font-medium text-grey-400">
                                         Project #7893
-                                    </h3>{" "} */}
+                                    </h3>{" "}
                                     {/* TODO DropDown Menu: Report Token */}
                                     <p className="mt-2 text-sm text-grey-400">
                                         Published on {deployTime}
@@ -223,49 +352,41 @@ function TokenDetail() {
                                         <div>
                                             <div className="mt-6 ">
                                                 <dl className="divide-y divide-grey-900">
-                                                    {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Re—tain Project ID
                                                         </dt>
                                                         <dd className="mt-1 text-sm leading-6 text-grey-400 sm:col-span-2 sm:mt-0">
                                                             #7893
                                                         </dd>
-                                                    </div> */}
+                                                    </div>
 
+{/* TODO PIERO: Add Name + Profile Link */}
                                                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Creator
                                                         </dt>
                                                         <dd className="mt-1 text-sm leading-6 text-grey-400 sm:col-span-2 sm:mt-0">
-                                                            <UserDetail
-                                                                address={artist}
-                                                                isLink={true}
-                                                            />
+                                                           -Artist Name- (als link)
                                                         </dd>
                                                     </div>
-                                                    {/* TODO PIERO: Add Name + Profile Link */}
+{/* TODO PIERO: Add Name + Profile Link */}
                                                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Owner
                                                         </dt>
                                                         <dd className="mt-1 text-sm leading-6 text-grey-400 sm:col-span-2 sm:mt-0">
-                                                            <UserDetail
-                                                                address={owner}
-                                                                isLink={true}
-                                                            />
+                                                           -Collector Name- (als link)
                                                         </dd>
                                                     </div>
+
 
                                                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Contract Address
                                                         </dt>
                                                         <dd className="mt-1 text-sm leading-6 text-grey-400 sm:col-span-2 sm:mt-0">
-                                                            <Link
-                                                                to={`/series/${contract}`}
-                                                            >
-                                                                {contract}
-                                                            </Link>
+                                                            {contract}
                                                         </dd>
                                                     </div>
                                                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -339,7 +460,7 @@ function TokenDetail() {
                                                             ))}
                                                         </dd>
                                                     </div>
-                                                    {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Metadata
                                                         </dt>
@@ -359,7 +480,7 @@ function TokenDetail() {
                                                                 Artifact
                                                             </a>
                                                         </dd>
-                                                    </div> */}
+                                                    </div>
                                                 </dl>
                                             </div>
                                         </div>
@@ -371,11 +492,25 @@ function TokenDetail() {
                         </div>
                     </div>
                 </div>
+
+                <div style={{ marginTop: "3vh" }}>
+                    <MarketPlace contract={contract}></MarketPlace>
+                </div>
+
+                <TokenOverview
+                    query={`v1/tokens?contract=${contract}`}
+                    pageLength={30}
+                    extractTokens={extractTokensForOverview}
+                    title={"Iterations"}
+                ></TokenOverview>
             </Layout>
         );
     } else {
-        <Layout>return "Loading...";</Layout>;
+        {
+            /* add state: if nothing listed yet */
+        }
+        return <Layout>Loading...</Layout>;
     }
 }
 
-export default TokenDetail;
+export default Series;

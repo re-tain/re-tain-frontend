@@ -23,6 +23,7 @@ function TokenGrid({ tokens, loadMore, title, update }) {
                                     </div>
                                 )}
                                 {tokens.map((token) => {
+                                    console.log(token)
                                     if (token.metadata)
                                         return (
                                             <TokenBox
@@ -39,7 +40,7 @@ function TokenGrid({ tokens, loadMore, title, update }) {
                                                 }
                                                 key={token.metadata.name}
                                                 price={token.price}
-                                                artist={JSON.parse(token.metadata.creators || [])?.[0]}
+                                                artist={JSON.parse(token.metadata.creators || '[]')?.[0]}
                                             />
                                         );
                                     return "";

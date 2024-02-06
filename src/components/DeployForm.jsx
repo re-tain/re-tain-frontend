@@ -75,10 +75,9 @@ function DeployForm() {
     return (
         <Layout>
             <>
-                <div className="bg-black ">
-                    <form>
+                    <form > 
                         <div className="space-y-12">
-                            <div className=" w-1/2  border-b border-white/10 pb-12">
+                            <div className=" w-full   pb-12">
                                 <h2 className="text-base font-semibold leading-7 text-white">
                                     MINT A GENERATIVE ARTWORK
                                 </h2>
@@ -87,6 +86,8 @@ function DeployForm() {
                                     Tezos smart contract.
                                 </p>
 
+{/* TODO: Tipp: Use Temple Wallet to easily move from testnet to mainnet
+ */}
                                 <p className="mt-1 text-sm leading-6 text-white">
                                     <button
                                         onClick={openStarterTemplate}
@@ -146,7 +147,7 @@ function DeployForm() {
                                 </div>
                             </div>
 
-                            <div className=" w-1/2  col-span-full">
+                            <div className=" w-full  col-span-full">
                                 <label
                                     htmlFor="name"
                                     className="  block text-sm font-medium leading-6 text-white"
@@ -162,7 +163,7 @@ function DeployForm() {
                                 />
                             </div>
 
-                            <div className="w-1/2  col-span-full">
+                            <div className="w-full  col-span-full">
                                 <label
                                     htmlFor="about"
                                     className="block text-sm font-medium leading-6 text-white"
@@ -181,8 +182,10 @@ function DeployForm() {
                                 </div>
                             </div>
 
-                            <div className="border-b border-white/10 pb-12">
-                                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div className="pb-12">
+                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                               
+                               
                                     <div>
                                         <label
                                             htmlFor="price"
@@ -259,7 +262,7 @@ function DeployForm() {
                                                 name="royalties"
                                                 id="royalties"
                                                 className="block w-full rounded-md border-0 py-1.5 pl-7 pr-12  bg-white/5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-brand sm:text-sm sm:leading-6"
-                                                placeholder="Min 5, Max 90"
+                                                placeholder="5 - 90"
                                                 aria-describedby="royalties-currency"
                                             />
                                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -322,7 +325,7 @@ function DeployForm() {
                             </button>
                         </div>
                     </form>
-                </div>
+             
                 {statusText.length > 0 && <div>{statusText}</div>}
                 {contractAddress && (
                     <Link to={`/series/${contractAddress}`}>

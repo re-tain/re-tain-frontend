@@ -32,29 +32,6 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-const artworkArtist = [
-    {
-        name: "Studio Yorktown",
-        title: "@studioyorktown • studioyorktown.com",
-        role: "Verified",
-        email: "janecooper@example.com",
-        telephone: "+1-202-555-0170",
-        imageUrl:
-            "https://pbs.twimg.com/profile_images/1545668047691735040/oHha-3Op_400x400.png",
-    },
-];
-
-const artwork = {
-    name: "Sabler",
-    version: { name: "1.0", date: "June 5, 2021", datetime: "2021-06-05" },
-    price: "Mint selected",
-    description:
-        "'Sabler', an anagram of 'Albers',  is a generative homage to the work of the Bauhaus textile artist Anni Albers.",
-    imageSrc:
-        "https://images.squarespace-cdn.com/content/v1/60d1dd51ca008f2f908cbc2f/c8c81334-cdd3-4dd9-abf9-4d3d679e9937/Sabler.png?format=750w",
-    imageAlt: "Sabler",
-};
-
 function Series() {
     const wallet = useContext(WalletContext);
     const client = wallet.client;
@@ -117,8 +94,8 @@ function Series() {
                         {/* Drop image */}
                         <div className="lg:col-span-4 lg:row-end-1">
                             <a href="#ipfsview" target="_blank">
-                                <div className=" aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-black">
-                                    {/* TODO ANDRE: style the iframe properly  */}
+                                <div className=" aspect-h-4 aspect-w-4 overflow-hidden rounded-lg bg-black">
+                                    {/* DONE! TODO ANDRE: style the iframe properly  */}
                                     <LiveViewIFrame
                                         url={`${baseUrl}?hash=${hash}`}
                                     />
@@ -129,7 +106,9 @@ function Series() {
                         {/* Drop details */}
                         <div className="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
                             <UserDetail address={artist} />
-                            {/* <ul role="list" className="grid grid-cols-1 gap-6">
+                            {/* 
+
+                            <ul role="list" className="grid grid-cols-1 gap-6">
                                 {artworkArtist.map((person) => (
                                     <div className="flex w-full items-center justify-between space-x-6 ">
                                         <img
@@ -152,7 +131,7 @@ function Series() {
                                         </div>
                                     </div>
                                 ))}
-                            </ul> */}
+                            </ul>  */}
 
                             <div className="flex flex-col-reverse">
                                 <div className="mt-4">
@@ -174,7 +153,13 @@ function Series() {
                                         <div className="overflow-hidden rounded-full bg-grey-400">
                                             <div
                                                 className="h-2 rounded-full bg-brand"
-                                                style={{ width: "85.0%" }}
+                                                style={{
+                                                    width: `${
+                                                        (numTokensMinted *
+                                                            100) /
+                                                        numTokens
+                                                    }%`,
+                                                }}
                                             />
                                         </div>
                                     </div>
@@ -198,9 +183,9 @@ function Series() {
                                     >
                                         Artwork information
                                     </h2>
-                                    <h3 className="mt-4 text-base font-medium text-grey-400">
+                                    {/* <h3 className="mt-4 text-base font-medium text-grey-400">
                                         Project #7893
-                                    </h3>{" "}
+                                    </h3>{" "} */}
                                     {/* TODO DropDown Menu: Report Token */}
                                     <p className="mt-2 text-sm text-grey-400">
                                         Published on {deployTime}
@@ -271,14 +256,14 @@ function Series() {
                                         <div>
                                             <div className="mt-6 ">
                                                 <dl className="divide-y divide-grey-900">
-                                                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Re—tain Project ID
                                                         </dt>
                                                         <dd className="mt-1 text-sm leading-6 text-grey-400 sm:col-span-2 sm:mt-0">
                                                             #7893
                                                         </dd>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Contract Address
@@ -358,7 +343,7 @@ function Series() {
                                                             ))}
                                                         </dd>
                                                     </div>
-                                                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                    {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                         <dt className="text-sm font-medium leading-6 text-grey-400">
                                                             Metadata
                                                         </dt>
@@ -378,7 +363,7 @@ function Series() {
                                                                 Artifact
                                                             </a>
                                                         </dd>
-                                                    </div>
+                                                    </div> */}
                                                 </dl>
                                             </div>
                                         </div>

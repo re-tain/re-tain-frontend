@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getContractMetadata, getContractStorage, getToken } from "../lib/api";
+import { getContractMetadata, getContractStorage, getToken, getTokenMetadata } from "../lib/api";
 
 import Box from "./Box";
 import UserDetail from "./UserDetail";
@@ -17,8 +17,9 @@ function SeriesBox({ contract }) {
 
     useEffect(() => {
         const fetchToken = async () => {
+            console.log(contract.address)
             let token = await getToken(contract.address, 0);
-            console.log(token);
+            console.log(token)
             setArtifactUri(token?.metadata.artifactUri);
             setDisplayUri(token ? token.metadata.displayUri : "1000");
             setMetadata(await getContractMetadata(contract.address));
@@ -62,7 +63,12 @@ function SeriesBox({ contract }) {
                             <div className="overflow-hidden rounded-full bg-grey-200">
                                 <div
                                     className="h-1 rounded-full bg-brand"
-                                    style={{ width: "85.0%" }}
+                                    style={{
+                                        width: `${
+                                            (storage.last_token_id * 100) /
+                                            storage.num_tokens
+                                        }%`,
+                                    }}
                                 />
                             </div>
                         </div>

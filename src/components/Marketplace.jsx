@@ -1,4 +1,4 @@
-import { getToken } from "../lib/api";
+import { getToken, getTokenMetadata } from "../lib/api";
 import TokenOverview from "./TokenOverview";
 
 function MarketPlace({ contract }) {
@@ -16,13 +16,12 @@ function MarketPlace({ contract }) {
     }
 
     return (
-
-            <TokenOverview
-                query={query}
-                extractTokens={extractTokensForMarketplace}
-                pageLength={3}
-                title={"Marketplace"}
-            />
+        <TokenOverview
+            query={query}
+            extractTokens={extractTokensForMarketplace}
+            pageLength={3}
+            title={"Marketplace"}
+        />
     );
 }
 

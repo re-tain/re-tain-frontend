@@ -5,12 +5,13 @@ import { TEZOS_NETWORK } from "../consts";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import UserDetail from "./UserDetail";
+import { getAddrString } from "../lib/utils";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-function SyncButton() {
+function SyncButton({ isMobile = false }) {
     const client = useContext(WalletContext).client;
 
     const [activeAccount, setActiveAccount] = useState(null);
@@ -27,6 +28,7 @@ function SyncButton() {
 
     let connect = async () => {
         let account = await client.getActiveAccount();
+        console.log(TEZOS_NETWORK)
         if (!account) {
             await client.requestPermissions({
                 network: { type: TEZOS_NETWORK },
@@ -53,13 +55,17 @@ function SyncButton() {
                     Sync to Login
                 </button>
             )}
-            {activeAccount && (
+            {activeAccount && !isMobile && (
                 <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div>
                         <Menu.Button className="relative flex rounded-full bg-grey-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-grey-800">
                             <span className="absolute -inset-1.5" />
                             <span className="sr-only">Open user menu</span>
-                            <UserDetail address={activeAccount} imgOnly={true}/>
+                            {/* TODO PIERO: format {activeAccount} tz1...456 */}
+                            <UserDetail
+                                address={activeAccount}
+                                imgOnly={true}
+                            />
                             <ChevronDownIcon
                                 className="h-6 w-6 text-grey-400"
                                 aria-hidden="true"
@@ -76,6 +82,19 @@ function SyncButton() {
                         leaveTo="transform opacity-0 scale-95"
                     >
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <small
+                                        className={classNames(
+                                            active ? "bg-brand" : "",
+                                            "block px-4 py-2 text-sm text-grey-400"
+                                        )}
+                                    >
+                                        <UserDetail address={activeAccount} isLink={true} />
+                                    </small>
+                                )}
+                            </Menu.Item>
+
                             <Menu.Item>
                                 {({ active }) => (
                                     <a
@@ -120,6 +139,19 @@ function SyncButton() {
                         </Menu.Items>
                     </Transition>
                 </Menu>
+            )}
+            {activeAccount && isMobile && (
+                <div className="flex items-center px-5">
+                    <div className="flex-shrink-0">
+                        <UserDetail address={activeAccount} imgOnly={true} />
+                    </div>
+                    <div className="ml-3">
+                        {/* TODO PIERO: Format tz address: */}
+                        <div className="text-base font-medium text-white">
+                        <UserDetail address={activeAccount} isLink={true} />
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

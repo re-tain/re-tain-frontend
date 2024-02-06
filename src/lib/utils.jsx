@@ -57,3 +57,7 @@ export function insertIndexHtml(url) {
 export function formatDate(d) {
     return new Date(d).toLocaleString()
 }
+
+export function getAddrString(address) {
+    return `${address.slice(0, 4)}...${address.slice(-4)}`;
+}

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { OBJKT_API } from "../consts";
 import { Link } from "react-router-dom";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import { getAddrString } from "../lib/utils";
+import UserImage from "./UserImage";
 
 function UserDetail({ address, isLink, detail = true, imgOnly = false }) {
     const [tzProfile, setTzProfile] = useState(null);
@@ -39,75 +41,58 @@ function UserDetail({ address, isLink, detail = true, imgOnly = false }) {
         fetchTzProfile(address).catch(console.error);
     }, [address]);
 
-    function getAddrString(address) {
-        return `${address.slice(0, 4)}...${address.slice(-4)}`;
-    }
     if (isLink) {
         return (
             <Link to={`/user/${address}`}>
-                {tzProfile && <span>{tzProfile.alias}</span>}
-                {!tzProfile && <span>{getAddrString(address)}</span>}
+                {tzProfile?.alias || getAddrString(address)}
             </Link>
         );
     } else {
         if (imgOnly) {
-            return (
-                <img
-                    className="h-8 w-8 mr-1 rounded-full"
-                    src={tzProfile?.logo}
-                    alt=""
-                />
-            );
+            return <UserImage src={tzProfile?.logo} />;
         }
         return (
             <div>
-                {tzProfile && (
-                    <ul role="list" className="grid grid-cols-1 gap-6">
-                        <div className="mt-6 flex w-full items-center justify-between space-x-6 ">
-                            <img
-                                className="h-10 w-10 flex-shrink-0 rounded-full bg-grey-300"
-                                src={tzProfile.logo}
-                                alt=""
-                            />
-                            <div className="flex-1 truncate">
-                                <div className="flex items-center space-x-3">
-                                    <h3 className="truncate text-sm font-medium text-grey-400">
-                                        {tzProfile.alias}
-                                    </h3>
-                                    {/* <span className="inline-flex flex-shrink-0 items-center rounded-full  px-1.5 py-0.5 text-xs font-medium ">
+                <ul role="list" className="grid grid-cols-1 gap-6">
+                    <div className="mt-6 flex w-full items-center justify-between space-x-6 ">
+                        <UserImage src={tzProfile?.logo} />
+                        <div className="flex-1 truncate">
+                            <div className="flex items-center space-x-3">
+                                <h3 className="truncate text-sm font-medium text-grey-400">
+                                    <Link to={`/user/${address}`}>
+                                        {tzProfile?.alias ||
+                                            getAddrString(address)}
+                                    </Link>
+                                </h3>
+                                {/* FUTURE:
+                                    <span className="inline-flex flex-shrink-0 items-center rounded-full  px-1.5 py-0.5 text-xs font-medium ">
                                         <CheckBadgeIcon className="w-6 h-6"></CheckBadgeIcon>
                                     </span> */}
-                                </div>
-                                {detail && (
-                                    <p className="mt-1 truncate text-sm text-grey-500">
-                                        {tzProfile.twitter && (
-                                            <span>
-                                                <a href={tzProfile.twitter}>
-                                                    {"@" +
-                                                        tzProfile.twitter.split(
-                                                            "com/"
-                                                        )[1]}
-                                                </a>{" "}
-                                                •{" "}
-                                            </span>
-                                        )}
-
-                                        <span>
-                                            <a href={tzProfile.website}>
-                                                {tzProfile.website}
-                                            </a>
-                                        </span>
-                                    </p>
-                                )}
                             </div>
+                            {tzProfile && detail && (
+                                <p className="mt-1 truncate text-sm text-grey-500">
+                                    {tzProfile.twitter && (
+                                        <span>
+                                            <a href={tzProfile.twitter}>
+                                                {"@" +
+                                                    tzProfile.twitter.split(
+                                                        "com/"
+                                                    )[1]}
+                                            </a>{" "}
+                                            •{" "}
+                                        </span>
+                                    )}
+
+                                    <span>
+                                        <a href={tzProfile.website}>
+                                            {tzProfile.website}
+                                        </a>
+                                    </span>
+                                </p>
+                            )}
                         </div>
-                    </ul>
-                )}
-                {!tzProfile && (
-                    <div>
-                        <b>{address}</b>
                     </div>
-                )}
+                </ul>
             </div>
         );
     }

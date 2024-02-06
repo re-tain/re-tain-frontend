@@ -6,7 +6,7 @@ function Box({ artifactUri, displayUri, link, line1, line2 }) {
     return (
         <li key={line1}>
             <a href={link}>
-                <div className="border border-grey-700  aspect-[14/13] w-full  object-cover">
+                <div className="border border-grey-700  aspect-[1/1] w-full  object-cover">
                     <TokenImage
                         url={artifactUri}
                         displayUrl={displayUri}
