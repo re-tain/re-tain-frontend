@@ -1,6 +1,37 @@
-import { TZKT_API } from "../consts";
+import { ADMIN_ADDRESS, TREASURY_ADDRESS, TZKT_API } from "../consts";
 import { bytes2Char } from "@taquito/utils";
 import { resolveIpfs } from "./utils";
+import referenceContract from "../contracts";
+
+const sum = arr => arr.reduce((partialSum, a) => partialSum + parseInt(a), 0);
+
+function validateRoyalties(royalties) {
+    return royalties[TREASURY_ADDRESS] === "25" && sum(Object.values(royalties)) < 1000
+}
+
+function validateDistribution(distribution) {
+    return sum(Object.values(distribution)) === 1000
+}
+
+function validateContracts(contracts){
+    let validated = []
+    for(let contract of contracts) {
+        if(contract.storage.platform_fee !== "50") continue
+        if(contract.storage.administrator !== ADMIN_ADDRESS) continue
+        if(contract.storage.treasury !== TREASURY_ADDRESS) continue
+        if (!validateRoyalties(contract.storage.royalties)) continue
+        if (!validateDistribution(contract.storage.distribution)) continue
+        validated.push(contract)
+    }
+    return validated
+}
+export async function getAllContracts() {
+    let query = `v1/contracts/${referenceContract}/same?sort.desc=firstActivity&firstActivity.gte=23322687&includeStorage=true&limit=10000`;
+    let res = await fetch(TZKT_API + query);
+    let data = await res.json();
+    return validateContracts(data);
+}
+
 
 export async function getContract(contract) {
     let query = `v1/contracts/${contract}`;

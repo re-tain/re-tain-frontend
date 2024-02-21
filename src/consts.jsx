@@ -5,3 +5,5 @@ export const OBJKT_API = 'https://data.objkt.com/v3/graphql'
 export const IPFS_GATEWAY = 'https://retain.myfilebase.com/ipfs/'
 export const UPLOAD_URL = import.meta.env.REACT_APP_UPLOAD_URL || 'https://sea-lion-app-zstus.ondigitalocean.app/file-upload'
 export const ENV = import.meta.env.REACT_APP_ENV || 'dev';
+export const TREASURY_ADDRESS = 'tz1UhPH3onp8s5uke4pQj5DKBnWCujBPjB85'
+export const ADMIN_ADDRESS = 'tz1e4Z6zVZky5z3MG19DJguXUmroxXAT3hwv'
