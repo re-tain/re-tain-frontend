@@ -1,14 +1,15 @@
 import Layout from "./Layout";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TZKT_API } from "../consts";
 import { getAllContracts, getContractMetadata } from "../lib/api";
 import referenceContract from "../contracts";
 import SeriesOverviewGrid from "./SeriesOverviewGrid";
 import SeriesBox from "./SeriesBox";
+import { ContractsContext } from "../App";
 
 function SeriesOverview({ hidden = false }) {
+    const contracts = useContext(ContractsContext)
     const pageLength = 10;
-    const [contracts, setContracts] = useState([]);
     const [page, setPage] = useState(pageLength);
     const [oldPage, setOldPage] = useState(0);
     const [maybeMore, setMaybeMore] = useState(true);
@@ -18,36 +19,6 @@ function SeriesOverview({ hidden = false }) {
         setOldPage(page);
         setPage(Math.max(page + pageLength, 0));
     };
-
-    useEffect(() => {
-        async function fetchContracts() {
-            setContracts(await getAllContracts())
-        }
-        fetchContracts().catch(console.error);
-    }, []);
-
-    // useEffect(() => {
-    //     async function fetchContracts() {
-    //         if (!maybeMore) return;
-    //         if (contracts.length > 0 && oldPage === page) return;
-    //         let separator = query.includes("?") ? "&" : "?";
-    //         let res = await fetch(
-    //             TZKT_API +
-    //                 query +
-    //                 `${separator}limit=${pageLength}&offset=${page}`
-    //         );
-    //         let result = await res.json();
-    //         if (result.length > 0) {
-    //             console.log(result);
-    //             setContracts(contracts.concat(result));
-    //             setMaybeMore(result.length === pageLength);
-    //         } else {
-    //             setPage(Math.max(page - pageLength, 0));
-    //         }
-    //     }
-
-    //     fetchContracts().catch(console.error);
-    // }, [page, oldPage, maybeMore]);
 
     if (hidden) {
         return <Layout>Series overview is disabled.</Layout>;

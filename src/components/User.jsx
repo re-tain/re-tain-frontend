@@ -5,28 +5,11 @@ import { extractTokensForOverview } from "../lib/utils";
 import { useParams } from "react-router-dom";
 
 import UserDetail from "./UserDetail";
-import { useEffect, useState } from "react";
-import { TZKT_API } from "../consts";
-import referenceContract from "../contracts";
+import { useContext } from "react";
+import { ContractsContext } from "../App";
 function User() {
     let { address } = useParams();
-    const [contracts, setContracts] = useState([]);
-
-    useEffect(() => {
-        async function fetchContracts() {
-            let res = await fetch(
-                TZKT_API + `v1/contracts/${referenceContract}/same`
-            );
-
-            const contracts = (await res.json())
-                .filter((e) => e.firstActivity >= 2332268)
-                .map((c) => c.address);
-            console.log(contracts)
-            setContracts(contracts);
-        }
-
-        fetchContracts().catch(console.error);
-    }, [address]);
+    const contracts = useContext(ContractsContext);
 
     if (address && contracts.length > 0) {
         console.log(contracts);
@@ -34,8 +17,7 @@ function User() {
             "v1/tokens/balances" +
             "?" +
             new URLSearchParams({
-                "token.contract.in":
-                    contracts.join(","),
+                "token.contract.in": contracts.map((c) => c.address).join(","),
                 account: address,
                 "balance.gt": 0,
                 "sort.desc": "firstTime",
