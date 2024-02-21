@@ -3,27 +3,30 @@ import { bytes2Char } from "@taquito/utils";
 import { resolveIpfs } from "./utils";
 import referenceContract from "../contracts";
 
-const sum = arr => arr.reduce((partialSum, a) => partialSum + parseInt(a), 0);
+const sum = (arr) => arr.reduce((partialSum, a) => partialSum + parseInt(a), 0);
 
 function validateRoyalties(royalties) {
-    return royalties[TREASURY_ADDRESS] === "25" && sum(Object.values(royalties)) < 1000
+    return (
+        royalties[TREASURY_ADDRESS] === "25" &&
+        sum(Object.values(royalties)) < 1000
+    );
 }
 
 function validateDistribution(distribution) {
-    return sum(Object.values(distribution)) === 1000
+    return sum(Object.values(distribution)) === 1000;
 }
 
-function validateContracts(contracts){
-    let validated = []
-    for(let contract of contracts) {
-        if(contract.storage.platform_fee !== "50") continue
-        if(contract.storage.administrator !== ADMIN_ADDRESS) continue
-        if(contract.storage.treasury !== TREASURY_ADDRESS) continue
-        if (!validateRoyalties(contract.storage.royalties)) continue
-        if (!validateDistribution(contract.storage.distribution)) continue
-        validated.push(contract)
+function validateContracts(contracts) {
+    let validated = [];
+    for (let contract of contracts) {
+        if (contract.storage.platform_fee !== "50") continue;
+        if (contract.storage.administrator !== ADMIN_ADDRESS) continue;
+        if (contract.storage.treasury !== TREASURY_ADDRESS) continue;
+        if (!validateRoyalties(contract.storage.royalties)) continue;
+        if (!validateDistribution(contract.storage.distribution)) continue;
+        validated.push(contract);
     }
-    return validated
+    return validated;
 }
 export async function getAllContracts() {
     let query = `v1/contracts/${referenceContract}/same?sort.desc=firstActivity&firstActivity.gte=23322687&includeStorage=true&limit=10000`;
@@ -32,6 +35,34 @@ export async function getAllContracts() {
     return validateContracts(data);
 }
 
+export async function getTokenBalances(address, contracts) {
+    let promises = [];
+    // API can handle urls as long as with 100 contract addresses in it
+    for (let i = 0; i < contracts.length; i += 100) {
+        promises.push(
+            fetch(
+                TZKT_API +
+                    "v1/tokens/balances" +
+                    "?" +
+                    new URLSearchParams({
+                        "token.contract.in": contracts
+                            .slice(i, i + 100)
+                            .map((c) => c.address)
+                            .join(","),
+                        account: address,
+                        "balance.gt": 0,
+                        "sort.desc": "firstTime",
+                    })
+            )
+        );
+    }
+    let result = await Promise.all(promises);
+    result = await Promise.all(result.map((r) => r.json()));
+    result = result.flat();
+    result.sort((a, b) => a.firstTime - b.firstTime);
+    console.log(result)
+    return result;
+}
 
 export async function getContract(contract) {
     let query = `v1/contracts/${contract}`;
